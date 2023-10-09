@@ -1,0 +1,274 @@
+FSP Configuration
+  Board "Custom User Board (Any Device)"
+  R7FA6T1AB3CFP
+    part_number: R7FA6T1AB3CFP
+    rom_size_bytes: 262144
+    ram_size_bytes: 65536
+    data_flash_size_bytes: 8192
+    package_style: LQFP
+    package_pins: 100
+    
+  RA6T1
+    series: 6
+    
+  RA6T1 Family
+    OFS0 register settings: Independent WDT: Start Mode: IWDT is Disabled
+    OFS0 register settings: Independent WDT: Timeout Period: 2048 cycles
+    OFS0 register settings: Independent WDT: Dedicated Clock Frequency Divisor: 128
+    OFS0 register settings: Independent WDT: Window End Position:  0% (no window end position)
+    OFS0 register settings: Independent WDT: Window Start Position: 100% (no window start position)
+    OFS0 register settings: Independent WDT: Reset Interrupt Request Select: Reset is enabled
+    OFS0 register settings: Independent WDT: Stop Control: Stop counting when in Sleep, Snooze mode, or Software Standby
+    OFS0 register settings: WDT: Start Mode Select: Stop WDT after a reset (register-start mode)
+    OFS0 register settings: WDT: Timeout Period: 16384 cycles
+    OFS0 register settings: WDT: Clock Frequency Division Ratio: 128
+    OFS0 register settings: WDT: Window End Position:  0% (no window end position)
+    OFS0 register settings: WDT: Window Start Position: 100% (no window start position)
+    OFS0 register settings: WDT: Reset Interrupt Request: Reset
+    OFS0 register settings: WDT: Stop Control: Stop counting when entering Sleep mode
+    OFS1 register settings: Voltage Detection 0 Circuit Start: Voltage monitor 0 reset is disabled after reset
+    OFS1 register settings: Voltage Detection 0 Level: 2.80 V
+    OFS1 register settings: HOCO Oscillation Enable: HOCO oscillation is disabled after reset
+    MPU: Enable or disable PC Region 0: Disabled
+    MPU: PC0 Start: 0xFFFFFFFC
+    MPU: PC0 End: 0xFFFFFFFF
+    MPU: Enable or disable PC Region 1: Disabled
+    MPU: PC1 Start: 0xFFFFFFFC
+    MPU: PC1 End: 0xFFFFFFFF
+    MPU: Enable or disable Memory Region 0: Disabled
+    MPU: Memory Region 0 Start: 0x00FFFFFC
+    MPU: Memory Region 0 End: 0x00FFFFFF
+    MPU: Enable or disable Memory Region 1: Disabled
+    MPU: Memory Region 1 Start: 0x200FFFFC
+    MPU: Memory Region 1 End: 0x200FFFFF
+    MPU: Enable or disable Memory Region 2: Disabled
+    MPU: Memory Region 2 Start: 0x407FFFFC
+    MPU: Memory Region 2 End: 0x407FFFFF
+    MPU: Enable or disable Memory Region 3: Disabled
+    MPU: Memory Region 3 Start: 0x400DFFFC
+    MPU: Memory Region 3 End: 0x400DFFFF
+    Clocks: HOCO FLL Function: Disabled
+    Main Oscillator Wait Time: 8163 cycles
+    ID Code Mode: Unlocked (Ignore ID)
+    ID Code (32 Hex Characters): FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+    
+  RA Common
+    Main stack size (bytes): 0x400
+    Heap size (bytes): 0
+    MCU Vcc (mV): 3300
+    Parameter checking: Disabled
+    Assert Failures: Return FSP_ERR_ASSERTION
+    Error Log: No Error Log
+    Clock Registers not Reset Values during Startup: Disabled
+    Main Oscillator Populated: Populated
+    PFS Protect: Enabled
+    C Runtime Initialization : Enabled
+    Early BSP Initialization : Disabled
+    Main Oscillator Clock Source: Crystal or Resonator
+    Subclock Populated: Populated
+    Subclock Drive (Drive capacitance availability varies by MCU): Standard/Normal mode
+    Subclock Stabilization Time (ms): 1000
+    
+  Clocks
+    XTAL 12000000Hz
+    PLL Src: XTAL
+    HOCO 20MHz
+    PLL Div /1
+    PLL Mul x20.0
+    Clock Src: PLL
+    ICLK Div /2
+    PCLKA Div /4
+    PCLKB Div /8
+    PCLKC Div /8
+    PCLKD Div /4
+    UCLK Div /5
+    FCLK Div /4
+    CLKOUT Disabled
+    CLKOUT Div /1
+    
+  Pin Configurations
+    R7FA6T1AB3CFP.pincfg -> g_bsp_pin_cfg
+      AVCC0 88 ANALOG0_AVCC0 - - - - - - - - IO "Read only" - 
+      AVSS0 89 ANALOG0_AVSS0 - - - - - - - - IO "Read only" - 
+      P000 100 - - - - Disabled - - "ACMPHS0: IVCMP; ADC0: AN000; ICU0: IRQ06" - ‚È‚µ - - 
+      P001 99 - - - - Disabled - - "ACMPHS1: IVCMP; ADC0: AN001; ICU0: IRQ07" - ‚È‚µ - - 
+      P002 98 - - - - Disabled - - "ACMPHS2: IVCMP; ADC0: AN002; ICU0: IRQ08" - ‚È‚µ - - 
+      P003 97 - - - - Disabled - - "ADC0: AN007" - ‚È‚µ - - 
+      P004 96 - - - - Disabled - - "ACMPHS3: IVCMP; ADC1: AN100; ICU0: IRQ09" - ‚È‚µ - - 
+      P005 95 - - - - Disabled - - "ACMPHS4: IVCMP; ADC1: AN101; ICU0: IRQ10" - ‚È‚µ - - 
+      P006 94 - - - - Disabled - - "ACMPHS5: IVCMP; ADC1: AN102; ICU0: IRQ11" - ‚È‚µ - - 
+      P007 93 - - - - Disabled - - "ADC1: AN107" - ‚È‚µ - - 
+      P008 92 - - - - Disabled - - "ADC0: AN003; ICU0: IRQ12" - ‚È‚µ - - 
+      P014 85 - - - - Disabled - - "ACMPHS0: IVREF; ACMPHS1: IVREF; ACMPHS2: IVREF; ACMPHS3: IVREF; ACMPHS4: IVREF; ACMPHS5: IVREF; ADC0: AN005; ADC1: AN105; DAC0: DA0" - ‚È‚µ - - 
+      P015 84 - - - - Disabled - - "ACMPHS0: IVCMP; ACMPHS1: IVCMP; ACMPHS2: IVCMP; ACMPHS3: IVCMP; ACMPHS4: IVCMP; ACMPHS5: IVCMP; ADC0: AN006; ADC1: AN106; DAC1: DA1; ICU0: IRQ13" - ‚È‚µ - - 
+      P100 75 GPIO UI_LCD_A0 Low None "Output mode (Initial Low)" CMOS - "AGT0: AGTIO0; GPT_POEG0: GTETRGA; GPT5: GTIOC5B; ICU0: IRQ02; IIC1: SCL1; KINT0: KRM00; SCI0: RXD0; SCI0: SCL0; SCI1: SCK1; SPI0: MISOA" "LCD A0 pin" IO - - 
+      P101 74 SPI0_MOSIA UI_LCD_DATA Low None "Peripheral mode" CMOS None "AGT0: AGTEE0; GPT_POEG1: GTETRGB; GPT5: GTIOC5A; ICU0: IRQ01; IIC1: SDA1; KINT0: KRM01; SCI0: SDA0; SCI0: TXD0; SCI1: CTS1; SPI0: MOSIA" "lcd module data" IO - - 
+      P102 73 SPI0_RSPCKA UI_LCD_CLK Low - "Peripheral mode" CMOS None "ADC0: ADTRG0; AGT0: AGTO0; CAN0: CRX0; GPT_OPS0: GTOWLO; GPT2: GTIOC2B; KINT0: KRM02; SCI0: SCK0; SPI0: RSPCKA" "lcd module clock" IO - - 
+      P103 72 SPI0_SSLA0 UI_LCD_CS Low - "Peripheral mode" CMOS None "CAN0: CTX0; GPT_OPS0: GTOWUP; GPT2: GTIOC2A; KINT0: KRM03; SCI0: CTS0; SPI0: SSLA0" "lcd cs pin" IO - - 
+      P104 71 GPT1_GTIOC1B X_MOTOR_CLK Low None "Peripheral mode" CMOS None "GPT_POEG1: GTETRGB; GPT1: GTIOC1B; ICU0: IRQ01; KINT0: KRM04; SCI8: RXD8; SCI8: SCL8; SPI0: SSLA1" "X axis stepper clock" IO - - 
+      P105 70 GPIO X_MOTOR_DIR Low None "Output mode (Initial Low)" CMOS - "GPT_POEG0: GTETRGA; GPT1: GTIOC1A; ICU0: IRQ00; KINT0: KRM05; SCI8: SDA8; SCI8: TXD8; SPI0: SSLA2" "X axis stepper dir" IO - - 
+      P106 69 GPT8_GTIOC8B Y_MOTOR_CLK Low - "Peripheral mode" CMOS None "AGT0: AGTOB0; GPT8: GTIOC8B; KINT0: KRM06; SCI8: SCK8; SPI0: SSLA3" "Y axis stepper clock" IO - - 
+      P107 68 GPIO Y_MOTOR_DIR Low - "Output mode (Initial Low)" CMOS - "AGT0: AGTOA0; GPT8: GTIOC8A; KINT0: KRM07; SCI8: CTS8" "y axis stepper direction" IO - - 
+      P108 51 DEBUG0_SWDIO - Low - "Peripheral mode" CMOS None "DEBUG0: SWDIO; DEBUG0: TMS; GPT_OPS0: GTOULO; GPT0: GTIOC0B; SCI9: CTS9; SPI1: SSLB0" - IO - - 
+      P109 52 SCI9_TXD9 USART_TXD Low - "Peripheral mode" CMOS None "CGC0: CLKOUT; DEBUG0: TDO; DEBUG0: TRACESWO; GPT_OPS0: GTOVUP; GPT1: GTIOC1A; SCI9: SDA9; SCI9: TXD9; SPI1: MOSIB" - IO - - 
+      P110 53 SCI9_RXD9 USART_RXD Low None "Peripheral mode" CMOS None "ACMP(0-5): VCOUT; DEBUG0: TDI; GPT_OPS0: GTOVLO; GPT1: GTIOC1B; ICU0: IRQ03; SCI2: CTS2; SCI9: RXD9; SCI9: SCL9; SPI1: MISOB" - IO - - 
+      P111 54 GPT3_GTIOC3A Z_MOTOR_CLK Low None "Peripheral mode" CMOS None "GPT_OPS0: HRMON0; GPT3: GTIOC3A; ICU0: IRQ04; SCI2: SCK2; SCI9: SCK9; SPI1: RSPCKB" "z axis motor clock" IO - - 
+      P112 55 GPIO Z_MOTOR_DIR Low - "Output mode (Initial Low)" CMOS - "GPT_OPS0: HRMON1; GPT3: GTIOC3B; SCI1: SCK1; SCI2: SDA2; SCI2: TXD2; SPI1: SSLB0" "z axis direction" IO - - 
+      P113 56 GPIO Z_MOTOR_TQ Low - "Output mode (Initial Low)" CMOS - "GPT2: GTIOC2A; SCI2: RXD2; SCI2: SCL2" "z motor torque" IO - - 
+      P114 57 GPIO Y_MOTOR_TQ Low - "Output mode (Initial Low)" CMOS - "GPT2: GTIOC2B" "y motor torque set" IO - - 
+      P115 58 GPIO X_MOTOR_TQ Low - "Output mode (Initial Low)" CMOS - "GPT4: GTIOC4A" "X motor torque set" IO - - 
+      P200 40 - - - - Disabled - - "ICU0: NMI" - ‚È‚µ - - 
+      P201 39 - - - - Disabled - - "SYSTEM0: MD" - ‚È‚µ - - 
+      P205 32 - - - - Disabled - - "AGT1: AGTO1; CGC0: CLKOUT; GPT_OPS0: GTIV; GPT4: GTIOC4A; ICU0: IRQ01; IIC1: SCL1; SCI4: SDA4; SCI4: TXD4; SCI9: CTS9" - ‚È‚µ - - 
+      P206 31 - - - - Disabled - - "GPT_OPS0: GTIU; ICU0: IRQ00; IIC1: SDA1; SCI4: RXD4; SCI4: SCL4" - ‚È‚µ - - 
+      P207 30 - - - - Disabled - - - - ‚È‚µ - - 
+      P208 37 GPIO LED_RED Low - "Output mode (Initial Low)" CMOS - "DEBUG_TRACE0: TDATA3; GPT_OPS0: GTOVLO" "LED indicatior red" IO - - 
+      P209 36 GPIO SPINDLE_ALERT - - "Input mode" - "input pull-up" "DEBUG_TRACE0: TDATA2; GPT_OPS0: GTOVUP" "spindle alert in" IO - - 
+      P210 35 GPIO LED_GREEN Low - "Output mode (Initial Low)" CMOS - "DEBUG_TRACE0: TDATA1; GPT_OPS0: GTIW" "led indicatior green" IO - - 
+      P211 34 - - - - Disabled - - "DEBUG_TRACE0: TDATA0; GPT_OPS0: GTIV" - ‚È‚µ - - 
+      P212 14 - - - - Disabled - - "AGT1: AGTEE1; CGC0: EXTAL; GPT_POEG3: GTETRGD; GPT0: GTIOC0B; ICU0: IRQ03; SCI1: RXD1; SCI1: SCL1" - ‚È‚µ - - 
+      P213 13 - - - - Disabled - - "ADC1: ADTRG1; CGC0: XTAL; GPT_POEG2: GTETRGC; GPT0: GTIOC0A; ICU0: IRQ02; SCI1: SDA1; SCI1: TXD1" - ‚È‚µ - - 
+      P214 33 - - - - Disabled - - "DEBUG_TRACE0: TCLK; GPT_OPS0: GTIU" - ‚È‚µ - - 
+      P300 50 DEBUG0_SWCLK - Low - "Peripheral mode" CMOS None "DEBUG0: SWCLK; DEBUG0: TCK; GPT_OPS0: GTOUUP; GPT0: GTIOC0A; SPI1: SSLB1" - IO - - 
+      P301 49 SCI9_CTS9 - Low None "Peripheral mode" CMOS None "AGT0: AGTIO0; GPT_OPS0: GTOULO; GPT4: GTIOC4B; ICU0: IRQ06; SCI2: RXD2; SCI2: SCL2; SCI9: CTS9; SPI1: SSLB2" - IO - - 
+      P302 48 GPT4_GTIOC4A SPINDLE_SPEED_PWM Low None "Peripheral mode" CMOS None "GPT_OPS0: GTOUUP; GPT4: GTIOC4A; ICU0: IRQ05; SCI2: SDA2; SCI2: TXD2; SPI1: SSLB3" "spindle speed control pwm out" IO - - 
+      P303 47 GPIO USART_CTS - - "Input mode" - None "GPT7: GTIOC7B" - IO - - 
+      P304 44 GPT7_GTIOC7A SPINDLE_SPEED_FEEDBACK Low None "Peripheral mode" CMOS None "GPT_OPS0: GTOWLO; GPT7: GTIOC7A; ICU0: IRQ09" "spindle speed pulse input" IO - - 
+      P305 43 GPIO SPINDLE_BREAK Low None "Output mode (Initial Low)" CMOS - "GPT_OPS0: GTOWUP; ICU0: IRQ08" "spindle break out" IO - - 
+      P306 42 GPIO SPINDLE_ON Low - "Output mode (Initial Low)" CMOS - "GPT_OPS0: GTOULO" "spindle on" IO - - 
+      P307 41 GPIO SPINDLE_DIR Low - "Output mode (Initial Low)" CMOS - "GPT_OPS0: GTOUUP" "spindle rotation dir" IO - - 
+      P400 1 GPT6_GTIOC6A UI_ENC_A Low None "Peripheral mode" CMOS None "ADC1: ADTRG1; AGT1: AGTIO1; GPT6: GTIOC6A; ICU0: IRQ00; IIC0: SCL0; SCI4: SCK4" ui_endoder_a IO - - 
+      P401 2 GPT6_GTIOC6B UI_ENC_B Low None "Peripheral mode" CMOS None "CAN0: CTX0; GPT_POEG0: GTETRGA; GPT6: GTIOC6B; ICU0: IRQ05; IIC0: SDA0; SCI4: CTS4" ui_encoder_b IO - - 
+      P402 3 GPIO UI_ZSEL - None "Input mode" - "input pull-up" "AGT0: AGTIO0; AGT1: AGTIO1; CAC0: CACREF; CAN0: CRX0; ICU0: IRQ04" Z_AXIS_SELECT IO - - 
+      P403 4 GPIO UI_YSEL - - "Input mode" - "input pull-up" "AGT0: AGTIO0; AGT1: AGTIO1; GPT3: GTIOC3A" "ui y axis select" IO - - 
+      P404 5 GPIO UI_XSEL - - "Input mode" - "input pull-up" "GPT3: GTIOC3B" "ui x axis select" IO - - 
+      P405 6 - - - - Disabled - - "GPT1: GTIOC1A" - ‚È‚µ - - 
+      P406 7 - - - - Disabled - - "GPT1: GTIOC1B" - ‚È‚µ - - 
+      P407 25 GPIO UI_AUTOFEED_DIR - - "Input mode" - "input pull-up" "ADC0: ADTRG0; AGT0: AGTIO0; IIC0: SDA0; SCI4: CTS4" "ui autofeed direction" IO - - 
+      P408 24 GPIO UI_AUTOFEED_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWLO; GPT10: GTIOC10B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3" "ui autofeed switch" IO - - 
+      P409 23 GPIO UI_SPINDLE_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWUP; GPT10: GTIOC10A; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3" "ui spindle on sw" IO - - 
+      P410 22 GPIO UI_SET_ORIG - None "Input mode" - "input pull-up" "AGT1: AGTOB1; GPT_OPS0: GTOVLO; GPT9: GTIOC9B; ICU0: IRQ05; SCI0: RXD0; SCI0: SCL0; SCI3: SCK3; SPI0: MISOA" "ui fet origin btn" IO - - 
+      P411 21 GPIO ZM_LIM - None "Input mode" - "input pull-up" "AGT1: AGTOA1; GPT_OPS0: GTOVUP; GPT9: GTIOC9A; ICU0: IRQ04; SCI0: SDA0; SCI0: TXD0; SCI3: CTS3; SPI0: MOSIA" "Z- axis limit sw" IO - - 
+      P412 20 GPIO ZP_LIM - - "Input mode" - "input pull-up" "AGT1: AGTEE1; GPT_OPS0: GTOULO; SCI0: SCK0; SPI0: RSPCKA" "Z+ axis limit sw" IO - - 
+      P413 19 GPIO YM_LIM - - "Input mode" - "input pull-up" "GPT_OPS0: GTOUUP; SCI0: CTS0; SPI0: SSLA0" "Y- axis limit sw" IO - - 
+      P414 18 GPIO YP_LIM - None "Input mode" - "input pull-up" "GPT0: GTIOC0B; ICU0: IRQ09; SPI0: SSLA1" "Y+ axis limit sw" IO - - 
+      P415 17 GPIO XM_LIM - None "Input mode" - "input pull-up" "GPT0: GTIOC0A; ICU0: IRQ08; SPI0: SSLA2" "X- axis limit sw" IO - - 
+      P500 76 GPIO UI_LCD_RESET Low - "Output mode (Initial Low)" CMOS - "ACMPHS0: IVREF; ACMPHS1: IVREF; ACMPHS2: IVREF; ACMPHS3: IVREF; ACMPHS4: IVREF; ACMPHS5: IVREF; ADC0: AN016; AGT0: AGTOA0; GPT_OPS0: GTIU; GPT11: GTIOC11A" "lcd module reset" IO - - 
+      P501 77 - - - - Disabled - - "ACMPHS0: IVREF; ACMPHS1: IVREF; ACMPHS2: IVREF; ACMPHS3: IVREF; ACMPHS4: IVREF; ACMPHS5: IVREF; ADC1: AN116; AGT0: AGTOB0; GPT_OPS0: GTIV; GPT11: GTIOC11B; ICU0: IRQ11" - ‚È‚µ - - 
+      P502 78 ADC0_AN017 UI_SPINDLE_SPEED - - "Analog mode" - None "ACMPHS0: IVCMP; ACMPHS1: IVCMP; ACMPHS2: IVCMP; ACMPHS3: IVCMP; ACMPHS4: IVCMP; ACMPHS5: IVCMP; ADC0: AN017; GPT_OPS0: GTIW; GPT12: GTIOC12A; ICU0: IRQ12" "ui spindle spped setting" IO - - 
+      P503 79 ADC1_AN117 UI_AUTOFEED_SPEED - - "Analog mode" - None "ADC1: AN117; GPT_POEG2: GTETRGC; GPT12: GTIOC12B" "ui autofeed speedseetting" IO - - 
+      P504 80 - - - - Disabled - - "ADC0: AN018; GPT_POEG3: GTETRGD" - ‚È‚µ - - 
+      P508 81 - - - - Disabled - - "ADC0: AN020" - ‚È‚µ - - 
+      P600 67 - - - - Disabled - - "CAC0: CACREF; CGC0: CLKOUT; GPT6: GTIOC6B; SCI9: SCK9" - ‚È‚µ - - 
+      P601 66 - - - - Disabled - - "GPT6: GTIOC6A; SCI9: RXD9; SCI9: SCL9" - ‚È‚µ - - 
+      P602 65 - - - - Disabled - - "GPT7: GTIOC7B; SCI9: SDA9; SCI9: TXD9" - ‚È‚µ - - 
+      P608 59 GPIO STEPPER_RESET Low - "Output mode (Initial Low)" CMOS - "GPT4: GTIOC4B" "stepping motor reset" IO - - 
+      P609 60 GPIO STEPPER_ENABLE Low - "Output mode (Initial Low)" CMOS - "GPT5: GTIOC5A" "setpping motor enable" IO - - 
+      P610 61 GPIO STEPPER_ALERT - - "Input mode" - "input pull-up" "GPT5: GTIOC5B" "steppeing motor alert" IO - - 
+      P708 16 GPIO XP_LIM - None "Input mode" - "input pull-up" "CAC0: CACREF; ICU0: IRQ11; SCI1: RXD1; SCI1: SCL1; SPI0: SSLA3" "X+ axis limit sw" IO - - 
+      RES# 38 SYSTEM0_RES - - - - - - - - IO "Read only" - 
+      VCC 8 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCC 15 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCC 29 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCC 46 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCC 62 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCC 82 SYSTEM0_VCC - - - - - - - - IO "Read only" - 
+      VCL 64 SYSTEM0_VCL - - - - - - - - IO "Read only" - 
+      VCL0 9 SYSTEM0_VCL0 - - - - - - - - IO "Read only" - 
+      VREFH 87 ANALOG0_VREFH - - - - - - - - IO "Read only" - 
+      VREFH0 91 ANALOG0_VREFH0 - - - - - - - - IO "Read only" - 
+      VREFL 86 ANALOG0_VREFL - - - - - - - - IO "Read only" - 
+      VREFL0 90 ANALOG0_VREFL0 - - - - - - - - IO "Read only" - 
+      VSS 12 SYSTEM0_VSS - - - - - - - - IO "Read only" - 
+      VSS 26 SYSTEM0_VSS - - - - - - - - IO "Read only" - 
+      VSS 45 SYSTEM0_VSS - - - - - - - - IO "Read only" - 
+      VSS 63 SYSTEM0_VSS - - - - - - - - IO "Read only" - 
+      VSS 83 SYSTEM0_VSS - - - - - - - - IO "Read only" - 
+      XCIN 10 CGC0_XCIN - - - - - - - - IO "Read only" - 
+      XCOUT 11 CGC0_XCOUT - - - - - - - - IO "Read only" - 
+    
+  User Events
+    ADC0 SCAN END (A/D scan end interrupt): adc0_scan_completed
+    ADC1 SCAN END (A/D scan end interrupt): adc1_scan_completed
+    
+  User Event Links
+    
+  Module "I/O Port (r_ioport)"
+    Parameter Checking: Default (BSP)
+    
+  Module "FreeRTOS Port (rm_freertos_port)"
+  FreeRTOS
+    General: Custom FreeRTOSConfig.h: 
+    General: Use Preemption: Enabled
+    General: Use Port Optimised Task Selection: Disabled
+    General: Use Tickless Idle: Disabled
+    Hooks: Use Idle Hook: Enabled
+    Hooks: Use Malloc Failed Hook: Disabled
+    Hooks: Use Daemon Task Startup Hook: Disabled
+    Hooks: Use Tick Hook: Disabled
+    General: Cpu Clock Hz: SystemCoreClock
+    General: Tick Rate Hz: 1000
+    General: Max Priorities: 5
+    General: Minimal Stack Size: 128
+    General: Max Task Name Len: 16
+    Stats: Use Trace Facility: Disabled
+    Stats: Use Stats Formatting Functions: Disabled
+    General: Use 16-bit Ticks: Disabled
+    General: Idle Should Yield: Enabled
+    General: Use Task Notifications: Enabled
+    General: Use Mutexes: Disabled
+    General: Use Recursive Mutexes: Disabled
+    General: Use Counting Semaphores: Enabled
+    Hooks: Check For Stack Overflow: Disabled
+    General: Queue Registry Size: 10
+    General: Use Queue Sets: Disabled
+    General: Use Time Slicing: Disabled
+    General: Use Newlib Reentrant: Disabled
+    General: Enable Backward Compatibility: Disabled
+    General: Num Thread Local Storage Pointers: 5
+    General: Stack Depth Type: uint32_t
+    General: Message Buffer Length Type: size_t
+    Memory Allocation: Support Static Allocation: Enabled
+    Memory Allocation: Support Dynamic Allocation: Disabled
+    Memory Allocation: Total Heap Size: 0
+    Memory Allocation: Application Allocated Heap: Disabled
+    Stats: Generate Run Time Stats: Disabled
+    Timers: Use Timers: Enabled
+    Timers: Timer Task Priority: 3
+    Timers: Timer Queue Length: 10
+    Timers: Timer Task Stack Depth: 128
+    General: Library Max Syscall Interrupt Priority: Priority 1
+    General: Assert: assert(x)
+    General: Include Application Defined Privileged Functions: Disabled
+    Optional Functions: vTaskPrioritySet() Function: Enabled
+    Optional Functions: uxTaskPriorityGet() Function: Enabled
+    Optional Functions: vTaskDelete() Function: Enabled
+    Optional Functions: vTaskSuspend() Function: Enabled
+    Optional Functions: xResumeFromISR() Function: Enabled
+    Optional Functions: vTaskDelayUntil() Function: Enabled
+    Optional Functions: vTaskDelay() Function: Enabled
+    Optional Functions: xTaskGetSchedulerState() Function: Enabled
+    Optional Functions: xTaskGetCurrentTaskHandle() Function: Enabled
+    Optional Functions: uxTaskGetStackHighWaterMark() Function: Disabled
+    Optional Functions: xTaskGetIdleTaskHandle() Function: Disabled
+    Optional Functions: eTaskGetState() Function: Disabled
+    Optional Functions: xEventGroupSetBitFromISR() Function: Enabled
+    Optional Functions: xTimerPendFunctionCall() Function: Disabled
+    Optional Functions: xTaskAbortDelay() Function: Disabled
+    Optional Functions: xTaskGetHandle() Function: Disabled
+    Optional Functions: xTaskResumeFromISR() Function: Enabled
+    RA: Hardware Stack Monitor: Disabled
+    Logging: Print String Function: printf(x)
+    Logging: Logging Max Message Length: 192
+    Logging: Logging Include Time and Task Name: Disabled
+    
+  HAL
+    Instance "g_ioport I/O Port (r_ioport)"
+      Name: g_ioport
+      1st Port ELC Trigger Source: Disabled
+      2nd Port ELC Trigger Source: Disabled
+      3rd Port ELC Trigger Source: Disabled
+      4th Port ELC Trigger Source: Disabled
+      Pin Configuration Name: g_bsp_pin_cfg
+      
+    Instance "FreeRTOS Port (rm_freertos_port)"

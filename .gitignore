@@ -1,0 +1,7 @@
+/build
+.cproject
+.project
+*.elf
+CMakeFiles
+.settings
+.vscode

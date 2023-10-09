@@ -1,0 +1,11 @@
+CMakeFiles/cnc_controller.elf.dir/ra/arm/CMSIS_5/CMSIS/DSP/Source/CommonTables/arm_mve_tables.c.obj: \
+ D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Source/CommonTables/arm_mve_tables.c \
+ D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_types.h \
+ D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/Core/Include/cmsis_compiler.h \
+ D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h
+
+D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_types.h:
+
+D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/Core/Include/cmsis_compiler.h:
+
+D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h:

@@ -46,6 +46,8 @@
     <pincfg active="true" name="" symbol="">
       <configSetting altId="adc0.an17.p502" configurationId="adc0.an17"/>
       <configSetting altId="adc1.an17.p503" configurationId="adc1.an17"/>
+      <configSetting altId="cgc0.extal.p212" configurationId="cgc0.extal" isUsedByDriver="true"/>
+      <configSetting altId="cgc0.xtal.p213" configurationId="cgc0.xtal" isUsedByDriver="true"/>
       <configSetting altId="debug0.swclk.p300" configurationId="debug0.swclk" isUsedByDriver="true"/>
       <configSetting altId="debug0.swdio.p108" configurationId="debug0.swdio" isUsedByDriver="true"/>
       <configSetting altId="gpt1.gtiocb.p104" configurationId="gpt1.gtiocb"/>

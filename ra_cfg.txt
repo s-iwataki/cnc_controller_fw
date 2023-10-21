@@ -65,7 +65,7 @@ FSP Configuration
     C Runtime Initialization : Enabled
     Early BSP Initialization : Disabled
     Main Oscillator Clock Source: Crystal or Resonator
-    Subclock Populated: Populated
+    Subclock Populated: Not Populated
     Subclock Drive (Drive capacitance availability varies by MCU): Standard/Normal mode
     Subclock Stabilization Time (ms): 1000
     
@@ -126,8 +126,8 @@ FSP Configuration
       P209 36 GPIO SPINDLE_ALERT - - "Input mode" - "input pull-up" "DEBUG_TRACE0: TDATA2; GPT_OPS0: GTOVUP" "spindle alert in" IO - - 
       P210 35 GPIO LED_GREEN Low - "Output mode (Initial Low)" CMOS - "DEBUG_TRACE0: TDATA1; GPT_OPS0: GTIW" "led indicatior green" IO - - 
       P211 34 - - - - Disabled - - "DEBUG_TRACE0: TDATA0; GPT_OPS0: GTIV" - ‚È‚µ - - 
-      P212 14 - - - - Disabled - - "AGT1: AGTEE1; CGC0: EXTAL; GPT_POEG3: GTETRGD; GPT0: GTIOC0B; ICU0: IRQ03; SCI1: RXD1; SCI1: SCL1" - ‚È‚µ - - 
-      P213 13 - - - - Disabled - - "ADC1: ADTRG1; CGC0: XTAL; GPT_POEG2: GTETRGC; GPT0: GTIOC0A; ICU0: IRQ02; SCI1: SDA1; SCI1: TXD1" - ‚È‚µ - - 
+      P212 14 CGC0_EXTAL - Low None "Peripheral mode" CMOS None "AGT1: AGTEE1; CGC0: EXTAL; GPT_POEG3: GTETRGD; GPT0: GTIOC0B; ICU0: IRQ03; SCI1: RXD1; SCI1: SCL1" - IO - - 
+      P213 13 CGC0_XTAL - Low None "Peripheral mode" CMOS None "ADC1: ADTRG1; CGC0: XTAL; GPT_POEG2: GTETRGC; GPT0: GTIOC0A; ICU0: IRQ02; SCI1: SDA1; SCI1: TXD1" - IO - - 
       P214 33 - - - - Disabled - - "DEBUG_TRACE0: TCLK; GPT_OPS0: GTIU" - ‚È‚µ - - 
       P300 50 DEBUG0_SWCLK - Low - "Peripheral mode" CMOS None "DEBUG0: SWCLK; DEBUG0: TCK; GPT_OPS0: GTOUUP; GPT0: GTIOC0A; SPI1: SSLB1" - IO - - 
       P301 49 SCI9_CTS9 - Low None "Peripheral mode" CMOS None "AGT0: AGTIO0; GPT_OPS0: GTOULO; GPT4: GTIOC4B; ICU0: IRQ06; SCI2: RXD2; SCI2: SCL2; SCI9: CTS9; SPI1: SSLB2" - IO - - 
@@ -272,3 +272,12 @@ FSP Configuration
       Pin Configuration Name: g_bsp_pin_cfg
       
     Instance "FreeRTOS Port (rm_freertos_port)"
+  Thread "ledblink"
+    Symbol: led_blink
+    Name: ledblink
+    Stack size (bytes): 1024
+    Priority: 1
+    Thread Context: NULL
+    Memory Allocation: Static
+    Allocate Secure Context: Enable
+    

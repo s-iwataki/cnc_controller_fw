@@ -10,7 +10,7 @@
             #include "board_cfg.h"
             #define RA_NOT_DEFINED 0
             #ifndef BSP_CFG_RTOS
-             #if (RA_NOT_DEFINED) != (RA_NOT_DEFINED)
+             #if (RA_NOT_DEFINED) != (1)
               #define BSP_CFG_RTOS (2)
              #elif (RA_NOT_DEFINED) != (RA_NOT_DEFINED)
               #define BSP_CFG_RTOS (1)
@@ -50,7 +50,7 @@
             #define BSP_CLOCK_CFG_SUBCLOCK_DRIVE (0)
             #endif
             #ifndef BSP_CLOCK_CFG_SUBCLOCK_POPULATED
-            #define BSP_CLOCK_CFG_SUBCLOCK_POPULATED (1)
+            #define BSP_CLOCK_CFG_SUBCLOCK_POPULATED (0)
             #endif
             #ifndef BSP_CLOCK_CFG_SUBCLOCK_STABILIZATION_MS
             #define BSP_CLOCK_CFG_SUBCLOCK_STABILIZATION_MS 1000

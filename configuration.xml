@@ -96,7 +96,7 @@
       <property id="config.bsp.common.c_runtime_init" value="config.bsp.common.c_runtime_init.enabled"/>
       <property id="config.bsp.common.early_init" value="config.bsp.common.early_init.disabled"/>
       <property id="config.bsp.common.main_osc_clock_source" value="config.bsp.common.main_osc_clock_source.crystal"/>
-      <property id="config.bsp.common.subclock_populated" value="config.bsp.common.subclock_populated.enabled"/>
+      <property id="config.bsp.common.subclock_populated" value="config.bsp.common.subclock_populated.disabled"/>
       <property id="config.bsp.common.subclock_drive" value="config.bsp.common.subclock_drive.standard"/>
       <property id="config.bsp.common.subclock_stabilization_ms" value="1000"/>
     </config>
@@ -218,6 +218,15 @@
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.middleware.rm_freertos_port.0"/>
+    </context>
+    <context id="rtos.awsfreertos.thread.1922777237">
+      <property id="_symbol" value="led_blink"/>
+      <property id="rtos.awsfreertos.thread.name" value="ledblink"/>
+      <property id="rtos.awsfreertos.thread.stack" value="1024"/>
+      <property id="rtos.awsfreertos.thread.priority" value="1"/>
+      <property id="rtos.awsfreertos.thread.context" value="NULL"/>
+      <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.static"/>
+      <property id="rtos.awsfreertos.thread.secure_context" value="rtos.awsfreertos.thread.secure_context.enable"/>
     </context>
     <config id="config.driver.ioport">
       <property id="config.driver.ioport.checking" value="config.driver.ioport.checking.system"/>
@@ -411,6 +420,9 @@
       <configSetting altId="adc0.mode.custom" configurationId="adc0.mode"/>
       <configSetting altId="adc1.an17.p503" configurationId="adc1.an17"/>
       <configSetting altId="adc1.mode.custom" configurationId="adc1.mode"/>
+      <configSetting altId="cgc0.extal.p212" configurationId="cgc0.extal"/>
+      <configSetting altId="cgc0.mode.main" configurationId="cgc0.mode"/>
+      <configSetting altId="cgc0.xtal.p213" configurationId="cgc0.xtal"/>
       <configSetting altId="debug0.mode.swd" configurationId="debug0.mode"/>
       <configSetting altId="debug0.swclk.p300" configurationId="debug0.swclk"/>
       <configSetting altId="debug0.swdio.p108" configurationId="debug0.swdio"/>
@@ -466,6 +478,10 @@
       <configSetting altId="p209.gpio_pupd.gpio_pupd_ip_up" configurationId="p209.gpio_pupd"/>
       <configSetting altId="p210.output.low" configurationId="p210"/>
       <configSetting altId="p210.gpio_mode.gpio_mode_out.low" configurationId="p210.gpio_mode"/>
+      <configSetting altId="p212.cgc0.extal" configurationId="p212"/>
+      <configSetting altId="p212.gpio_mode.gpio_mode_peripheral" configurationId="p212.gpio_mode"/>
+      <configSetting altId="p213.cgc0.xtal" configurationId="p213"/>
+      <configSetting altId="p213.gpio_mode.gpio_mode_peripheral" configurationId="p213.gpio_mode"/>
       <configSetting altId="p300.debug0.swclk" configurationId="p300"/>
       <configSetting altId="p300.gpio_mode.gpio_mode_peripheral" configurationId="p300.gpio_mode"/>
       <configSetting altId="p301.sci9.cts" configurationId="p301"/>

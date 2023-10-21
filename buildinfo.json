@@ -1,7 +1,6 @@
 {
   "definedMacros": [
-    "_RA_CORE=CM4",
-    "_RENESAS_RA_"
+    "_RA_CORE=CM4"
   ],
   "sourcePaths": [
     "ra",
@@ -28,7 +27,6 @@
   "objectFiles": [],
   "linkerScript": "script/fsp.ld",
   "targetDeviceName": "R7FA6T1AB3CFP",
-  "entrySymbol": "Reset_Handler",
   "isPreBuildContentGenEnabled": false,
   "isPostBuildContentGenEnabled": true,
   "isTargetDeviceSupportsTrustZone": false,

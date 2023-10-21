@@ -1,4 +1,6 @@
 #include "hal_data.h"
+#include "FreeRTOS.h"
+#include "task_main.h"
 
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
@@ -11,6 +13,7 @@ FSP_CPP_FOOTER
 void hal_entry(void)
 {
     /* TODO: add your own code here */
+    xTaskCreateStatic(task_main, "maint", MAIN_TASK_STACK_DEPTH, NULL, 1, main_task_stack, &main_task_tcb);
 
 #if BSP_TZ_SECURE_BUILD
     /* Enter non-secure code */

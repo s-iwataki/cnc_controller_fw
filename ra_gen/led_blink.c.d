@@ -60,7 +60,11 @@ CMakeFiles/cnc_controller.elf.dir/ra_gen/led_blink.c.obj: \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h
 
 D:/workspace/cnc_controller/ra_gen/led_blink.h:
 
@@ -183,3 +187,11 @@ D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
+
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:

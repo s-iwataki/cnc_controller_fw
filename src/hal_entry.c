@@ -1,5 +1,6 @@
 #include "hal_data.h"
 #include "FreeRTOS.h"
+#include "r_sci_uart.h"
 
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
@@ -47,6 +48,7 @@ void R_BSP_WarmStart (bsp_warm_start_event_t event)
 
         /* Configure pins. */
         R_IOPORT_Open(&g_ioport_ctrl, &IOPORT_CFG_NAME);
+        R_SCI_UART_Open(&g_uart9_ctrl,&g_uart9_cfg);
     }
 }
 

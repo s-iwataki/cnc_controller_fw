@@ -88,9 +88,9 @@
       <configSetting altId="p609.output.low" configurationId="p609"/>
       <configSetting altId="p610.input" configurationId="p610"/>
       <configSetting altId="p708.input" configurationId="p708"/>
-      <configSetting altId="sci9.cts.p301" configurationId="sci9.cts"/>
-      <configSetting altId="sci9.rxd.p110" configurationId="sci9.rxd"/>
-      <configSetting altId="sci9.txd.p109" configurationId="sci9.txd"/>
+      <configSetting altId="sci9.cts.p301" configurationId="sci9.cts" isUsedByDriver="true"/>
+      <configSetting altId="sci9.rxd.p110" configurationId="sci9.rxd" isUsedByDriver="true"/>
+      <configSetting altId="sci9.txd.p109" configurationId="sci9.txd" isUsedByDriver="true"/>
       <configSetting altId="spi0.mosi.p101" configurationId="spi0.mosi"/>
       <configSetting altId="spi0.rspck.p102" configurationId="spi0.rspck"/>
       <configSetting altId="spi0.ssl0.p103" configurationId="spi0.ssl0"/>

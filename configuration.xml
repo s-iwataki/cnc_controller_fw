@@ -85,7 +85,7 @@
     </config>
     <config id="config.bsp.ra">
       <property id="config.bsp.common.main" value="0x400"/>
-      <property id="config.bsp.common.heap" value="0"/>
+      <property id="config.bsp.common.heap" value="0x2000"/>
       <property id="config.bsp.common.vcc" value="3300"/>
       <property id="config.bsp.common.checking" value="config.bsp.common.checking.disabled"/>
       <property id="config.bsp.common.assert" value="config.bsp.common.assert.none"/>
@@ -199,6 +199,10 @@
       <description>Serial Peripheral Interface</description>
       <originalPack>Renesas.RA.4.6.0.pack</originalPack>
     </component>
+    <component apiversion="" class="Heaps" condition="" group="FreeRTOS" subgroup="heap_3" variant="" vendor="AWS" version="10.4.6+fsp.4.6.0">
+      <description>FreeRTOS - Memory Management - Heap 3</description>
+      <originalPack>Amazon.FreeRTOS-Kernel.10.4.6+fsp.4.6.0.pack</originalPack>
+    </component>
   </raComponentSelection>
   <raElcConfiguration/>
   <raIcuConfiguration>
@@ -241,10 +245,12 @@
       <property id="module.driver.uart.tei_ipl" value="board.icu.common.irq.priority12"/>
       <property id="module.driver.uart.eri_ipl" value="board.icu.common.irq.priority12"/>
     </module>
+    <module id="module.freertos.heap.3.763072350"/>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.middleware.rm_freertos_port.0"/>
       <stack module="module.driver.uart_on_sci_uart.694709794"/>
+      <stack module="module.freertos.heap.3.763072350"/>
     </context>
     <context id="rtos.awsfreertos.thread.1922777237">
       <property id="_symbol" value="led_blink"/>
@@ -293,14 +299,14 @@
       <property id="config.awsfreertos.thread.configqueue_registry_size" value="10"/>
       <property id="config.awsfreertos.thread.configuse_queue_sets" value="config.awsfreertos.thread.configuse_queue_sets.disabled"/>
       <property id="config.awsfreertos.thread.configuse_time_slicing" value="config.awsfreertos.thread.configuse_time_slicing.disabled"/>
-      <property id="config.awsfreertos.thread.configuse_newlib_reentrant" value="config.awsfreertos.thread.configuse_newlib_reentrant.disabled"/>
+      <property id="config.awsfreertos.thread.configuse_newlib_reentrant" value="config.awsfreertos.thread.configuse_newlib_reentrant.enabled"/>
       <property id="config.awsfreertos.thread.configenable_backward_compatibility" value="config.awsfreertos.thread.configenable_backward_compatibility.disabled"/>
       <property id="config.awsfreertos.thread.confignum_thread_local_storage_pointers" value="5"/>
       <property id="config.awsfreertos.thread.configstack_depth_type" value="uint32_t"/>
       <property id="config.awsfreertos.thread.configmessage_buffer_length_type" value="size_t"/>
       <property id="config.awsfreertos.thread.configsupport_static_allocation" value="config.awsfreertos.thread.configsupport_static_allocation.enabled"/>
-      <property id="config.awsfreertos.thread.configsupport_dynamic_allocation" value="config.awsfreertos.thread.configsupport_dynamic_allocation.disabled"/>
-      <property id="config.awsfreertos.thread.configtotal_heap_size" value="0"/>
+      <property id="config.awsfreertos.thread.configsupport_dynamic_allocation" value="config.awsfreertos.thread.configsupport_dynamic_allocation.enabled"/>
+      <property id="config.awsfreertos.thread.configtotal_heap_size" value="1024"/>
       <property id="config.awsfreertos.thread.configapplication_allocated_heap" value="config.awsfreertos.thread.configapplication_allocated_heap.disabled"/>
       <property id="config.awsfreertos.thread.configgenerate_run_time_stats" value="config.awsfreertos.thread.configgenerate_run_time_stats.disabled"/>
       <property id="config.awsfreertos.thread.configuse_timers" value="config.awsfreertos.thread.configuse_timers.enabled"/>

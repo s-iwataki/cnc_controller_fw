@@ -54,7 +54,7 @@ FSP Configuration
     
   RA Common
     Main stack size (bytes): 0x400
-    Heap size (bytes): 0
+    Heap size (bytes): 0x2000
     MCU Vcc (mV): 3300
     Parameter checking: Disabled
     Assert Failures: Return FSP_ERR_ASSERTION
@@ -204,6 +204,7 @@ FSP Configuration
     Flow Control Support: Enable
     RS-485 Support: Disable
     
+  Module "FreeRTOS Heap 3"
   FreeRTOS
     General: Custom FreeRTOSConfig.h: 
     General: Use Preemption: Enabled
@@ -230,14 +231,14 @@ FSP Configuration
     General: Queue Registry Size: 10
     General: Use Queue Sets: Disabled
     General: Use Time Slicing: Disabled
-    General: Use Newlib Reentrant: Disabled
+    General: Use Newlib Reentrant: Enabled
     General: Enable Backward Compatibility: Disabled
     General: Num Thread Local Storage Pointers: 5
     General: Stack Depth Type: uint32_t
     General: Message Buffer Length Type: size_t
     Memory Allocation: Support Static Allocation: Enabled
-    Memory Allocation: Support Dynamic Allocation: Disabled
-    Memory Allocation: Total Heap Size: 0
+    Memory Allocation: Support Dynamic Allocation: Enabled
+    Memory Allocation: Total Heap Size: 1024
     Memory Allocation: Application Allocated Heap: Disabled
     Stats: Generate Run Time Stats: Disabled
     Timers: Use Timers: Enabled
@@ -305,6 +306,7 @@ FSP Configuration
       Interrupts: Transmit End Interrupt Priority: Priority 12
       Interrupts: Error Interrupt Priority: Priority 12
       
+    Instance "FreeRTOS Heap 3"
   Thread "ledblink"
     Symbol: led_blink
     Name: ledblink

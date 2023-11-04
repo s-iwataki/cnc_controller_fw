@@ -50,17 +50,7 @@ CMakeFiles/cnc_controller.elf.dir/src/syscalls.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
- D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
- D:/workspace/cnc_controller/ra_gen/hal_data.h \
- D:/workspace/cnc_controller/ra_gen/common_data.h \
- D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h
+ D:/workspace/cnc_controller/src/tty.h
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -162,24 +152,4 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
 
-D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
-
-D:/workspace/cnc_controller/ra_gen/hal_data.h:
-
-D:/workspace/cnc_controller/ra_gen/common_data.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
+D:/workspace/cnc_controller/src/tty.h:

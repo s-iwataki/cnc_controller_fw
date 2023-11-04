@@ -10,8 +10,7 @@
 #include <sys/fcntl.h>
 #include <FreeRTOS.h>
 #include "task.h"
-#include "r_sci_uart.h"
-#include "hal_data.h"
+#include "tty.h"
 
 /* Variables */
 #ifdef errno
@@ -53,14 +52,23 @@ void _exit (int status)
 __attribute__ ((used))
 int _read (int file, char *ptr, int len)
 {
+    int stdio_fd_min,stdio_fd_max;
+    tty_get_stdio_fd_range(&stdio_fd_min, &stdio_fd_max);
+    if((file>=stdio_fd_min)&&(file<=stdio_fd_max)){
+        return tty_stdio_read(file, ptr, len);
+    }
 	return 0;
 }
 
 __attribute__ ((used))
 int _write(int file, char *ptr, int len)
 {
-	R_SCI_UART_Write(&g_uart9_ctrl,ptr, len);
-	return len;
+	int stdio_fd_min,stdio_fd_max;
+    tty_get_stdio_fd_range(&stdio_fd_min, &stdio_fd_max);
+    if((file>=stdio_fd_min)&&(file<=stdio_fd_max)){
+        return tty_stdio_write(file, ptr, len);
+    }
+	return 0;
 }
 
 /* _sbrk()は bsp_sbrk.cで実装されている */

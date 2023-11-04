@@ -264,7 +264,7 @@
     <context id="rtos.awsfreertos.thread.1201511649">
       <property id="_symbol" value="shell"/>
       <property id="rtos.awsfreertos.thread.name" value="shell task"/>
-      <property id="rtos.awsfreertos.thread.stack" value="1024"/>
+      <property id="rtos.awsfreertos.thread.stack" value="2048"/>
       <property id="rtos.awsfreertos.thread.priority" value="1"/>
       <property id="rtos.awsfreertos.thread.context" value="NULL"/>
       <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.static"/>

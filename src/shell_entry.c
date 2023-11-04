@@ -10,9 +10,7 @@ void shell_entry(void* pvParameters) {
     /* TODO: add your own code here */
     while (1) {
         printf(">");
-        //fgets(cmd_buff,sizeof(cmd_buff),stdin);
-        char c;
-        _read(0,&c,1);
-        printf("input:%c\r\n",c);
+        fgets(cmd_buff,sizeof(cmd_buff),stdin);
+        printf("input:%s\r\n",cmd_buff);
     }
 }

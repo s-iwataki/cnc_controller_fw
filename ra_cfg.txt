@@ -319,7 +319,7 @@ FSP Configuration
   Thread "shell task"
     Symbol: shell
     Name: shell task
-    Stack size (bytes): 1024
+    Stack size (bytes): 2048
     Priority: 1
     Thread Context: NULL
     Memory Allocation: Static

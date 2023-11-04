@@ -316,3 +316,12 @@ FSP Configuration
     Memory Allocation: Static
     Allocate Secure Context: Enable
     
+  Thread "shell task"
+    Symbol: shell
+    Name: shell task
+    Stack size (bytes): 1024
+    Priority: 1
+    Thread Context: NULL
+    Memory Allocation: Static
+    Allocate Secure Context: Enable
+    

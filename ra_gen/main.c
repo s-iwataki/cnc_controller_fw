@@ -5,6 +5,8 @@
                 #include "semphr.h"
                 extern void led_blink_create(void);
                 extern TaskHandle_t led_blink;
+extern void shell_create(void);
+                extern TaskHandle_t shell;
                 uint32_t g_fsp_common_thread_count;
                 bool g_fsp_common_initialized;
                 SemaphoreHandle_t g_fsp_common_initialized_semaphore;
@@ -101,6 +103,7 @@
 
                     /* Init RTOS tasks. */
                     led_blink_create();
+shell_create();
 
                     /* Start the scheduler. */
                     vTaskStartScheduler();

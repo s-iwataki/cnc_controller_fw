@@ -7,10 +7,10 @@
 #include <stdio.h>
 /* ledblink entry function */
 /* pvParameters contains TaskHandle_t */
-const char*test_msg="test\r\n";
 void led_blink_entry(void *pvParameters) {
   FSP_PARAMETER_NOT_USED(pvParameters);
   /* TODO: add your own code here */
+  int x=0;
   while (1) {
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_GREEN, BSP_IO_LEVEL_HIGH);
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_RED, BSP_IO_LEVEL_HIGH);
@@ -18,6 +18,6 @@ void led_blink_entry(void *pvParameters) {
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_GREEN, BSP_IO_LEVEL_LOW);
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_RED, BSP_IO_LEVEL_LOW);
     vTaskDelay(pdMS_TO_TICKS(500));
-    printf("printf test\r\n");
+    printf("x=%d\r\n",x++);
   }
 }

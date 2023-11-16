@@ -44,7 +44,6 @@ __attribute__((used)) void _exit(int status) {
 
 __attribute__((used)) int _read(int file, char* ptr, int len) {
     int stdio_fd_min, stdio_fd_max;
-    printf("_read %d bytes\r\n",len);
     tty_get_stdio_fd_range(&stdio_fd_min, &stdio_fd_max);
     if ((file >= stdio_fd_min) && (file <= stdio_fd_max)) {
         return tty_stdio_read(file, ptr, len);

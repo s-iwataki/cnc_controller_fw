@@ -46,9 +46,22 @@ CMakeFiles/cnc_controller.elf.dir/src/led_blink_entry.c.obj: \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
  D:/workspace/cnc_controller/ra_gen/hal_data.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_adc.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_adc_cfg.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_adc_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_dmac.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_spi.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_spi_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_gpt.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_timer_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
  D:/workspace/cnc_controller/ra_gen/led_blink.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h \
@@ -159,11 +172,37 @@ D:/workspace/cnc_controller/ra_gen/hal_data.h:
 
 D:/workspace/cnc_controller/ra_gen/common_data.h:
 
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h:
+
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_adc.h:
+
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_adc_cfg.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_adc_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_dmac.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_spi.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_spi_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_gpt.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_timer_api.h:
+
 D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
 

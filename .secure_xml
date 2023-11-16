@@ -44,19 +44,19 @@
   </raClockConfiguration>
   <raPinConfiguration>
     <pincfg active="true" name="" symbol="">
-      <configSetting altId="adc0.an17.p502" configurationId="adc0.an17"/>
-      <configSetting altId="adc1.an17.p503" configurationId="adc1.an17"/>
+      <configSetting altId="adc0.an17.p502" configurationId="adc0.an17" isUsedByDriver="true"/>
+      <configSetting altId="adc1.an17.p503" configurationId="adc1.an17" isUsedByDriver="true"/>
       <configSetting altId="cgc0.extal.p212" configurationId="cgc0.extal" isUsedByDriver="true"/>
       <configSetting altId="cgc0.xtal.p213" configurationId="cgc0.xtal" isUsedByDriver="true"/>
       <configSetting altId="debug0.swclk.p300" configurationId="debug0.swclk" isUsedByDriver="true"/>
       <configSetting altId="debug0.swdio.p108" configurationId="debug0.swdio" isUsedByDriver="true"/>
-      <configSetting altId="gpt1.gtiocb.p104" configurationId="gpt1.gtiocb"/>
-      <configSetting altId="gpt3.gtioca.p111" configurationId="gpt3.gtioca"/>
-      <configSetting altId="gpt4.gtioca.p302" configurationId="gpt4.gtioca"/>
-      <configSetting altId="gpt6.gtioca.p400" configurationId="gpt6.gtioca"/>
-      <configSetting altId="gpt6.gtiocb.p401" configurationId="gpt6.gtiocb"/>
-      <configSetting altId="gpt7.gtioca.p304" configurationId="gpt7.gtioca"/>
-      <configSetting altId="gpt8.gtiocb.p106" configurationId="gpt8.gtiocb"/>
+      <configSetting altId="gpt1.gtiocb.p104" configurationId="gpt1.gtiocb" isUsedByDriver="true"/>
+      <configSetting altId="gpt3.gtioca.p111" configurationId="gpt3.gtioca" isUsedByDriver="true"/>
+      <configSetting altId="gpt4.gtioca.p302" configurationId="gpt4.gtioca" isUsedByDriver="true"/>
+      <configSetting altId="gpt6.gtioca.p400" configurationId="gpt6.gtioca" isUsedByDriver="true"/>
+      <configSetting altId="gpt6.gtiocb.p401" configurationId="gpt6.gtiocb" isUsedByDriver="true"/>
+      <configSetting altId="gpt7.gtioca.p304" configurationId="gpt7.gtioca" isUsedByDriver="true"/>
+      <configSetting altId="gpt8.gtiocb.p106" configurationId="gpt8.gtiocb" isUsedByDriver="true"/>
       <configSetting altId="p100.output.low" configurationId="p100"/>
       <configSetting altId="p105.output.low" configurationId="p105"/>
       <configSetting altId="p107.output.low" configurationId="p107"/>
@@ -91,9 +91,9 @@
       <configSetting altId="sci9.cts.p301" configurationId="sci9.cts" isUsedByDriver="true"/>
       <configSetting altId="sci9.rxd.p110" configurationId="sci9.rxd" isUsedByDriver="true"/>
       <configSetting altId="sci9.txd.p109" configurationId="sci9.txd" isUsedByDriver="true"/>
-      <configSetting altId="spi0.mosi.p101" configurationId="spi0.mosi"/>
-      <configSetting altId="spi0.rspck.p102" configurationId="spi0.rspck"/>
-      <configSetting altId="spi0.ssl0.p103" configurationId="spi0.ssl0"/>
+      <configSetting altId="spi0.mosi.p101" configurationId="spi0.mosi" isUsedByDriver="true"/>
+      <configSetting altId="spi0.rspck.p102" configurationId="spi0.rspck" isUsedByDriver="true"/>
+      <configSetting altId="spi0.ssl0.p103" configurationId="spi0.ssl0" isUsedByDriver="true"/>
     </pincfg>
   </raPinConfiguration>
 </raConfiguration>

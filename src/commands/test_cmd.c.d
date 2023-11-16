@@ -1,7 +1,8 @@
-CMakeFiles/cnc_controller.elf.dir/src/uart_tty.c.obj: \
- D:/workspace/cnc_controller/src/uart_tty.c \
- D:/workspace/cnc_controller/src/uart_tty.h \
- D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
+CMakeFiles/cnc_controller.elf.dir/src/commands/test_cmd.c.obj: \
+ D:/workspace/cnc_controller/src/commands/test_cmd.c \
+ D:/workspace/cnc_controller/src/commands/test_cmd.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h \
+ D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/fsp_common_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/fsp_version.h \
@@ -41,12 +42,6 @@ CMakeFiles/cnc_controller.elf.dir/src/uart_tty.c.obj: \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_compiler_support.h \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_delay.h \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_mcu_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h \
- D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/deprecated_definitions.h \
@@ -54,35 +49,43 @@ CMakeFiles/cnc_controller.elf.dir/src/uart_tty.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
- D:/workspace/cnc_controller/ra_gen/hal_data.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
+ D:/workspace/cnc_controller/src/command_list.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h \
- D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h \
- D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h \
+ D:/workspace/cnc_controller/ra_gen/hal_data.h \
+ D:/workspace/cnc_controller/ra_gen/common_data.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_adc.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_adc_cfg.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_adc_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_dmac.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_spi.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_spi_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_gpt.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_timer_api.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
- D:/workspace/cnc_controller/src/tty.h
+ D:/workspace/cnc_controller/src/triaxis_table.h
 
-D:/workspace/cnc_controller/src/uart_tty.h:
+D:/workspace/cnc_controller/src/commands/test_cmd.h:
 
-D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
+
+D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
 
@@ -162,18 +165,6 @@ d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_delay.h:
 
 d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_mcu_api.h:
 
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
-
-D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h:
-
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h:
@@ -188,7 +179,17 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
 
-D:/workspace/cnc_controller/ra_gen/hal_data.h:
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
+
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
+
+D:/workspace/cnc_controller/src/command_list.h:
 
 D:/workspace/cnc_controller/ra_gen/common_data.h:
 
@@ -198,13 +199,9 @@ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h:
 
-D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h:
+D:/workspace/cnc_controller/ra_gen/hal_data.h:
 
-D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
+D:/workspace/cnc_controller/ra_gen/common_data.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/instances/r_adc.h:
 
@@ -213,6 +210,8 @@ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_adc_cfg.h:
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_adc_api.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_transfer_api.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/instances/r_dmac.h:
 
@@ -226,7 +225,11 @@ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_gpt.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_timer_api.h:
 
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h:
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
+
+D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
+
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h:
 
@@ -236,4 +239,4 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 
-D:/workspace/cnc_controller/src/tty.h:
+D:/workspace/cnc_controller/src/triaxis_table.h:

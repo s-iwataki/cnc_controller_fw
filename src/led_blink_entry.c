@@ -18,6 +18,5 @@ void led_blink_entry(void *pvParameters) {
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_GREEN, BSP_IO_LEVEL_LOW);
     R_IOPORT_PinWrite(&g_ioport_ctrl, LED_RED, BSP_IO_LEVEL_LOW);
     vTaskDelay(pdMS_TO_TICKS(500));
-    printf("x=%d\r\n",x++);
   }
 }

@@ -67,6 +67,20 @@
             <slot name="P708" secure="false"/>
         </peripheral>
         <peripheral name="SCI9" group="SCI" security=""/>
+        <peripheral name="GPT1" group="GPT" security=""/>
+        <peripheral name="GPT8" group="GPT" security=""/>
+        <peripheral name="GPT3" group="GPT" security=""/>
+        <peripheral name="GPT6" group="GPT" security=""/>
+        <peripheral name="GPT0" group="GPT" security=""/>
+        <peripheral name="GPT2" group="GPT" security=""/>
+        <peripheral name="GPT5" group="GPT" security=""/>
+        <peripheral name="GPT4" group="GPT" security=""/>
+        <peripheral name="GPT7" group="GPT" security=""/>
+        <peripheral name="SPI0" group="SPI" security=""/>
+        <peripheral name="DMA_DMAC0" group="DMA_DMAC" security=""/>
+        <peripheral name="DMA_DMAC1" group="DMA_DMAC" security=""/>
+        <peripheral name="ADC0" group="ADC" security=""/>
+        <peripheral name="ADC1" group="ADC" security=""/>
         <peripheral name="ICU">
             <slot name="IRQ0" secure="false"/>
             <slot name="IRQ1" secure="false"/>
@@ -74,6 +88,20 @@
             <slot name="IRQ3" secure="false"/>
             <slot name="IRQ4" secure="false"/>
             <slot name="IRQ5" secure="false"/>
+            <slot name="IRQ6" secure="false"/>
+            <slot name="IRQ7" secure="false"/>
+            <slot name="IRQ8" secure="false"/>
+            <slot name="IRQ9" secure="false"/>
+            <slot name="IRQ10" secure="false"/>
+        </peripheral>
+        <peripheral name="ELC">
+            <slot name="GPT_A" secure="false"/>
+            <slot name="GPT_B" secure="false"/>
+            <slot name="GPT_C" secure="false"/>
+            <slot name="GPT_D" secure="false"/>
+            <slot name="GPT_E" secure="false"/>
+            <slot name="GPT_F" secure="false"/>
+            <slot name="GPT_G" secure="false"/>
         </peripheral>
     </partition>
 </azone>

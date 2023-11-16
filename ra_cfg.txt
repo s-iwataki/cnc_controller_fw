@@ -521,7 +521,7 @@ FSP Configuration
       General: Name: g_timer_xpos
       General: Channel: 0
       General: Mode: One-Shot
-      General: Period: 0x10000
+      General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
       Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
@@ -572,7 +572,7 @@ FSP Configuration
       General: Name: g_timer_ypos
       General: Channel: 2
       General: Mode: One-Shot
-      General: Period: 0x10000
+      General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
       Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
@@ -590,7 +590,7 @@ FSP Configuration
       Output: GTIOCB Stop Level: Pin Level Low
       Input: Count Up Source: GPT8 COUNTER OVERFLOW (Overflow)
       Input: Count Down Source: 
-      Input: Start Source: 
+      Input: Start Source: ELC SOFTWARE EVENT 0 (Software event 0)
       Input: Stop Source: 
       Input: Clear Source: 
       Input: Capture A Source: 
@@ -620,7 +620,7 @@ FSP Configuration
       General: Name: g_timer_zpos
       General: Channel: 5
       General: Mode: One-Shot
-      General: Period: 0x10000
+      General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
       Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
@@ -638,7 +638,7 @@ FSP Configuration
       Output: GTIOCB Stop Level: Pin Level Low
       Input: Count Up Source: GPT3 COUNTER OVERFLOW (Overflow)
       Input: Count Down Source: 
-      Input: Start Source: 
+      Input: Start Source: ELC SOFTWARE EVENT 0 (Software event 0)
       Input: Stop Source: 
       Input: Clear Source: 
       Input: Capture A Source: 

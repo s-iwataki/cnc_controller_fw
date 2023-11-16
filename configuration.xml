@@ -439,7 +439,7 @@
       <property id="module.driver.timer.name" value="g_timer_xpos"/>
       <property id="module.driver.timer.channel" value="0"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_one_shot"/>
-      <property id="module.driver.timer.period" value="0x10000"/>
+      <property id="module.driver.timer.period" value="0x100000000"/>
       <property id="module.driver.timer.unit" value="module.driver.timer.unit.unit_period_raw_counts"/>
       <property id="module.driver.timer.gtior.gtioa.initial_output_level" value="module.driver.timer.gtior.gtioa.initial_output_level.low"/>
       <property id="module.driver.timer.gtior.gtioa.cycle_end_output_level" value="module.driver.timer.gtior.gtioa.cycle_end_output_level.retain"/>
@@ -490,7 +490,7 @@
       <property id="module.driver.timer.name" value="g_timer_ypos"/>
       <property id="module.driver.timer.channel" value="2"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_one_shot"/>
-      <property id="module.driver.timer.period" value="0x10000"/>
+      <property id="module.driver.timer.period" value="0x100000000"/>
       <property id="module.driver.timer.unit" value="module.driver.timer.unit.unit_period_raw_counts"/>
       <property id="module.driver.timer.gtior.gtioa.initial_output_level" value="module.driver.timer.gtior.gtioa.initial_output_level.low"/>
       <property id="module.driver.timer.gtior.gtioa.cycle_end_output_level" value="module.driver.timer.gtior.gtioa.cycle_end_output_level.retain"/>
@@ -508,7 +508,7 @@
       <property id="module.driver.timer.gtiocb_stop_level" value="module.driver.timer.gtiocb_stop_level.pin_level_low"/>
       <property id="module.driver.timer.count_up_source" value="_signal.event.gpt8.counter.overflow"/>
       <property id="module.driver.timer.count_down_source" value=""/>
-      <property id="module.driver.timer.start_source" value=""/>
+      <property id="module.driver.timer.start_source" value="_signal.event.elc.software.event.0"/>
       <property id="module.driver.timer.stop_source" value=""/>
       <property id="module.driver.timer.clear_source" value=""/>
       <property id="module.driver.timer.capture_a_source" value=""/>
@@ -538,7 +538,7 @@
       <property id="module.driver.timer.name" value="g_timer_zpos"/>
       <property id="module.driver.timer.channel" value="5"/>
       <property id="module.driver.timer.mode" value="module.driver.timer.mode.mode_one_shot"/>
-      <property id="module.driver.timer.period" value="0x10000"/>
+      <property id="module.driver.timer.period" value="0x100000000"/>
       <property id="module.driver.timer.unit" value="module.driver.timer.unit.unit_period_raw_counts"/>
       <property id="module.driver.timer.gtior.gtioa.initial_output_level" value="module.driver.timer.gtior.gtioa.initial_output_level.low"/>
       <property id="module.driver.timer.gtior.gtioa.cycle_end_output_level" value="module.driver.timer.gtior.gtioa.cycle_end_output_level.retain"/>
@@ -556,7 +556,7 @@
       <property id="module.driver.timer.gtiocb_stop_level" value="module.driver.timer.gtiocb_stop_level.pin_level_low"/>
       <property id="module.driver.timer.count_up_source" value="_signal.event.gpt3.counter.overflow"/>
       <property id="module.driver.timer.count_down_source" value=""/>
-      <property id="module.driver.timer.start_source" value=""/>
+      <property id="module.driver.timer.start_source" value="_signal.event.elc.software.event.0"/>
       <property id="module.driver.timer.stop_source" value=""/>
       <property id="module.driver.timer.clear_source" value=""/>
       <property id="module.driver.timer.capture_a_source" value=""/>

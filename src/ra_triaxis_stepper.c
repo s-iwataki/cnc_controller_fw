@@ -78,16 +78,13 @@ void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, fl
         t->p_reg->GTUPSR = GPT_SOURCE_NONE;
     }
     int sig = 1;
-    int cross_sign = ((dist > 0) && (currnt < 0)) || ((dist < 0) && (currnt > 0));
     if (dist < 0) {
         sig = -1;
         dist = -dist;
     }
     uint32_t gtccr = sig * (int32_t)(dist / mm_per_count);
     t->p_reg->GTCCR[0] = gtccr;  // set gtccra
-    if (cross_sign) {
-        t->p_reg->GTCCR[2] = gtccr;//バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．
-    }
+    t->p_reg->GTCCR[2] = gtccr;  // バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．
 }
 void set_direction_pin(ioport_ctrl_t* io, bsp_io_port_pin_t pin, float dist, float current, int invert) {
     int dir = ((dist > current) ? 1 : -1) * invert;

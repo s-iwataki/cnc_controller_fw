@@ -173,6 +173,7 @@ static int test_table_move_cmd(int argc, char** argv) {
             }
         }
     }
+    return 0;
 }
 static int test_table_getpos_cmd(int argc, char** argv) {
     table_3d_driver_t* tbl_drv = table_get_driver();

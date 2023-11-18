@@ -59,13 +59,20 @@ int uart_tty_read_bin(void* device_instance, char* ptr, int len) {
     d->rx_task_handle = xTaskGetCurrentTaskHandle();
     R_SCI_UART_Read(d->p_api_ctrl, ptr, len);
     uint32_t uart_evt;
-    xTaskNotifyWait(UART_EVENT_ERR_FRAMING | UART_EVENT_BREAK_DETECT |
+    while (1) {//uart以外からtask notificationを受け取るケースを考慮
+        xTaskNotifyWait(UART_EVENT_ERR_FRAMING | UART_EVENT_BREAK_DETECT |
+                            UART_EVENT_RX_COMPLETE | UART_EVENT_ERR_OVERFLOW |
+                            UART_EVENT_ERR_PARITY,
+                        UART_EVENT_ERR_FRAMING | UART_EVENT_BREAK_DETECT |
+                            UART_EVENT_RX_COMPLETE | UART_EVENT_ERR_OVERFLOW |
+                            UART_EVENT_ERR_PARITY,
+                        &uart_evt, portMAX_DELAY);
+        if (uart_evt & (UART_EVENT_ERR_FRAMING | UART_EVENT_BREAK_DETECT |
                         UART_EVENT_RX_COMPLETE | UART_EVENT_ERR_OVERFLOW |
-                        UART_EVENT_ERR_PARITY,
-                    UART_EVENT_ERR_FRAMING | UART_EVENT_BREAK_DETECT |
-                        UART_EVENT_RX_COMPLETE | UART_EVENT_ERR_OVERFLOW |
-                        UART_EVENT_ERR_PARITY,
-                    &uart_evt, portMAX_DELAY);
+                        UART_EVENT_ERR_PARITY)) {
+            break;
+        }
+    }
     int read_len;
     if (uart_evt & (UART_EVENT_ERR_FRAMING | UART_EVENT_ERR_OVERFLOW |
                     UART_EVENT_ERR_PARITY | UART_EVENT_BREAK_DETECT)) {
@@ -78,7 +85,7 @@ int uart_tty_read_bin(void* device_instance, char* ptr, int len) {
     d->rx_task_handle = NULL;
     return read_len;
 }
-int uart_tty_write(void* device_instance, char* ptr, int len) ;
+int uart_tty_write(void* device_instance, char* ptr, int len);
 int uart_tty_read(void* device_instance, char* ptr, int len) {
     uart_tty_device_t* d = (uart_tty_device_t*)device_instance;
     xSemaphoreTake(d->rx_task_mutex, portMAX_DELAY);
@@ -91,7 +98,7 @@ int uart_tty_read(void* device_instance, char* ptr, int len) {
             char c;
             int r = uart_tty_read_bin(device_instance, &c, 1);
             if (r > 0) {
-                if(d->tc_config.c_lflag & ECHO){
+                if (d->tc_config.c_lflag & ECHO) {
                     uart_tty_write(device_instance, &c, 1);
                 }
                 *(ptr++) = c;
@@ -119,8 +126,13 @@ int uart_tty_write(void* device_instance, char* ptr, int len) {
         return -1;
     }
     uint32_t uart_evt;
-    xTaskNotifyWait(UART_EVENT_TX_COMPLETE, UART_EVENT_TX_COMPLETE, &uart_evt,
-                    portMAX_DELAY);
+    while (1) {//uart以外からtask notificationを受け取るケースを考慮
+        xTaskNotifyWait(UART_EVENT_TX_COMPLETE, UART_EVENT_TX_COMPLETE, &uart_evt,
+                        portMAX_DELAY);
+        if (uart_evt & UART_EVENT_TX_COMPLETE) {
+            break;
+        }
+    }
     d->tx_task_handle = NULL;
     xSemaphoreGive(d->tx_task_mutex);
     return len;

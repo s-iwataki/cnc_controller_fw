@@ -202,7 +202,7 @@ const dmac_extended_cfg_t g_transfer1_extend =
 #else
     .irq                 = FSP_INVALID_VECTOR,
 #endif
-    .ipl                 = (1),
+    .ipl                 = (2),
     .channel             = 1,
     .p_callback          = g_spi0_rx_transfer_callback,
     .p_context           = NULL,
@@ -244,7 +244,7 @@ const dmac_extended_cfg_t g_transfer0_extend =
 #else
     .irq                 = FSP_INVALID_VECTOR,
 #endif
-    .ipl                 = (1),
+    .ipl                 = (2),
     .channel             = 0,
     .p_callback          = g_spi0_tx_transfer_callback,
     .p_context           = NULL,
@@ -610,7 +610,7 @@ const gpt_extended_cfg_t g_timer_zpos_extend =
     .count_down_source   = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_a_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_b_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .capture_a_ipl       = (0),
+    .capture_a_ipl       = (2),
     .capture_b_ipl       = (BSP_IRQ_DISABLED),
 #if defined(VECTOR_NUMBER_GPT5_CAPTURE_COMPARE_A)
     .capture_a_irq       = VECTOR_NUMBER_GPT5_CAPTURE_COMPARE_A,
@@ -714,7 +714,7 @@ const gpt_extended_cfg_t g_timer_ypos_extend =
     .count_down_source   = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_a_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_b_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .capture_a_ipl       = (0),
+    .capture_a_ipl       = (2),
     .capture_b_ipl       = (BSP_IRQ_DISABLED),
 #if defined(VECTOR_NUMBER_GPT2_CAPTURE_COMPARE_A)
     .capture_a_irq       = VECTOR_NUMBER_GPT2_CAPTURE_COMPARE_A,
@@ -818,7 +818,7 @@ const gpt_extended_cfg_t g_timer_xpos_extend =
     .count_down_source   = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_a_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_b_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .capture_a_ipl       = (0),
+    .capture_a_ipl       = (2),
     .capture_b_ipl       = (BSP_IRQ_DISABLED),
 #if defined(VECTOR_NUMBER_GPT0_CAPTURE_COMPARE_A)
     .capture_a_irq       = VECTOR_NUMBER_GPT0_CAPTURE_COMPARE_A,

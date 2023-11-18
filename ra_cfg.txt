@@ -548,7 +548,7 @@ FSP Configuration
       Input: Noise Filter B Sampling Clock Select: No Filter
       Interrupts: Callback: xpos_counter_isr
       Interrupts: Overflow/Crest Interrupt Priority: Disabled
-      Interrupts: Capture A Interrupt Priority: Priority 0 (highest)
+      Interrupts: Capture A Interrupt Priority: Priority 2
       Interrupts: Capture B Interrupt Priority: Disabled
       Interrupts: Underflow/Trough Interrupt Priority: Disabled
       Extra Features: Extra Features: Disabled
@@ -599,7 +599,7 @@ FSP Configuration
       Input: Noise Filter B Sampling Clock Select: No Filter
       Interrupts: Callback: ypos_counter_isr
       Interrupts: Overflow/Crest Interrupt Priority: Disabled
-      Interrupts: Capture A Interrupt Priority: Priority 0 (highest)
+      Interrupts: Capture A Interrupt Priority: Priority 2
       Interrupts: Capture B Interrupt Priority: Disabled
       Interrupts: Underflow/Trough Interrupt Priority: Disabled
       Extra Features: Extra Features: Disabled
@@ -647,7 +647,7 @@ FSP Configuration
       Input: Noise Filter B Sampling Clock Select: No Filter
       Interrupts: Callback: zpos_counter_isr
       Interrupts: Overflow/Crest Interrupt Priority: Disabled
-      Interrupts: Capture A Interrupt Priority: Priority 0 (highest)
+      Interrupts: Capture A Interrupt Priority: Priority 2
       Interrupts: Capture B Interrupt Priority: Disabled
       Interrupts: Underflow/Trough Interrupt Priority: Disabled
       Extra Features: Extra Features: Disabled
@@ -800,7 +800,7 @@ FSP Configuration
         Activation Source: SPI0 TXI (Transmit buffer empty)
         Callback: g_spi0_tx_transfer_callback
         Context: NULL
-        Transfer End Interrupt Priority: Priority 1
+        Transfer End Interrupt Priority: Priority 2
         Interrupt Frequency: Interrupt after all transfers have completed
         Offset value (Valid only when address mode is \'Offset\'): 1
         Source Buffer Size: 1
@@ -820,7 +820,7 @@ FSP Configuration
         Activation Source: SPI0 RXI (Receive buffer full)
         Callback: g_spi0_rx_transfer_callback
         Context: NULL
-        Transfer End Interrupt Priority: Priority 1
+        Transfer End Interrupt Priority: Priority 2
         Interrupt Frequency: Interrupt after all transfers have completed
         Offset value (Valid only when address mode is \'Offset\'): 1
         Source Buffer Size: 1

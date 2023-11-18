@@ -520,7 +520,7 @@ FSP Configuration
     Instance "g_timer_xpos Timer, General PWM (r_gpt)"
       General: Name: g_timer_xpos
       General: Channel: 0
-      General: Mode: One-Shot
+      General: Mode: Periodic
       General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
@@ -571,7 +571,7 @@ FSP Configuration
     Instance "g_timer_ypos Timer, General PWM (r_gpt)"
       General: Name: g_timer_ypos
       General: Channel: 2
-      General: Mode: One-Shot
+      General: Mode: Periodic
       General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
@@ -619,7 +619,7 @@ FSP Configuration
     Instance "g_timer_zpos Timer, General PWM (r_gpt)"
       General: Name: g_timer_zpos
       General: Channel: 5
-      General: Mode: One-Shot
+      General: Mode: Periodic
       General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low

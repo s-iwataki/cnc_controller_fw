@@ -650,7 +650,7 @@ const gpt_extended_cfg_t g_timer_zpos_extend =
 };
 const timer_cfg_t g_timer_zpos_cfg =
 {
-    .mode                = TIMER_MODE_ONE_SHOT,
+    .mode                = TIMER_MODE_PERIODIC,
     /* Actual period: 71.58278826666667 seconds. Actual duty: 50%. */ .period_counts = (uint32_t) 0x100000000, .duty_cycle_counts = 0x80000000, .source_div = (timer_source_div_t)0,
     .channel             = 5,
     .p_callback          = zpos_counter_isr,
@@ -754,7 +754,7 @@ const gpt_extended_cfg_t g_timer_ypos_extend =
 };
 const timer_cfg_t g_timer_ypos_cfg =
 {
-    .mode                = TIMER_MODE_ONE_SHOT,
+    .mode                = TIMER_MODE_PERIODIC,
     /* Actual period: 71.58278826666667 seconds. Actual duty: 50%. */ .period_counts = (uint32_t) 0x100000000, .duty_cycle_counts = 0x80000000, .source_div = (timer_source_div_t)0,
     .channel             = 2,
     .p_callback          = ypos_counter_isr,
@@ -858,7 +858,7 @@ const gpt_extended_cfg_t g_timer_xpos_extend =
 };
 const timer_cfg_t g_timer_xpos_cfg =
 {
-    .mode                = TIMER_MODE_ONE_SHOT,
+    .mode                = TIMER_MODE_PERIODIC,
     /* Actual period: 71.58278826666667 seconds. Actual duty: 50%. */ .period_counts = (uint32_t) 0x100000000, .duty_cycle_counts = 0x80000000, .source_div = (timer_source_div_t)0,
     .channel             = 0,
     .p_callback          = xpos_counter_isr,

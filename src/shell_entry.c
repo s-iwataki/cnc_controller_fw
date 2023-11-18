@@ -30,15 +30,19 @@ void shell_entry(void* pvParameters) {
         for (; (argc < sizeof(argv)) && (token != NULL); token = strtok(NULL, " \n\t"), argc++) {
             argv[argc] = token;
         }
+        int cmd_found=0;
         for (int i = 0; command_list[i].cmd_name != NULL; i++) {
             if (strcmp(command_list[i].cmd_name, argv[0]) == 0) {
                 int retval = command_list[i].cmd_func(argc, argv);
                 if (retval != 0) {
                     printf("command_fail:%d\r\n", retval);
                 }
-                continue;
-                ;
+                cmd_found=1;
+                break;
             }
+        }
+        if(cmd_found){
+            continue;
         }
         print_available_cmd();
     }

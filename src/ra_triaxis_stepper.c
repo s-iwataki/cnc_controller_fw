@@ -62,8 +62,8 @@ uint32_t get_period_counts(float mm_ps, float mm_per_count, uint32_t counter_hz)
 void timer_clock_set(gpt_instance_ctrl_t* t, float v, float mm_per_count) {
     timer_info_t s;
     R_GPT_InfoGet(t, &s);
-    uint32_t period=get_period_counts(v, mm_per_count, s.clock_frequency);
-    printf("tmr set period %d\r\n",period);
+    uint32_t period = get_period_counts(v, mm_per_count, s.clock_frequency);
+    printf("tmr set period %d\r\n", period);
     R_GPT_PeriodSet(t, get_period_counts(v, mm_per_count, s.clock_frequency));
 }
 
@@ -77,7 +77,17 @@ void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, fl
         t->p_reg->GTDNSR = cfg_ext->count_up_source;
         t->p_reg->GTUPSR = GPT_SOURCE_NONE;
     }
-    t->p_reg->GTCCR[0] = (uint32_t)(dist / mm_per_count);
+    int sig = 1;
+    int cross_sign = ((dist > 0) && (currnt < 0)) || ((dist < 0) && (currnt > 0));
+    if (dist < 0) {
+        sig = -1;
+        dist = -dist;
+    }
+    uint32_t gtccr = sig * (int32_t)(dist / mm_per_count);
+    t->p_reg->GTCCR[0] = gtccr;  // set gtccra
+    if (cross_sign) {
+        t->p_reg->GTCCR[2] = gtccr;//バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．
+    }
 }
 void set_direction_pin(ioport_ctrl_t* io, bsp_io_port_pin_t pin, float dist, float current, int invert) {
     int dir = ((dist > current) ? 1 : -1) * invert;
@@ -150,27 +160,33 @@ static void motor_enable(void* instance, int enable) {
     }
 }
 void xpos_counter_isr(timer_callback_args_t* p_args) {
-    ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
-    float x, y, z;
-    getpos(d, &x, &y, &z);
-    table_3d_event_t evt = {.id = X_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-    d->callback(d->cb_ctx, &evt);
+    if ((p_args->event == TIMER_EVENT_CAPTURE_A) || (p_args->event == TIMER_EVENT_CAPTURE_B)) {
+        ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
+        float x, y, z;
+        getpos(d, &x, &y, &z);
+        table_3d_event_t evt = {.id = X_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
+        d->callback(d->cb_ctx, &evt);
+    }
 }
 
 void ypos_counter_isr(timer_callback_args_t* p_args) {
-    ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
-    float x, y, z;
-    getpos(d, &x, &y, &z);
-    table_3d_event_t evt = {.id = Y_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-    d->callback(d->cb_ctx, &evt);
+    if ((p_args->event == TIMER_EVENT_CAPTURE_A) || (p_args->event == TIMER_EVENT_CAPTURE_B)) {
+        ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
+        float x, y, z;
+        getpos(d, &x, &y, &z);
+        table_3d_event_t evt = {.id = Y_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
+        d->callback(d->cb_ctx, &evt);
+    }
 }
 
 void zpos_counter_isr(timer_callback_args_t* p_args) {
-    ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
-    float x, y, z;
-    getpos(d, &x, &y, &z);
-    table_3d_event_t evt = {.id = Z_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-    d->callback(d->cb_ctx, &evt);
+    if ((p_args->event == TIMER_EVENT_CAPTURE_A) || (p_args->event == TIMER_EVENT_CAPTURE_B)) {
+        ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)p_args->p_context;
+        float x, y, z;
+        getpos(d, &x, &y, &z);
+        table_3d_event_t evt = {.id = Z_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
+        d->callback(d->cb_ctx, &evt);
+    }
 }
 
 void ra_triaxis_stepper_init(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign) {

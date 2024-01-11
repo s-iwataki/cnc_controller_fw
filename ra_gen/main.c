@@ -7,6 +7,8 @@
                 extern TaskHandle_t led_blink;
 extern void shell_create(void);
                 extern TaskHandle_t shell;
+extern void spindle_control_task_create(void);
+                extern TaskHandle_t spindle_control_task;
                 uint32_t g_fsp_common_thread_count;
                 bool g_fsp_common_initialized;
                 SemaphoreHandle_t g_fsp_common_initialized_semaphore;
@@ -104,6 +106,7 @@ extern void shell_create(void);
                     /* Init RTOS tasks. */
                     led_blink_create();
 shell_create();
+spindle_control_task_create();
 
                     /* Start the scheduler. */
                     vTaskStartScheduler();

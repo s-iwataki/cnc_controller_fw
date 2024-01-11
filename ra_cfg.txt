@@ -473,7 +473,7 @@ FSP Configuration
       General: Name: g_timer_uienc
       General: Channel: 6
       General: Mode: Periodic
-      General: Period: 0x10000
+      General: Period: 0x100000000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
       Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
@@ -912,6 +912,15 @@ FSP Configuration
     Symbol: shell
     Name: shell task
     Stack size (bytes): 2048
+    Priority: 1
+    Thread Context: NULL
+    Memory Allocation: Static
+    Allocate Secure Context: Enable
+    
+  Thread "spindle"
+    Symbol: spindle_control_task
+    Name: spindle
+    Stack size (bytes): 1024
     Priority: 1
     Thread Context: NULL
     Memory Allocation: Static

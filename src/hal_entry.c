@@ -1,8 +1,10 @@
 #include "FreeRTOS.h"
+#include "encoder.h"
 #include "hal_data.h"
 #include "ra_triaxis_stepper.h"
 #include "triaxis_table.h"
 #include "uart_tty.h"
+#include "ra_gpt_encoder.h"
 
 
 FSP_CPP_HEADER
@@ -50,6 +52,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         table_mm_per_count_t mm_per_count = {.x = 0.00125f, .y = 0.00125f, .z = 0.00125f};
         table_axis_sign_t sing = {.x = 1, .y = 1, .z = 1};
         table_init(ra_triaxis_stepper_init, &mm_per_count, &sing);
+        ra_gpt_encoder_init(&g_ui_encoder);
     }
 }
 

@@ -1046,14 +1046,14 @@ const gpt_extended_cfg_t g_timer_zclock_extend =
     .p_pwm_cfg                   = NULL,
 #endif
 #if 1
-    .gtior_setting.gtior_b.gtioa  = (0U << 4U) | (0U << 2U) | (0U << 0U),
+    .gtior_setting.gtior_b.gtioa  = (0U << 4U) | (3U << 2U) | (0U << 0U),
     .gtior_setting.gtior_b.oadflt = (uint32_t) GPT_PIN_LEVEL_LOW,
     .gtior_setting.gtior_b.oahld  = 0U,
     .gtior_setting.gtior_b.oae    = (uint32_t) true,
     .gtior_setting.gtior_b.oadf   = (uint32_t) GPT_GTIOC_DISABLE_PROHIBITED,
     .gtior_setting.gtior_b.nfaen  = ((uint32_t) GPT_CAPTURE_FILTER_NONE & 1U),
     .gtior_setting.gtior_b.nfcsa  = ((uint32_t) GPT_CAPTURE_FILTER_NONE >> 1U),
-    .gtior_setting.gtior_b.gtiob  = (0U << 4U) | (3U << 2U) | (0U << 0U),
+    .gtior_setting.gtior_b.gtiob  = (0U << 4U) | (0U << 2U) | (0U << 0U),
     .gtior_setting.gtior_b.obdflt = (uint32_t) GPT_PIN_LEVEL_LOW,
     .gtior_setting.gtior_b.obhld  = 1U,
     .gtior_setting.gtior_b.obe    = (uint32_t) false,

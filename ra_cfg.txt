@@ -428,11 +428,11 @@ FSP Configuration
       General: Period: 0x10000
       General: Period Unit: Raw Counts
       Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
-      Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
+      Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Toggle
       Output: Custom Waveform: GTIOA: Compare Match Output Level: Pin Level Retain
       Output: Custom Waveform: GTIOA: Retain Output Level at Count Stop: Disabled
       Output: Custom Waveform: GTIOB: Initial Output Level: Pin Level Low
-      Output: Custom Waveform: GTIOB: Cycle End Output Level: Pin Level Toggle
+      Output: Custom Waveform: GTIOB: Cycle End Output Level: Pin Level Retain
       Output: Custom Waveform: GTIOB: Compare Match Output Level: Pin Level Retain
       Output: Custom Waveform: GTIOB: Retain Output Level at Count Stop: Enabled
       Output: Custom Waveform: Custom Waveform Enable: Enabled

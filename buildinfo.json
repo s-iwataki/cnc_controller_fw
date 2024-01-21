@@ -7,10 +7,7 @@
     "ra_gen",
     "src"
   ],
-  "excludedFilePaths": [
-    "src/report_task_entry.c",
-    "src/report_task_entry.cpp"
-  ],
+  "excludedFilePaths": [],
   "includePaths": [
     "ra/arm/CMSIS_5/CMSIS/Core/Include",
     "ra/arm/CMSIS_5/CMSIS/DSP/Include",

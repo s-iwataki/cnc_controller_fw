@@ -34,7 +34,7 @@ void spindle_control_task_entry(void* pvParameters) {
     TickType_t last_wake_time = xTaskGetTickCount();
     /* TODO: add your own code here */
     while (1) {
-        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(10));
+        /*vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(10));
         int rpm=g_spindle_motor.current_rpm;
         if(g_spindle_motor.motor_enabled==pdFALSE){
             R_IOPORT_PinWrite(&g_ioport_ctrl, g_spindle_motor.motor_on, BSP_IO_LEVEL_LOW);
@@ -50,7 +50,8 @@ void spindle_control_task_entry(void* pvParameters) {
         if (ctrl < 0) {
             ctrl = 0;  // duty is positive.
         }
-        g_spindle_motor.pwm_timer->p_api->dutyCycleSet(g_spindle_motor.pwm_timer->p_ctrl, ctrl, GPT_IO_PIN_GTIOCA);
+        g_spindle_motor.pwm_timer->p_api->dutyCycleSet(g_spindle_motor.pwm_timer->p_ctrl, ctrl, GPT_IO_PIN_GTIOCA);*/
+        vTaskDelay(pdMS_TO_TICKS(500));
     }
 }
 

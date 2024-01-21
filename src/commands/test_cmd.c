@@ -50,7 +50,7 @@ static command_entry_t subcmd[] = {
     {"led", led_cmd, "led function test: test led <led_number> [on|off]"},
     {"table", table_test_cmd, "table function test."},
     {"enc", test_encoder_cmd, "encoder function test."},
-    {"table", test_switch_cmd, "switch function test."},
+    {"switch", test_switch_cmd, "switch function test."},
     {NULL, NULL, NULL}};
 
 

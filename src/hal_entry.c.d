@@ -73,10 +73,10 @@ CMakeFiles/cnc_controller.elf.dir/src/hal_entry.c.obj: \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
+ D:/workspace/cnc_controller/src/ra_gpt_encoder.h \
  D:/workspace/cnc_controller/src/ra_triaxis_stepper.h \
  D:/workspace/cnc_controller/src/triaxis_table.h \
- D:/workspace/cnc_controller/src/uart_tty.h \
- D:/workspace/cnc_controller/src/ra_gpt_encoder.h
+ D:/workspace/cnc_controller/src/uart_tty.h
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -224,10 +224,10 @@ D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
 
+D:/workspace/cnc_controller/src/ra_gpt_encoder.h:
+
 D:/workspace/cnc_controller/src/ra_triaxis_stepper.h:
 
 D:/workspace/cnc_controller/src/triaxis_table.h:
 
 D:/workspace/cnc_controller/src/uart_tty.h:
-
-D:/workspace/cnc_controller/src/ra_gpt_encoder.h:

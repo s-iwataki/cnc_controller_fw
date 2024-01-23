@@ -140,7 +140,7 @@
             #define configTIMER_QUEUE_LENGTH (10)
             #endif
             #ifndef configTIMER_TASK_STACK_DEPTH
-            #define configTIMER_TASK_STACK_DEPTH (128)
+            #define configTIMER_TASK_STACK_DEPTH (512)
             #endif
             #ifndef configLIBRARY_LOWEST_INTERRUPT_PRIORITY
             #define configLIBRARY_LOWEST_INTERRUPT_PRIORITY ((1 << __NVIC_PRIO_BITS) - 1)

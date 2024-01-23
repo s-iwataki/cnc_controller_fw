@@ -262,7 +262,7 @@ FSP Configuration
     Timers: Use Timers: Enabled
     Timers: Timer Task Priority: 3
     Timers: Timer Queue Length: 10
-    Timers: Timer Task Stack Depth: 128
+    Timers: Timer Task Stack Depth: 512
     General: Library Max Syscall Interrupt Priority: Priority 1
     General: Assert: assert(x)
     General: Include Application Defined Privileged Functions: Disabled

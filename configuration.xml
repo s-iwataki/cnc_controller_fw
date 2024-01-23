@@ -917,7 +917,7 @@
       <property id="config.awsfreertos.thread.configuse_timers" value="config.awsfreertos.thread.configuse_timers.enabled"/>
       <property id="config.awsfreertos.thread.configtimer_task_priority" value="3"/>
       <property id="config.awsfreertos.thread.configtimer_queue_length" value="10"/>
-      <property id="config.awsfreertos.thread.configtimer_task_stack_depth" value="128"/>
+      <property id="config.awsfreertos.thread.configtimer_task_stack_depth" value="512"/>
       <property id="config.awsfreertos.thread.configlibrary_max_syscall_interrupt_priority" value="board.icu.common.irq.priority1"/>
       <property id="config.awsfreertos.thread.configassert" value="assert(x)"/>
       <property id="config.awsfreertos.thread.configinclude_application_defined_privileged_functions" value="config.awsfreertos.thread.configinclude_application_defined_privileged_functions.disabled"/>

@@ -6,7 +6,7 @@
         #endif
                 /* Number of interrupts allocated */
         #ifndef VECTOR_DATA_IRQ_COUNT
-        #define VECTOR_DATA_IRQ_COUNT    (11)
+        #define VECTOR_DATA_IRQ_COUNT    (13)
         #endif
         /* ISR prototypes */
         void sci_uart_rxi_isr(void);
@@ -17,6 +17,7 @@
         void spi_tei_isr(void);
         void spi_eri_isr(void);
         void dmac_int_isr(void);
+        void adc_scan_end_isr(void);
 
         /* Vector table allocations */
         #define VECTOR_NUMBER_SCI9_RXI ((IRQn_Type) 0) /* SCI9 RXI (Received data full) */
@@ -41,6 +42,10 @@
         #define DMAC0_INT_IRQn          ((IRQn_Type) 9) /* DMAC0 INT (DMAC transfer end 0) */
         #define VECTOR_NUMBER_DMAC1_INT ((IRQn_Type) 10) /* DMAC1 INT (DMAC transfer end 1) */
         #define DMAC1_INT_IRQn          ((IRQn_Type) 10) /* DMAC1 INT (DMAC transfer end 1) */
+        #define VECTOR_NUMBER_ADC0_SCAN_END ((IRQn_Type) 11) /* ADC0 SCAN END (A/D scan end interrupt) */
+        #define ADC0_SCAN_END_IRQn          ((IRQn_Type) 11) /* ADC0 SCAN END (A/D scan end interrupt) */
+        #define VECTOR_NUMBER_ADC1_SCAN_END ((IRQn_Type) 12) /* ADC1 SCAN END (A/D scan end interrupt) */
+        #define ADC1_SCAN_END_IRQn          ((IRQn_Type) 12) /* ADC1 SCAN END (A/D scan end interrupt) */
         #ifdef __cplusplus
         }
         #endif

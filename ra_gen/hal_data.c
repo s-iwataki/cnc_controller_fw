@@ -48,7 +48,7 @@ const adc_cfg_t g_adc1_cfg =
 #else
     .scan_end_irq        = FSP_INVALID_VECTOR,
 #endif
-    .scan_end_ipl        = (BSP_IRQ_DISABLED),
+    .scan_end_ipl        = (15),
 #if defined(VECTOR_NUMBER_ADC1_SCAN_END_B)
     .scan_end_b_irq      = VECTOR_NUMBER_ADC1_SCAN_END_B,
 #else
@@ -72,7 +72,7 @@ const adc_window_cfg_t g_adc1_window_cfg =
 #endif
 const adc_channel_cfg_t g_adc1_channel_cfg =
 {
-    .scan_mask           =  0,
+    .scan_mask           = ADC_MASK_CHANNEL_17 |  0,
     .scan_mask_group_b   =  0,
     .priority_group_a    = ADC_GROUP_A_PRIORITY_OFF,
     .add_mask            =  0,
@@ -134,7 +134,7 @@ const adc_cfg_t g_adc0_cfg =
 #else
     .scan_end_irq        = FSP_INVALID_VECTOR,
 #endif
-    .scan_end_ipl        = (BSP_IRQ_DISABLED),
+    .scan_end_ipl        = (15),
 #if defined(VECTOR_NUMBER_ADC0_SCAN_END_B)
     .scan_end_b_irq      = VECTOR_NUMBER_ADC0_SCAN_END_B,
 #else
@@ -158,7 +158,7 @@ const adc_window_cfg_t g_adc0_window_cfg =
 #endif
 const adc_channel_cfg_t g_adc0_channel_cfg =
 {
-    .scan_mask           =  0,
+    .scan_mask           = ADC_MASK_CHANNEL_17 |  0,
     .scan_mask_group_b   =  0,
     .priority_group_a    = ADC_GROUP_A_PRIORITY_OFF,
     .add_mask            =  0,

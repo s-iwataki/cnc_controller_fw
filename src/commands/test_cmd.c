@@ -7,6 +7,7 @@
 #include "FreeRTOS.h"
 #include "bsp_pin_cfg.h"
 #include "command_list.h"
+#include "commands/test_adc_commands.h"
 #include "commands/test_encoder_commands.h"
 #include "commands/test_switch_commands.h"
 #include "common_data.h"
@@ -51,6 +52,7 @@ static command_entry_t subcmd[] = {
     {"table", table_test_cmd, "table function test."},
     {"enc", test_encoder_cmd, "encoder function test."},
     {"switch", test_switch_cmd, "switch function test."},
+    {"adc",test_adc_cmd,"adc function test."},
     {NULL, NULL, NULL}};
 
 

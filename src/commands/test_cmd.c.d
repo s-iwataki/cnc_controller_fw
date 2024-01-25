@@ -55,6 +55,7 @@ CMakeFiles/cnc_controller.elf.dir/src/commands/test_cmd.c.obj: \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
  D:/workspace/cnc_controller/src/command_list.h \
+ D:/workspace/cnc_controller/src/commands/test_adc_commands.h \
  D:/workspace/cnc_controller/src/commands/test_encoder_commands.h \
  D:/workspace/cnc_controller/src/commands/test_switch_commands.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
@@ -195,6 +196,8 @@ D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
 
 D:/workspace/cnc_controller/src/command_list.h:
+
+D:/workspace/cnc_controller/src/commands/test_adc_commands.h:
 
 D:/workspace/cnc_controller/src/commands/test_encoder_commands.h:
 

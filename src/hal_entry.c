@@ -75,6 +75,8 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         table_axis_sign_t sing = {.x = 1, .y = 1, .z = 1};
         table_init(ra_triaxis_stepper_init, &mm_per_count, &sing);
         ra_gpt_encoder_init(&g_ui_encoder);
+        g_adc0.p_api->open(g_adc0.p_ctrl,g_adc0.p_cfg);
+        g_adc1.p_api->open(g_adc1.p_ctrl,g_adc1.p_cfg);
     }
 }
 

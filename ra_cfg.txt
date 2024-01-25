@@ -833,7 +833,7 @@ FSP Configuration
       General: Clear after read: On
       General: Mode: Single Scan
       General: Double-trigger: Disabled
-      Input: Channel Scan Mask (channel availability varies by MCU): 
+      Input: Channel Scan Mask (channel availability varies by MCU): Channel 17
       Input: Group B Scan Mask (channel availability varies by MCU): 
       Interrupts: Normal/Group A Trigger: Software
       Interrupts: Group B Trigger: Disabled
@@ -856,7 +856,7 @@ FSP Configuration
       Input: Window Compare: Window B: Lower Reference: 0
       Input: Window Compare: Window B: Upper Reference: 0
       Interrupts: Callback: NULL
-      Interrupts: Scan End Interrupt Priority: Disabled
+      Interrupts: Scan End Interrupt Priority: Priority 15
       Interrupts: Scan End Group B Interrupt Priority: Disabled
       Interrupts: Window Compare A Interrupt Priority: Disabled
       Interrupts: Window Compare B Interrupt Priority: Disabled
@@ -870,7 +870,7 @@ FSP Configuration
       General: Clear after read: On
       General: Mode: Single Scan
       General: Double-trigger: Disabled
-      Input: Channel Scan Mask (channel availability varies by MCU): 
+      Input: Channel Scan Mask (channel availability varies by MCU): Channel 17
       Input: Group B Scan Mask (channel availability varies by MCU): 
       Interrupts: Normal/Group A Trigger: Software
       Interrupts: Group B Trigger: Disabled
@@ -893,7 +893,7 @@ FSP Configuration
       Input: Window Compare: Window B: Lower Reference: 0
       Input: Window Compare: Window B: Upper Reference: 0
       Interrupts: Callback: NULL
-      Interrupts: Scan End Interrupt Priority: Disabled
+      Interrupts: Scan End Interrupt Priority: Priority 15
       Interrupts: Scan End Group B Interrupt Priority: Disabled
       Interrupts: Window Compare A Interrupt Priority: Disabled
       Interrupts: Window Compare B Interrupt Priority: Disabled

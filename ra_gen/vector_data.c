@@ -15,6 +15,8 @@
             [8] = spi_eri_isr, /* SPI0 ERI (Error) */
             [9] = dmac_int_isr, /* DMAC0 INT (DMAC transfer end 0) */
             [10] = dmac_int_isr, /* DMAC1 INT (DMAC transfer end 1) */
+            [11] = adc_scan_end_isr, /* ADC0 SCAN END (A/D scan end interrupt) */
+            [12] = adc_scan_end_isr, /* ADC1 SCAN END (A/D scan end interrupt) */
         };
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_MAX_ENTRIES] =
         {
@@ -29,5 +31,7 @@
             [8] = BSP_PRV_IELS_ENUM(EVENT_SPI0_ERI), /* SPI0 ERI (Error) */
             [9] = BSP_PRV_IELS_ENUM(EVENT_DMAC0_INT), /* DMAC0 INT (DMAC transfer end 0) */
             [10] = BSP_PRV_IELS_ENUM(EVENT_DMAC1_INT), /* DMAC1 INT (DMAC transfer end 1) */
+            [11] = BSP_PRV_IELS_ENUM(EVENT_ADC0_SCAN_END), /* ADC0 SCAN END (A/D scan end interrupt) */
+            [12] = BSP_PRV_IELS_ENUM(EVENT_ADC1_SCAN_END), /* ADC1 SCAN END (A/D scan end interrupt) */
         };
         #endif

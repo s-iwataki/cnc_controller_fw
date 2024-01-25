@@ -27,7 +27,7 @@ void NULL(adc_callback_args_t * p_args);
 #endif
 
 #ifndef NULL
-#define ADC_DMAC_CHANNELS_PER_BLOCK_NULL  0
+#define ADC_DMAC_CHANNELS_PER_BLOCK_NULL  1
 #endif
 /** ADC on ADC Instance. */
 extern const adc_instance_t g_adc0;
@@ -42,7 +42,7 @@ void NULL(adc_callback_args_t * p_args);
 #endif
 
 #ifndef NULL
-#define ADC_DMAC_CHANNELS_PER_BLOCK_NULL  0
+#define ADC_DMAC_CHANNELS_PER_BLOCK_NULL  1
 #endif
 /* Transfer on DMAC Instance. */
 extern const transfer_instance_t g_transfer1;

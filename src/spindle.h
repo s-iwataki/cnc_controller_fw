@@ -8,7 +8,13 @@
 #include "r_ioport.h"
 #include "semphr.h"
 
+typedef enum{
+    SPINDLE_DIRECT_DUTY_CONTROL,
+    SPINDLE_SPEED_CONTROL
+}spindle_control_mode_t;
+
 typedef struct{
+    int init;
     bsp_io_port_pin_t motor_alarm;
     bsp_io_port_pin_t motor_break;
     bsp_io_port_pin_t motor_on;
@@ -23,6 +29,7 @@ typedef struct{
     float kd;
     int prev_err;
     int err_integral;
+    spindle_control_mode_t control_mode;
 }spindle_motor_t ;
 typedef enum{
     SPINDLE_OK,
@@ -38,3 +45,4 @@ void spindle_set_duty(spindle_motor_t*m,uint32_t duty);
 spindle_status_t spindle_get_status(spindle_motor_t*m);
 void spindle_set_control_param(spindle_motor_t*m,float kp,float ki,float kd);
 void spindle_enable(spindle_motor_t*m,BaseType_t on_off);
+void spindle_control_mode_set(spindle_motor_t*m,spindle_control_mode_t);

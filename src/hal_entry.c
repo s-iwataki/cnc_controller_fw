@@ -4,6 +4,7 @@
 #include "hal_data.h"
 #include "ra_gpt_encoder.h"
 #include "ra_triaxis_stepper.h"
+#include "spindle.h"
 #include "triaxis_table.h"
 #include "uart_tty.h"
 
@@ -77,6 +78,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         ra_gpt_encoder_init(&g_ui_encoder);
         g_adc0.p_api->open(g_adc0.p_ctrl,g_adc0.p_cfg);
         g_adc1.p_api->open(g_adc1.p_ctrl,g_adc1.p_cfg);
+        spindle_init(&g_spindle_motor);
     }
 }
 

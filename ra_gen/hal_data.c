@@ -525,8 +525,8 @@ const gpt_extended_cfg_t g_timer_spindle_pwm_extend =
 #else
     .p_pwm_cfg                   = NULL,
 #endif
-#if 0
-    .gtior_setting.gtior_b.gtioa  = (0U << 4U) | (0U << 2U) | (0U << 0U),
+#if 1
+    .gtior_setting.gtior_b.gtioa  = (1U << 4U) | (1U << 2U) | (2U << 0U),
     .gtior_setting.gtior_b.oadflt = (uint32_t) GPT_PIN_LEVEL_HIGH,
     .gtior_setting.gtior_b.oahld  = 0U,
     .gtior_setting.gtior_b.oae    = (uint32_t) true,
@@ -547,7 +547,7 @@ const gpt_extended_cfg_t g_timer_spindle_pwm_extend =
 const timer_cfg_t g_timer_spindle_pwm_cfg =
 {
     .mode                = TIMER_MODE_PWM,
-    /* Actual period: 0.0010922666666666667 seconds. Actual duty: 98.9990234375%. */ .period_counts = (uint32_t) 0x10000, .duty_cycle_counts = 0xfd70, .source_div = (timer_source_div_t)0,
+    /* Actual period: 0.000033333333333333335 seconds. Actual duty: 0%. */ .period_counts = (uint32_t) 0x7d0, .duty_cycle_counts = 0x0, .source_div = (timer_source_div_t)0,
     .channel             = 4,
     .p_callback          = NULL,
     /** If NULL then do not add & */

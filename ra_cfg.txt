@@ -668,18 +668,18 @@ FSP Configuration
       General: Name: g_timer_spindle_pwm
       General: Channel: 4
       General: Mode: PWM
-      General: Period: 0x10000
-      General: Period Unit: Raw Counts
-      Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
-      Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
-      Output: Custom Waveform: GTIOA: Compare Match Output Level: Pin Level Retain
+      General: Period: 30
+      General: Period Unit: Kilohertz
+      Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level High
+      Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Low
+      Output: Custom Waveform: GTIOA: Compare Match Output Level: Pin Level High
       Output: Custom Waveform: GTIOA: Retain Output Level at Count Stop: Disabled
       Output: Custom Waveform: GTIOB: Initial Output Level: Pin Level Low
       Output: Custom Waveform: GTIOB: Cycle End Output Level: Pin Level Retain
       Output: Custom Waveform: GTIOB: Compare Match Output Level: Pin Level Retain
       Output: Custom Waveform: GTIOB: Retain Output Level at Count Stop: Disabled
-      Output: Custom Waveform: Custom Waveform Enable: Disabled
-      Output: Duty Cycle Percent (only applicable in PWM mode): 99
+      Output: Custom Waveform: Custom Waveform Enable: Enabled
+      Output: Duty Cycle Percent (only applicable in PWM mode): 0
       Output: GTIOCA Output Enabled: True
       Output: GTIOCA Stop Level: Pin Level High
       Output: GTIOCB Output Enabled: False

@@ -9,6 +9,7 @@
 #include "command_list.h"
 #include "commands/test_adc_commands.h"
 #include "commands/test_encoder_commands.h"
+#include "commands/test_spindle_commands.h"
 #include "commands/test_switch_commands.h"
 #include "common_data.h"
 #include "hal_data.h"
@@ -53,6 +54,7 @@ static command_entry_t subcmd[] = {
     {"enc", test_encoder_cmd, "encoder function test."},
     {"switch", test_switch_cmd, "switch function test."},
     {"adc",test_adc_cmd,"adc function test."},
+    {"spindle",test_spindle_cmd,"spindle function test."},
     {NULL, NULL, NULL}};
 
 

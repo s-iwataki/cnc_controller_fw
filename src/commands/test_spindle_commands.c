@@ -60,11 +60,13 @@ static int set_param_cmd(int argc, char** argv) {
 }
 static int set_duty_cmd(int argc, char** argv) {
     int target_duty = atoi(argv[1]);
+    spindle_control_mode_set(&g_spindle_motor, SPINDLE_DIRECT_DUTY_CONTROL);
     spindle_set_duty(&g_spindle_motor, target_duty);
     return 1;
 }
 static int set_speed_cmd(int argc, char** argv) {
     int target_speed = atoi(argv[1]);
+    spindle_control_mode_set(&g_spindle_motor, SPINDLE_SPEED_CONTROL);
     spindle_set_speed(&g_spindle_motor, target_speed);
     return 1;
 }
@@ -75,7 +77,7 @@ static int get_speed_cmd(int argc, char** argv) {
 static command_entry_t subcmd[] = {
     {"set_param", set_param_cmd, "set speed control parameter"},
     {"set_duty", set_duty_cmd, "set motor pwm duty"},
-    {"set_duty", set_speed_cmd, "set target speed"},
+    {"set_speed", set_speed_cmd, "set target speed"},
     {"get_speed", get_speed_cmd, "get currenct speed"},
     {NULL, NULL, NULL}};
 

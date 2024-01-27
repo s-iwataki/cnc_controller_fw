@@ -57,6 +57,7 @@ CMakeFiles/cnc_controller.elf.dir/src/commands/test_cmd.c.obj: \
  D:/workspace/cnc_controller/src/command_list.h \
  D:/workspace/cnc_controller/src/commands/test_adc_commands.h \
  D:/workspace/cnc_controller/src/commands/test_encoder_commands.h \
+ D:/workspace/cnc_controller/src/commands/test_spindle_commands.h \
  D:/workspace/cnc_controller/src/commands/test_switch_commands.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h \
@@ -200,6 +201,8 @@ D:/workspace/cnc_controller/src/command_list.h:
 D:/workspace/cnc_controller/src/commands/test_adc_commands.h:
 
 D:/workspace/cnc_controller/src/commands/test_encoder_commands.h:
+
+D:/workspace/cnc_controller/src/commands/test_spindle_commands.h:
 
 D:/workspace/cnc_controller/src/commands/test_switch_commands.h:
 

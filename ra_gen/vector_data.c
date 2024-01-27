@@ -11,12 +11,13 @@
             [4] = gpt_capture_a_isr, /* GPT0 CAPTURE COMPARE A (Compare match A) */
             [5] = gpt_capture_a_isr, /* GPT2 CAPTURE COMPARE A (Compare match A) */
             [6] = gpt_capture_a_isr, /* GPT5 CAPTURE COMPARE A (Compare match A) */
-            [7] = spi_tei_isr, /* SPI0 TEI (Transmission complete event) */
-            [8] = spi_eri_isr, /* SPI0 ERI (Error) */
-            [9] = dmac_int_isr, /* DMAC0 INT (DMAC transfer end 0) */
-            [10] = dmac_int_isr, /* DMAC1 INT (DMAC transfer end 1) */
-            [11] = adc_scan_end_isr, /* ADC0 SCAN END (A/D scan end interrupt) */
-            [12] = adc_scan_end_isr, /* ADC1 SCAN END (A/D scan end interrupt) */
+            [7] = gpt_capture_a_isr, /* GPT7 CAPTURE COMPARE A (Compare match A) */
+            [8] = spi_tei_isr, /* SPI0 TEI (Transmission complete event) */
+            [9] = spi_eri_isr, /* SPI0 ERI (Error) */
+            [10] = dmac_int_isr, /* DMAC0 INT (DMAC transfer end 0) */
+            [11] = dmac_int_isr, /* DMAC1 INT (DMAC transfer end 1) */
+            [12] = adc_scan_end_isr, /* ADC0 SCAN END (A/D scan end interrupt) */
+            [13] = adc_scan_end_isr, /* ADC1 SCAN END (A/D scan end interrupt) */
         };
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_MAX_ENTRIES] =
         {
@@ -27,11 +28,12 @@
             [4] = BSP_PRV_IELS_ENUM(EVENT_GPT0_CAPTURE_COMPARE_A), /* GPT0 CAPTURE COMPARE A (Compare match A) */
             [5] = BSP_PRV_IELS_ENUM(EVENT_GPT2_CAPTURE_COMPARE_A), /* GPT2 CAPTURE COMPARE A (Compare match A) */
             [6] = BSP_PRV_IELS_ENUM(EVENT_GPT5_CAPTURE_COMPARE_A), /* GPT5 CAPTURE COMPARE A (Compare match A) */
-            [7] = BSP_PRV_IELS_ENUM(EVENT_SPI0_TEI), /* SPI0 TEI (Transmission complete event) */
-            [8] = BSP_PRV_IELS_ENUM(EVENT_SPI0_ERI), /* SPI0 ERI (Error) */
-            [9] = BSP_PRV_IELS_ENUM(EVENT_DMAC0_INT), /* DMAC0 INT (DMAC transfer end 0) */
-            [10] = BSP_PRV_IELS_ENUM(EVENT_DMAC1_INT), /* DMAC1 INT (DMAC transfer end 1) */
-            [11] = BSP_PRV_IELS_ENUM(EVENT_ADC0_SCAN_END), /* ADC0 SCAN END (A/D scan end interrupt) */
-            [12] = BSP_PRV_IELS_ENUM(EVENT_ADC1_SCAN_END), /* ADC1 SCAN END (A/D scan end interrupt) */
+            [7] = BSP_PRV_IELS_ENUM(EVENT_GPT7_CAPTURE_COMPARE_A), /* GPT7 CAPTURE COMPARE A (Compare match A) */
+            [8] = BSP_PRV_IELS_ENUM(EVENT_SPI0_TEI), /* SPI0 TEI (Transmission complete event) */
+            [9] = BSP_PRV_IELS_ENUM(EVENT_SPI0_ERI), /* SPI0 ERI (Error) */
+            [10] = BSP_PRV_IELS_ENUM(EVENT_DMAC0_INT), /* DMAC0 INT (DMAC transfer end 0) */
+            [11] = BSP_PRV_IELS_ENUM(EVENT_DMAC1_INT), /* DMAC1 INT (DMAC transfer end 1) */
+            [12] = BSP_PRV_IELS_ENUM(EVENT_ADC0_SCAN_END), /* ADC0 SCAN END (A/D scan end interrupt) */
+            [13] = BSP_PRV_IELS_ENUM(EVENT_ADC1_SCAN_END), /* ADC1 SCAN END (A/D scan end interrupt) */
         };
         #endif

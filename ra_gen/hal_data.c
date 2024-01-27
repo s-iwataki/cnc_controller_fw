@@ -397,12 +397,12 @@ const gpt_extended_cfg_t g_timer_spindle_speed_extend =
               },
     .start_source        = (gpt_source_t) ( GPT_SOURCE_NONE),
     .stop_source         = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .clear_source        = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .count_up_source     = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_LOW | GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_HIGH |  GPT_SOURCE_NONE),
+    .clear_source        = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_LOW | GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_HIGH |  GPT_SOURCE_NONE),
+    .count_up_source     = (gpt_source_t) ( GPT_SOURCE_NONE),
     .count_down_source   = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .capture_a_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
+    .capture_a_source    = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_LOW | GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_HIGH |  GPT_SOURCE_NONE),
     .capture_b_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .capture_a_ipl       = (BSP_IRQ_DISABLED),
+    .capture_a_ipl       = (15),
     .capture_b_ipl       = (BSP_IRQ_DISABLED),
 #if defined(VECTOR_NUMBER_GPT7_CAPTURE_COMPARE_A)
     .capture_a_irq       = VECTOR_NUMBER_GPT7_CAPTURE_COMPARE_A,
@@ -414,7 +414,7 @@ const gpt_extended_cfg_t g_timer_spindle_speed_extend =
 #else
     .capture_b_irq       = FSP_INVALID_VECTOR,
 #endif
-    .capture_filter_gtioca       = GPT_CAPTURE_FILTER_NONE,
+    .capture_filter_gtioca       = GPT_CAPTURE_FILTER_PCLKD_DIV_16,
     .capture_filter_gtiocb       = GPT_CAPTURE_FILTER_NONE,
 #if 0
     .p_pwm_cfg                   = &g_timer_spindle_speed_pwm_extend,
@@ -427,8 +427,8 @@ const gpt_extended_cfg_t g_timer_spindle_speed_extend =
     .gtior_setting.gtior_b.oahld  = 0U,
     .gtior_setting.gtior_b.oae    = (uint32_t) false,
     .gtior_setting.gtior_b.oadf   = (uint32_t) GPT_GTIOC_DISABLE_PROHIBITED,
-    .gtior_setting.gtior_b.nfaen  = ((uint32_t) GPT_CAPTURE_FILTER_NONE & 1U),
-    .gtior_setting.gtior_b.nfcsa  = ((uint32_t) GPT_CAPTURE_FILTER_NONE >> 1U),
+    .gtior_setting.gtior_b.nfaen  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_16 & 1U),
+    .gtior_setting.gtior_b.nfcsa  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_16 >> 1U),
     .gtior_setting.gtior_b.gtiob  = (0U << 4U) | (0U << 2U) | (0U << 0U),
     .gtior_setting.gtior_b.obdflt = (uint32_t) GPT_PIN_LEVEL_LOW,
     .gtior_setting.gtior_b.obhld  = 0U,
@@ -443,7 +443,7 @@ const gpt_extended_cfg_t g_timer_spindle_speed_extend =
 const timer_cfg_t g_timer_spindle_speed_cfg =
 {
     .mode                = TIMER_MODE_PERIODIC,
-    /* Actual period: 0.0010922666666666667 seconds. Actual duty: 50%. */ .period_counts = (uint32_t) 0x10000, .duty_cycle_counts = 0x8000, .source_div = (timer_source_div_t)0,
+    /* Actual period: 71.58278826666667 seconds. Actual duty: 50%. */ .period_counts = (uint32_t) 0x100000000, .duty_cycle_counts = 0x80000000, .source_div = (timer_source_div_t)0,
     .channel             = 7,
     .p_callback          = NULL,
     /** If NULL then do not add & */

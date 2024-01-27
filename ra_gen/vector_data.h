@@ -6,7 +6,7 @@
         #endif
                 /* Number of interrupts allocated */
         #ifndef VECTOR_DATA_IRQ_COUNT
-        #define VECTOR_DATA_IRQ_COUNT    (13)
+        #define VECTOR_DATA_IRQ_COUNT    (14)
         #endif
         /* ISR prototypes */
         void sci_uart_rxi_isr(void);
@@ -34,18 +34,20 @@
         #define GPT2_CAPTURE_COMPARE_A_IRQn          ((IRQn_Type) 5) /* GPT2 CAPTURE COMPARE A (Compare match A) */
         #define VECTOR_NUMBER_GPT5_CAPTURE_COMPARE_A ((IRQn_Type) 6) /* GPT5 CAPTURE COMPARE A (Compare match A) */
         #define GPT5_CAPTURE_COMPARE_A_IRQn          ((IRQn_Type) 6) /* GPT5 CAPTURE COMPARE A (Compare match A) */
-        #define VECTOR_NUMBER_SPI0_TEI ((IRQn_Type) 7) /* SPI0 TEI (Transmission complete event) */
-        #define SPI0_TEI_IRQn          ((IRQn_Type) 7) /* SPI0 TEI (Transmission complete event) */
-        #define VECTOR_NUMBER_SPI0_ERI ((IRQn_Type) 8) /* SPI0 ERI (Error) */
-        #define SPI0_ERI_IRQn          ((IRQn_Type) 8) /* SPI0 ERI (Error) */
-        #define VECTOR_NUMBER_DMAC0_INT ((IRQn_Type) 9) /* DMAC0 INT (DMAC transfer end 0) */
-        #define DMAC0_INT_IRQn          ((IRQn_Type) 9) /* DMAC0 INT (DMAC transfer end 0) */
-        #define VECTOR_NUMBER_DMAC1_INT ((IRQn_Type) 10) /* DMAC1 INT (DMAC transfer end 1) */
-        #define DMAC1_INT_IRQn          ((IRQn_Type) 10) /* DMAC1 INT (DMAC transfer end 1) */
-        #define VECTOR_NUMBER_ADC0_SCAN_END ((IRQn_Type) 11) /* ADC0 SCAN END (A/D scan end interrupt) */
-        #define ADC0_SCAN_END_IRQn          ((IRQn_Type) 11) /* ADC0 SCAN END (A/D scan end interrupt) */
-        #define VECTOR_NUMBER_ADC1_SCAN_END ((IRQn_Type) 12) /* ADC1 SCAN END (A/D scan end interrupt) */
-        #define ADC1_SCAN_END_IRQn          ((IRQn_Type) 12) /* ADC1 SCAN END (A/D scan end interrupt) */
+        #define VECTOR_NUMBER_GPT7_CAPTURE_COMPARE_A ((IRQn_Type) 7) /* GPT7 CAPTURE COMPARE A (Compare match A) */
+        #define GPT7_CAPTURE_COMPARE_A_IRQn          ((IRQn_Type) 7) /* GPT7 CAPTURE COMPARE A (Compare match A) */
+        #define VECTOR_NUMBER_SPI0_TEI ((IRQn_Type) 8) /* SPI0 TEI (Transmission complete event) */
+        #define SPI0_TEI_IRQn          ((IRQn_Type) 8) /* SPI0 TEI (Transmission complete event) */
+        #define VECTOR_NUMBER_SPI0_ERI ((IRQn_Type) 9) /* SPI0 ERI (Error) */
+        #define SPI0_ERI_IRQn          ((IRQn_Type) 9) /* SPI0 ERI (Error) */
+        #define VECTOR_NUMBER_DMAC0_INT ((IRQn_Type) 10) /* DMAC0 INT (DMAC transfer end 0) */
+        #define DMAC0_INT_IRQn          ((IRQn_Type) 10) /* DMAC0 INT (DMAC transfer end 0) */
+        #define VECTOR_NUMBER_DMAC1_INT ((IRQn_Type) 11) /* DMAC1 INT (DMAC transfer end 1) */
+        #define DMAC1_INT_IRQn          ((IRQn_Type) 11) /* DMAC1 INT (DMAC transfer end 1) */
+        #define VECTOR_NUMBER_ADC0_SCAN_END ((IRQn_Type) 12) /* ADC0 SCAN END (A/D scan end interrupt) */
+        #define ADC0_SCAN_END_IRQn          ((IRQn_Type) 12) /* ADC0 SCAN END (A/D scan end interrupt) */
+        #define VECTOR_NUMBER_ADC1_SCAN_END ((IRQn_Type) 13) /* ADC1 SCAN END (A/D scan end interrupt) */
+        #define ADC1_SCAN_END_IRQn          ((IRQn_Type) 13) /* ADC1 SCAN END (A/D scan end interrupt) */
         #ifdef __cplusplus
         }
         #endif

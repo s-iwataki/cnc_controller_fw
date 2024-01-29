@@ -926,3 +926,12 @@ FSP Configuration
     Memory Allocation: Static
     Allocate Secure Context: Enable
     
+  Thread "user interface"
+    Symbol: ui_thread
+    Name: user interface
+    Stack size (bytes): 2048
+    Priority: 1
+    Thread Context: NULL
+    Memory Allocation: Static
+    Allocate Secure Context: Enable
+    

@@ -20,7 +20,7 @@ typedef struct {
     TaskHandle_t task_handle;
 } ra_spi_busdriver_t;
 
-static void spi_callback_drv(spi_callback_args_t* p_arg) {
+void spi_callback(spi_callback_args_t* p_arg) {
     ra_spi_busdriver_t* d = container_of(p_arg->p_context, ra_spi_busdriver_t, api);
     if (d->task_handle != NULL) {
         BaseType_t higher_prio_task_wake;
@@ -32,6 +32,7 @@ static void spi_callback_drv(spi_callback_args_t* p_arg) {
 static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_device_s* device, char* tx_buf, size_t tx_size, char* rx_buf, size_t rx_size) {
     ra_spi_busdriver_t* d = container_of(instance, ra_spi_busdriver_t, api);
     const spi_instance_t* inst = d->fsp_inst;
+    d->task_handle = xTaskGetCurrentTaskHandle();
     size_t common_txrx_size = (tx_size > rx_size) ? (tx_size - rx_size) : (rx_size - tx_size);
     if (common_txrx_size > 0) {
         inst->p_api->writeRead(inst->p_ctrl, tx_buf, rx_buf, common_txrx_size, SPI_BIT_WIDTH_8_BITS);
@@ -68,7 +69,7 @@ static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_
             }
         }
     }
-
+    d->task_handle = 0;
     if (device->on_transfer_completed) {
         device->on_transfer_completed(device);
     }
@@ -102,7 +103,6 @@ static void enable(struct spi_bus_driver_s* instance, struct spi_bus_device_s* d
     ra_spi_busdriver_t* d = container_of(instance, ra_spi_busdriver_t, api);
     const spi_instance_t* inst = d->fsp_inst;
     inst->p_api->open(inst->p_ctrl, inst->p_cfg);
-    inst->p_api->callbackSet(inst->p_ctrl, spi_callback_drv, instance, NULL);
 }
 
 static ra_spi_busdriver_t driver;
@@ -114,6 +114,8 @@ spi_bus_driver_t* spi_init(void) {
     driver.api.spi_do_transaction = spi_do_transaction;
     driver.api.spi_release_lock = spi_release_lock;
     driver.fsp_inst = &g_spi0;
+    g_spi0.p_api->open(g_spi0.p_ctrl, g_spi0.p_cfg);
+    g_spi0.p_api->callbackSet(g_spi0.p_ctrl, spi_callback, &driver, NULL);
     driver.bus_lock = xSemaphoreCreateMutexStatic(&driver.bus_lock_mem);
     driver.task_handle = 0;
     return &(driver.api);

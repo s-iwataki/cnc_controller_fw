@@ -58,6 +58,7 @@
       <configSetting altId="gpt7.gtioca.p304" configurationId="gpt7.gtioca" isUsedByDriver="true"/>
       <configSetting altId="gpt8.gtiocb.p106" configurationId="gpt8.gtiocb" isUsedByDriver="true"/>
       <configSetting altId="p100.output.low" configurationId="p100"/>
+      <configSetting altId="p103.output.high" configurationId="p103"/>
       <configSetting altId="p105.output.low" configurationId="p105"/>
       <configSetting altId="p107.output.low" configurationId="p107"/>
       <configSetting altId="p112.output.low" configurationId="p112"/>
@@ -93,7 +94,6 @@
       <configSetting altId="sci9.txd.p109" configurationId="sci9.txd" isUsedByDriver="true"/>
       <configSetting altId="spi0.mosi.p101" configurationId="spi0.mosi" isUsedByDriver="true"/>
       <configSetting altId="spi0.rspck.p102" configurationId="spi0.rspck" isUsedByDriver="true"/>
-      <configSetting altId="spi0.ssl0.p103" configurationId="spi0.ssl0" isUsedByDriver="true"/>
     </pincfg>
   </raPinConfiguration>
 </raConfiguration>

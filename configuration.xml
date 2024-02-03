@@ -692,13 +692,13 @@
       <property id="module.driver.spi.bit_order" value="module.driver.spi.bit_order.bit_order_msb_first"/>
       <property id="module.driver.spi.p_callback" value="spi_callback"/>
       <property id="module.driver.spi.spi_clksyn" value="module.driver.spi.spi_clksyn.spi_clksyn"/>
-      <property id="module.driver.spi.spi_comm" value="module.driver.spi.spi_comm.full_duplex"/>
+      <property id="module.driver.spi.spi_comm" value="module.driver.spi.spi_comm.transmit_only"/>
       <property id="module.driver.spi.ssl_polarity" value="module.driver.spi.ssl_polarity.low"/>
       <property id="module.driver.spi.ssl_select" value="module.driver.spi.ssl_select.zero"/>
       <property id="module.driver.spi.mosi_idle_value_fixing" value="module.driver.spi.mosi_idle_value_fixing.disable"/>
       <property id="module.driver.spi.parity" value="module.driver.spi.parity_mode.disable"/>
       <property id="module.driver.spi.byte_swap" value="module.driver.spi.byte_swap.disable"/>
-      <property id="module.driver.spi.bitrate" value="16000000"/>
+      <property id="module.driver.spi.bitrate" value="15000000"/>
       <property id="module.driver.spi.spck_delay" value="module.driver.spi.spck_delay.one"/>
       <property id="module.driver.spi.ssl_negation_delay" value="module.driver.spi.ssl_negation_delay.one"/>
       <property id="module.driver.spi.next_access_delay" value="module.driver.spi.next_access_delay.one"/>
@@ -1089,11 +1089,13 @@
       <configSetting altId="p100.output.low" configurationId="p100"/>
       <configSetting altId="p100.gpio_mode.gpio_mode_out.low" configurationId="p100.gpio_mode"/>
       <configSetting altId="p101.spi0.mosi" configurationId="p101"/>
+      <configSetting altId="p101.gpio_speed.gpio_speed_medium" configurationId="p101.gpio_drivecapacity"/>
       <configSetting altId="p101.gpio_mode.gpio_mode_peripheral" configurationId="p101.gpio_mode"/>
       <configSetting altId="p102.spi0.rspck" configurationId="p102"/>
+      <configSetting altId="p102.gpio_speed.gpio_speed_high" configurationId="p102.gpio_drivecapacity"/>
       <configSetting altId="p102.gpio_mode.gpio_mode_peripheral" configurationId="p102.gpio_mode"/>
-      <configSetting altId="p103.spi0.ssl0" configurationId="p103"/>
-      <configSetting altId="p103.gpio_mode.gpio_mode_peripheral" configurationId="p103.gpio_mode"/>
+      <configSetting altId="p103.output.high" configurationId="p103"/>
+      <configSetting altId="p103.gpio_mode.gpio_mode_out.high" configurationId="p103.gpio_mode"/>
       <configSetting altId="p104.gpt1.gtiocb" configurationId="p104"/>
       <configSetting altId="p104.gpio_mode.gpio_mode_peripheral" configurationId="p104.gpio_mode"/>
       <configSetting altId="p105.output.low" configurationId="p105"/>
@@ -1209,7 +1211,6 @@
       <configSetting altId="spi0.mode.custom.a" configurationId="spi0.mode"/>
       <configSetting altId="spi0.mosi.p101" configurationId="spi0.mosi"/>
       <configSetting altId="spi0.rspck.p102" configurationId="spi0.rspck"/>
-      <configSetting altId="spi0.ssl0.p103" configurationId="spi0.ssl0"/>
     </pincfg>
   </raPinConfiguration>
 </raConfiguration>

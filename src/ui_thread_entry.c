@@ -30,6 +30,7 @@ void ui_thread_entry(void* pvParameters) {
     gui_register_graphic_driver(st7735_init(ST7735R_18GREENTAB, drv, &lcd_reset, &lcd_cs, &lcd_rs));
     printf("lcd init ok\r\n");
     clear_screen();
+    printf("cls end\r\n");
     /* TODO: add your own code here */
     while (1) {
         vTaskDelay(pdMS_TO_TICKS(1000));

@@ -33,7 +33,7 @@ static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_
     ra_spi_busdriver_t* d = container_of(instance, ra_spi_busdriver_t, api);
     const spi_instance_t* inst = d->fsp_inst;
     d->task_handle = xTaskGetCurrentTaskHandle();
-    size_t common_txrx_size = (tx_size > rx_size) ? (tx_size - rx_size) : (rx_size - tx_size);
+    size_t common_txrx_size = (tx_size > rx_size) ? (rx_size) : (tx_size);
     if (common_txrx_size > 0) {
         inst->p_api->writeRead(inst->p_ctrl, tx_buf, rx_buf, common_txrx_size, SPI_BIT_WIDTH_8_BITS);
         uint32_t notify_value;

@@ -102,9 +102,9 @@ FSP Configuration
       P014 85 - - - - Disabled - - "ACMPHS0: IVREF; ACMPHS1: IVREF; ACMPHS2: IVREF; ACMPHS3: IVREF; ACMPHS4: IVREF; ACMPHS5: IVREF; ADC0: AN005; ADC1: AN105; DAC0: DA0" - ‚È‚µ - - 
       P015 84 - - - - Disabled - - "ACMPHS0: IVCMP; ACMPHS1: IVCMP; ACMPHS2: IVCMP; ACMPHS3: IVCMP; ACMPHS4: IVCMP; ACMPHS5: IVCMP; ADC0: AN006; ADC1: AN106; DAC1: DA1; ICU0: IRQ13" - ‚È‚µ - - 
       P100 75 GPIO UI_LCD_A0 Low None "Output mode (Initial Low)" CMOS - "AGT0: AGTIO0; GPT_POEG0: GTETRGA; GPT5: GTIOC5B; ICU0: IRQ02; IIC1: SCL1; KINT0: KRM00; SCI0: RXD0; SCI0: SCL0; SCI1: SCK1; SPI0: MISOA" "LCD A0 pin" IO - - 
-      P101 74 SPI0_MOSIA UI_LCD_DATA Low None "Peripheral mode" CMOS None "AGT0: AGTEE0; GPT_POEG1: GTETRGB; GPT5: GTIOC5A; ICU0: IRQ01; IIC1: SDA1; KINT0: KRM01; SCI0: SDA0; SCI0: TXD0; SCI1: CTS1; SPI0: MOSIA" "lcd module data" IO - - 
-      P102 73 SPI0_RSPCKA UI_LCD_CLK Low - "Peripheral mode" CMOS None "ADC0: ADTRG0; AGT0: AGTO0; CAN0: CRX0; GPT_OPS0: GTOWLO; GPT2: GTIOC2B; KINT0: KRM02; SCI0: SCK0; SPI0: RSPCKA" "lcd module clock" IO - - 
-      P103 72 SPI0_SSLA0 UI_LCD_CS Low - "Peripheral mode" CMOS None "CAN0: CTX0; GPT_OPS0: GTOWUP; GPT2: GTIOC2A; KINT0: KRM03; SCI0: CTS0; SPI0: SSLA0" "lcd cs pin" IO - - 
+      P101 74 SPI0_MOSIA UI_LCD_DATA Medium None "Peripheral mode" CMOS None "AGT0: AGTEE0; GPT_POEG1: GTETRGB; GPT5: GTIOC5A; ICU0: IRQ01; IIC1: SDA1; KINT0: KRM01; SCI0: SDA0; SCI0: TXD0; SCI1: CTS1; SPI0: MOSIA" "lcd module data" IO - - 
+      P102 73 SPI0_RSPCKA UI_LCD_CLK High - "Peripheral mode" CMOS None "ADC0: ADTRG0; AGT0: AGTO0; CAN0: CRX0; GPT_OPS0: GTOWLO; GPT2: GTIOC2B; KINT0: KRM02; SCI0: SCK0; SPI0: RSPCKA" "lcd module clock" IO - - 
+      P103 72 GPIO UI_LCD_CS Low - "Output mode (Initial High)" CMOS - "CAN0: CTX0; GPT_OPS0: GTOWUP; GPT2: GTIOC2A; KINT0: KRM03; SCI0: CTS0; SPI0: SSLA0" "lcd cs pin" IO - - 
       P104 71 GPT1_GTIOC1B X_MOTOR_CLK Low None "Peripheral mode" CMOS None "GPT_POEG1: GTETRGB; GPT1: GTIOC1B; ICU0: IRQ01; KINT0: KRM04; SCI8: RXD8; SCI8: SCL8; SPI0: SSLA1" "X axis stepper clock" IO - - 
       P105 70 GPIO X_MOTOR_DIR Low None "Output mode (Initial Low)" CMOS - "GPT_POEG0: GTETRGA; GPT1: GTIOC1A; ICU0: IRQ00; KINT0: KRM05; SCI8: SDA8; SCI8: TXD8; SPI0: SSLA2" "X axis stepper dir" IO - - 
       P106 69 GPT8_GTIOC8B Y_MOTOR_CLK Low - "Peripheral mode" CMOS None "AGT0: AGTOB0; GPT8: GTIOC8B; KINT0: KRM06; SCI8: SCK8; SPI0: SSLA3" "Y axis stepper clock" IO - - 
@@ -774,13 +774,13 @@ FSP Configuration
       Bit Order: MSB First
       Callback: spi_callback
       SPI Mode: Clock Synchronous Operation
-      Full or Transmit Only Mode: Full Duplex
+      Full or Transmit Only Mode: Transmit Only
       Slave Select Polarity: Active Low
       Select SSL(Slave Select): SSL0
       MOSI Idle State: MOSI Idle Value Fixing Disable
       Parity Mode: Disabled
       Byte Swapping: Disable
-      Bitrate: 16000000
+      Bitrate: 15000000
       Clock Delay: 1 Clock
       SSL Negation Delay: 1 Clock
       Next Access Delay: 1 Clock

@@ -296,7 +296,7 @@ spi_instance_ctrl_t g_spi0_ctrl;
 const spi_extended_cfg_t g_spi0_ext_cfg =
 {
     .spi_clksyn         = SPI_SSL_MODE_CLK_SYN,
-    .spi_comm           = SPI_COMMUNICATION_FULL_DUPLEX,
+    .spi_comm           = SPI_COMMUNICATION_TRANSMIT_ONLY,
     .ssl_polarity        = SPI_SSLP_LOW,
     .ssl_select          = SPI_SSL_SELECT_SSL0,
     .mosi_idle           = SPI_MOSI_IDLE_VALUE_FIXING_DISABLE,

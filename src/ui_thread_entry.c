@@ -27,7 +27,7 @@ void ui_thread_entry(void* pvParameters) {
     spi_bus_driver_t*drv=spi_init();
     printf("lcd init\r\n");
 
-    gui_register_graphic_driver(st7735_init(ST7735R_18GREENTAB, drv, &lcd_reset, &lcd_cs, &lcd_rs));
+    gui_register_graphic_driver(st7735_init(ST7735R_18BLACKTAB, drv, &lcd_reset, &lcd_cs, &lcd_rs));
     printf("lcd init ok\r\n");
     clear_screen();
     printf("cls end\r\n");

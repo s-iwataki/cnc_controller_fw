@@ -12,7 +12,7 @@
 #include "textbox.h"
 #include "gui.h"
 
-static void print_text(uint8_t x, uint8_t y, uint8_t size, const int8_t *text, uint16_t text_color, uint8_t background_color)
+static void print_text(uint8_t x, uint8_t y, uint8_t size, const int8_t *text, uint16_t text_color, uint16_t background_color)
 {
 	const graphic_apis_t *apis = gui_get_graphic_driver();
 	uint8_t xstep = 6 * size;

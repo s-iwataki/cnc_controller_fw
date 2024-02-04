@@ -192,7 +192,7 @@ static void print_mm_disp(TEXTBOX_t* t, float val) {
     mm *= sign;
     int mm_part = mm / 1000 * sign;
     int micron_part = mm % 1000;
-    textbox_printf(t, "%+3d.%03d", mm_part, micron_part);
+    textbox_printf(t, "%+ 4d.%03d", mm_part, micron_part);
 }
 
 static void update_position_disp(TEXTBOX_t* t, float prev, float current) {
@@ -242,8 +242,8 @@ static void update_display(userinput_state_t* s, ui_view_items_t* items) {
     count++;
     if (count > UI_SPINDLE_SPEED_DISP_UPDATE_PERIOD_MS / UI_VIEW_UPDATE_PERIOD_MS) {
         count = 0;
-        textbox_printf(&items->autofeed_speed, "%d mm/s", (int)current.autofeed_speed);
-        textbox_printf(&items->spindle_rpm, "%d rpm", current.spindle_rpm);
+        textbox_printf(&items->autofeed_speed, "% 4d mm/s", (int)current.autofeed_speed);
+        textbox_printf(&items->spindle_rpm, "% 4d rpm", current.spindle_rpm);
     }
     prev = current;
 }
@@ -252,23 +252,23 @@ static ui_view_items_t g_view_items;
 void ui_view_init(void) {
     const graphic_apis_t* api = gui_get_graphic_driver();
     int w = api->get_width(api);
-    textbox_create(&g_view_items.x_pos, 0, 0, w, 2);
-    textbox_create(&g_view_items.y_pos, 0, 20, w, 2);
-    textbox_create(&g_view_items.z_pos, 0, 40, w, 2);
-    textbox_create(&g_view_items.autofeed_speed, 0, 60, w, 1);
-    textbox_create(&g_view_items.spindle_rpm, 0, 70, w, 1);
+    textbox_create(&g_view_items.x_pos, 0, 5, w, 3);
+    textbox_create(&g_view_items.y_pos, 0, 30, w, 3);
+    textbox_create(&g_view_items.z_pos, 0, 55, w, 3);
+    textbox_create(&g_view_items.autofeed_speed, 10, 80, w, 2);
+    textbox_create(&g_view_items.spindle_rpm, 10, 100, w, 2);
     print_mm_disp(&g_view_items.x_pos, 0);
     print_mm_disp(&g_view_items.y_pos, 0);
     print_mm_disp(&g_view_items.z_pos, 0);
-    textbox_printf(&g_view_items.autofeed_speed, "%d mm/s", 0);
-    textbox_printf(&g_view_items.spindle_rpm, "%d rpm", 0);
+    textbox_printf(&g_view_items.autofeed_speed, "% 4d mm/s", 0);
+    textbox_printf(&g_view_items.spindle_rpm, "% 4d rpm", 0);
     table_3d_driver_t*tbl=table_get_driver();
     table_enable(tbl, pdTRUE);
 }
 void ui_view_process(void) {
     userinput_state_t s;
     update_ui_input(&s);
-    if (cnc_system_state_is_gcode_exec() != pdFALSE) {
+    if (cnc_system_state_is_gcode_exec() == pdFALSE) {
         process_user_input(&s);
     }
     update_display(&s, &g_view_items);

@@ -1,7 +1,7 @@
 CMakeFiles/cnc_controller.elf.dir/src/ui_thread_entry.c.obj: \
  D:/workspace/cnc_controller/src/ui_thread_entry.c \
- D:/workspace/cnc_controller/src/gui.h \
  D:/workspace/cnc_controller/src/graphic.h \
+ D:/workspace/cnc_controller/src/gui.h \
  D:/workspace/cnc_controller/src/ra_spi.h \
  D:/workspace/cnc_controller/src/spi.h \
  D:/workspace/cnc_controller/ra_gen/ui_thread.h \
@@ -90,9 +90,9 @@ CMakeFiles/cnc_controller.elf.dir/src/ui_thread_entry.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/timers.h \
  D:/workspace/cnc_controller/src/ui_view.h
 
-D:/workspace/cnc_controller/src/gui.h:
-
 D:/workspace/cnc_controller/src/graphic.h:
+
+D:/workspace/cnc_controller/src/gui.h:
 
 D:/workspace/cnc_controller/src/ra_spi.h:
 

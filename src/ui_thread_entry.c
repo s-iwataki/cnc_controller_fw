@@ -16,6 +16,11 @@
 #include "task.h"
 #include "timers.h"
 #include <stdio.h>
+#include "ui_view.h"
+
+
+
+
 /* user interface entry function */
 /* pvParameters contains TaskHandle_t */
 void ui_thread_entry(void* pvParameters) {
@@ -23,16 +28,14 @@ void ui_thread_entry(void* pvParameters) {
     DIGITALOUT_t lcd_rs={.pin=UI_LCD_A0};
     DIGITALOUT_t lcd_cs={.pin=UI_LCD_CS};
     DIGITALOUT_t lcd_reset={.pin=UI_LCD_RESET};
-    printf("spi init\r\n");
-    spi_bus_driver_t*drv=spi_init();
-    printf("lcd init\r\n");
-
-    gui_register_graphic_driver(st7735_init(ST7735R_18BLACKTAB, drv, &lcd_reset, &lcd_cs, &lcd_rs));
-    printf("lcd init ok\r\n");
+    gui_register_graphic_driver(st7735_init(ST7735R_18BLACKTAB, spi_init(), &lcd_reset, &lcd_cs, &lcd_rs));
     clear_screen();
-    printf("cls end\r\n");
+    ui_view_init();
     /* TODO: add your own code here */
+    TickType_t last_wake_time = xTaskGetTickCount();
+    
     while (1) {
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(UI_VIEW_UPDATE_PERIOD_MS));
+        ui_view_process();
     }
 }

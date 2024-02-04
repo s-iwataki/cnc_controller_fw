@@ -162,7 +162,9 @@ void xpos_counter_isr(timer_callback_args_t* p_args) {
         float x, y, z;
         getpos(d, &x, &y, &z);
         table_3d_event_t evt = {.id = X_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-        d->callback(d->cb_ctx, &evt);
+        if (d->callback) {
+            d->callback(d->cb_ctx, &evt);
+        }
     }
 }
 
@@ -172,7 +174,9 @@ void ypos_counter_isr(timer_callback_args_t* p_args) {
         float x, y, z;
         getpos(d, &x, &y, &z);
         table_3d_event_t evt = {.id = Y_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-        d->callback(d->cb_ctx, &evt);
+        if (d->callback) {
+            d->callback(d->cb_ctx, &evt);
+        }
     }
 }
 
@@ -182,7 +186,9 @@ void zpos_counter_isr(timer_callback_args_t* p_args) {
         float x, y, z;
         getpos(d, &x, &y, &z);
         table_3d_event_t evt = {.id = Z_AXIS_MOTION_COMPLETE, .pos = {.x = x, .y = y, .z = z}, .inmotion = {.x = d->x_in_motion, .y = d->y_in_motion, .z = d->z_in_motion}};
-        d->callback(d->cb_ctx, &evt);
+        if (d->callback) {
+            d->callback(d->cb_ctx, &evt);
+        }
     }
 }
 

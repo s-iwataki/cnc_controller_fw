@@ -84,7 +84,7 @@ static command_entry_t subcmd[] = {
 int test_spindle_cmd(int argc, char** argv) {
     static TimerHandle_t report_timer = NULL;
     if (report_timer == NULL) {
-        spindle_init(&g_spindle_motor);
+        //spindle_init(&g_spindle_motor);
         report_timer = xTimerCreateStatic("spindle_report", pdMS_TO_TICKS(100), pdTRUE, NULL, timer_callback, &tm);
     }
     int retval=apply_sub_cmd(argc, argv, subcmd);

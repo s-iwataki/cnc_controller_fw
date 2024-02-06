@@ -389,7 +389,7 @@ static void push_color_array(st7735_t* inst, int count, uint16_t color) {
             buf[2 * i] = color_h;
             buf[2 * i + 1] = color_l;
         }
-        writedataarray(inst, buf, send_size);
+        writedataarray(inst, buf, send_size*2);
         remain -= send_size;
     }
 }

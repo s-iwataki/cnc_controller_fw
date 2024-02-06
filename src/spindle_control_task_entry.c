@@ -31,6 +31,7 @@ void tmr_callback(timer_callback_args_t* arg) {
 /* pvParameters contains TaskHandle_t */
 void spindle_control_task_entry(void* pvParameters) {
     FSP_PARAMETER_NOT_USED(pvParameters);
+    spindle_init(&g_spindle_motor);
     TickType_t last_wake_time = xTaskGetTickCount();
     /* TODO: add your own code here */
     while (1) {

@@ -155,6 +155,9 @@ static void process_table_motion(userinput_state_t* s, userinput_state_t* s_prev
         }
     }
     if (s->autofeed_enabled == pdFALSE) {
+        if(s->setzero_button_pressed==pdTRUE){
+            table_setzero(table);
+        }
         if (s->uienc_diff != 0) {
             float dpos = (float)s->uienc_diff * UI_POS_INCR_PER_ENC;
             float speed = dpos * 1000.0f / UI_VIEW_UPDATE_PERIOD_MS;

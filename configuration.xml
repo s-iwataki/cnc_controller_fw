@@ -407,15 +407,15 @@
       <property id="module.driver.timer.gtioca_stop_level" value="module.driver.timer.gtioca_stop_level.pin_level_low"/>
       <property id="module.driver.timer.gtiocb_output_enabled" value="module.driver.timer.gtiocb_output_enabled.false"/>
       <property id="module.driver.timer.gtiocb_stop_level" value="module.driver.timer.gtiocb_stop_level.pin_level_low"/>
-      <property id="module.driver.timer.count_up_source" value="module.driver.gpt.source_gtioca_rising_gtiocb_low"/>
-      <property id="module.driver.timer.count_down_source" value="module.driver.gpt.source_gtioca_rising_gtiocb_high"/>
+      <property id="module.driver.timer.count_up_source" value="module.driver.gpt.source_gtioca_rising_gtiocb_low,module.driver.gpt.source_gtioca_falling_gtiocb_high"/>
+      <property id="module.driver.timer.count_down_source" value="module.driver.gpt.source_gtioca_rising_gtiocb_high,module.driver.gpt.source_gtioca_falling_gtiocb_low"/>
       <property id="module.driver.timer.start_source" value=""/>
       <property id="module.driver.timer.stop_source" value=""/>
       <property id="module.driver.timer.clear_source" value=""/>
       <property id="module.driver.timer.capture_a_source" value=""/>
       <property id="module.driver.timer.capture_b_source" value=""/>
-      <property id="module.driver.timer.gtioca_filter" value="module.driver.timer.gtioc_filter.gtioc_filter_none"/>
-      <property id="module.driver.timer.gtiocb_filter" value="module.driver.timer.gtioc_filter.gtioc_filter_none"/>
+      <property id="module.driver.timer.gtioca_filter" value="module.driver.timer.gtioc_filter.gtioc_filter_pclkd_div_64"/>
+      <property id="module.driver.timer.gtiocb_filter" value="module.driver.timer.gtioc_filter.gtioc_filter_pclkd_div_64"/>
       <property id="module.driver.timer.p_callback" value="NULL"/>
       <property id="module.driver.timer.ipl" value="_disabled"/>
       <property id="module.driver.timer.capture_a_ipl" value="_disabled"/>
@@ -1005,8 +1005,8 @@
     <symbolicName propertyId="p403.symbolic_name" value="UI_YSEL"/>
     <symbolicName propertyId="p404.symbolic_name" value="UI_XSEL"/>
     <symbolicName propertyId="p407.symbolic_name" value="UI_AUTOFEED_DIR"/>
-    <symbolicName propertyId="p408.symbolic_name" value="UI_AUTOFEED_ON"/>
-    <symbolicName propertyId="p409.symbolic_name" value="UI_SPINDLE_ON"/>
+    <symbolicName propertyId="p408.symbolic_name" value="UI_SPINDLE_ON"/>
+    <symbolicName propertyId="p409.symbolic_name" value="UI_AUTOFEED_ON"/>
     <symbolicName propertyId="p410.symbolic_name" value="UI_SET_ORIG"/>
     <symbolicName propertyId="p411.symbolic_name" value="ZM_LIM"/>
     <symbolicName propertyId="p412.symbolic_name" value="ZP_LIM"/>
@@ -1047,8 +1047,8 @@
     <comment propertyId="p403.comment" value="ui y axis select"/>
     <comment propertyId="p404.comment" value="ui x axis select"/>
     <comment propertyId="p407.comment" value="ui autofeed direction"/>
-    <comment propertyId="p408.comment" value="ui autofeed switch"/>
-    <comment propertyId="p409.comment" value="ui spindle on sw"/>
+    <comment propertyId="p408.comment" value="ui spindle switch"/>
+    <comment propertyId="p409.comment" value="ui autofeed on sw"/>
     <comment propertyId="p410.comment" value="ui fet origin btn"/>
     <comment propertyId="p411.comment" value="Z- axis limit sw"/>
     <comment propertyId="p412.comment" value="Z+ axis limit sw"/>

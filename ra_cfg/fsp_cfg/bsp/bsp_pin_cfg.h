@@ -36,8 +36,8 @@ FSP_HEADER
 #define UI_YSEL (BSP_IO_PORT_04_PIN_03) /* ui y axis select */
 #define UI_XSEL (BSP_IO_PORT_04_PIN_04) /* ui x axis select */
 #define UI_AUTOFEED_DIR (BSP_IO_PORT_04_PIN_07) /* ui autofeed direction */
-#define UI_AUTOFEED_ON (BSP_IO_PORT_04_PIN_08) /* ui autofeed switch */
-#define UI_SPINDLE_ON (BSP_IO_PORT_04_PIN_09) /* ui spindle on sw */
+#define UI_SPINDLE_ON (BSP_IO_PORT_04_PIN_08) /* ui spindle switch */
+#define UI_AUTOFEED_ON (BSP_IO_PORT_04_PIN_09) /* ui autofeed on sw */
 #define UI_SET_ORIG (BSP_IO_PORT_04_PIN_10) /* ui fet origin btn */
 #define ZM_LIM (BSP_IO_PORT_04_PIN_11) /* Z- axis limit sw */
 #define ZP_LIM (BSP_IO_PORT_04_PIN_12) /* Z+ axis limit sw */

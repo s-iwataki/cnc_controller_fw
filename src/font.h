@@ -13,6 +13,7 @@ extern const unsigned char font[] PROGMEM;
 #else
 extern const unsigned char font[];
 #endif
-
+#define ASCII_FONT_WIDTH 5
+#define ASCII_FONT_HEIGHT 7
 
 #endif /* FONT_H_ */

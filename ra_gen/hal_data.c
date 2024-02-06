@@ -918,8 +918,8 @@ const gpt_extended_cfg_t g_timer_uienc_extend =
     .start_source        = (gpt_source_t) ( GPT_SOURCE_NONE),
     .stop_source         = (gpt_source_t) ( GPT_SOURCE_NONE),
     .clear_source        = (gpt_source_t) ( GPT_SOURCE_NONE),
-    .count_up_source     = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_LOW |  GPT_SOURCE_NONE),
-    .count_down_source   = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_HIGH |  GPT_SOURCE_NONE),
+    .count_up_source     = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_LOW | GPT_SOURCE_GTIOCA_FALLING_WHILE_GTIOCB_HIGH |  GPT_SOURCE_NONE),
+    .count_down_source   = (gpt_source_t) (GPT_SOURCE_GTIOCA_RISING_WHILE_GTIOCB_HIGH | GPT_SOURCE_GTIOCA_FALLING_WHILE_GTIOCB_LOW |  GPT_SOURCE_NONE),
     .capture_a_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_b_source    = (gpt_source_t) ( GPT_SOURCE_NONE),
     .capture_a_ipl       = (BSP_IRQ_DISABLED),
@@ -934,8 +934,8 @@ const gpt_extended_cfg_t g_timer_uienc_extend =
 #else
     .capture_b_irq       = FSP_INVALID_VECTOR,
 #endif
-    .capture_filter_gtioca       = GPT_CAPTURE_FILTER_NONE,
-    .capture_filter_gtiocb       = GPT_CAPTURE_FILTER_NONE,
+    .capture_filter_gtioca       = GPT_CAPTURE_FILTER_PCLKD_DIV_64,
+    .capture_filter_gtiocb       = GPT_CAPTURE_FILTER_PCLKD_DIV_64,
 #if 0
     .p_pwm_cfg                   = &g_timer_uienc_pwm_extend,
 #else
@@ -947,15 +947,15 @@ const gpt_extended_cfg_t g_timer_uienc_extend =
     .gtior_setting.gtior_b.oahld  = 0U,
     .gtior_setting.gtior_b.oae    = (uint32_t) false,
     .gtior_setting.gtior_b.oadf   = (uint32_t) GPT_GTIOC_DISABLE_PROHIBITED,
-    .gtior_setting.gtior_b.nfaen  = ((uint32_t) GPT_CAPTURE_FILTER_NONE & 1U),
-    .gtior_setting.gtior_b.nfcsa  = ((uint32_t) GPT_CAPTURE_FILTER_NONE >> 1U),
+    .gtior_setting.gtior_b.nfaen  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_64 & 1U),
+    .gtior_setting.gtior_b.nfcsa  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_64 >> 1U),
     .gtior_setting.gtior_b.gtiob  = (0U << 4U) | (0U << 2U) | (0U << 0U),
     .gtior_setting.gtior_b.obdflt = (uint32_t) GPT_PIN_LEVEL_LOW,
     .gtior_setting.gtior_b.obhld  = 0U,
     .gtior_setting.gtior_b.obe    = (uint32_t) false,
     .gtior_setting.gtior_b.obdf   = (uint32_t) GPT_GTIOC_DISABLE_PROHIBITED,
-    .gtior_setting.gtior_b.nfben  = ((uint32_t) GPT_CAPTURE_FILTER_NONE & 1U),
-    .gtior_setting.gtior_b.nfcsb  = ((uint32_t) GPT_CAPTURE_FILTER_NONE >> 1U),
+    .gtior_setting.gtior_b.nfben  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_64 & 1U),
+    .gtior_setting.gtior_b.nfcsb  = ((uint32_t) GPT_CAPTURE_FILTER_PCLKD_DIV_64 >> 1U),
 #else
     .gtior_setting.gtior = 0U,
 #endif

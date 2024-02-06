@@ -145,8 +145,8 @@ FSP Configuration
       P405 6 - - - - Disabled - - "GPT1: GTIOC1A" - ‚È‚µ - - 
       P406 7 - - - - Disabled - - "GPT1: GTIOC1B" - ‚È‚µ - - 
       P407 25 GPIO UI_AUTOFEED_DIR - - "Input mode" - "input pull-up" "ADC0: ADTRG0; AGT0: AGTIO0; IIC0: SDA0; SCI4: CTS4" "ui autofeed direction" IO - - 
-      P408 24 GPIO UI_AUTOFEED_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWLO; GPT10: GTIOC10B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3" "ui autofeed switch" IO - - 
-      P409 23 GPIO UI_SPINDLE_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWUP; GPT10: GTIOC10A; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3" "ui spindle on sw" IO - - 
+      P408 24 GPIO UI_SPINDLE_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWLO; GPT10: GTIOC10B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3" "ui spindle switch" IO - - 
+      P409 23 GPIO UI_AUTOFEED_ON - None "Input mode" - "input pull-up" "GPT_OPS0: GTOWUP; GPT10: GTIOC10A; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3" "ui autofeed on sw" IO - - 
       P410 22 GPIO UI_SET_ORIG - None "Input mode" - "input pull-up" "AGT1: AGTOB1; GPT_OPS0: GTOVLO; GPT9: GTIOC9B; ICU0: IRQ05; SCI0: RXD0; SCI0: SCL0; SCI3: SCK3; SPI0: MISOA" "ui fet origin btn" IO - - 
       P411 21 GPIO ZM_LIM - None "Input mode" - "input pull-up" "AGT1: AGTOA1; GPT_OPS0: GTOVUP; GPT9: GTIOC9A; ICU0: IRQ04; SCI0: SDA0; SCI0: TXD0; SCI3: CTS3; SPI0: MOSIA" "Z- axis limit sw" IO - - 
       P412 20 GPIO ZP_LIM - - "Input mode" - "input pull-up" "AGT1: AGTEE1; GPT_OPS0: GTOULO; SCI0: SCK0; SPI0: RSPCKA" "Z+ axis limit sw" IO - - 
@@ -489,15 +489,15 @@ FSP Configuration
       Output: GTIOCA Stop Level: Pin Level Low
       Output: GTIOCB Output Enabled: False
       Output: GTIOCB Stop Level: Pin Level Low
-      Input: Count Up Source: GTIOCA Rising Edge While GTIOCB Low
-      Input: Count Down Source: GTIOCA Rising Edge While GTIOCB High
+      Input: Count Up Source: GTIOCA Rising Edge While GTIOCB Low, GTIOCA Falling Edge While GTIOCB High
+      Input: Count Down Source: GTIOCA Rising Edge While GTIOCB High, GTIOCA Falling Edge While GTIOCB Low
       Input: Start Source: 
       Input: Stop Source: 
       Input: Clear Source: 
       Input: Capture A Source: 
       Input: Capture B Source: 
-      Input: Noise Filter A Sampling Clock Select: No Filter
-      Input: Noise Filter B Sampling Clock Select: No Filter
+      Input: Noise Filter A Sampling Clock Select: Filter PCLKD / 64
+      Input: Noise Filter B Sampling Clock Select: Filter PCLKD / 64
       Interrupts: Callback: NULL
       Interrupts: Overflow/Crest Interrupt Priority: Disabled
       Interrupts: Capture A Interrupt Priority: Disabled

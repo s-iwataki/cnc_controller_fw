@@ -53,7 +53,7 @@ FSP Configuration
     ID Code (32 Hex Characters): FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
     
   RA Common
-    Main stack size (bytes): 0x400
+    Main stack size (bytes): 0x800
     Heap size (bytes): 0x2000
     MCU Vcc (mV): 3300
     Parameter checking: Disabled
@@ -283,7 +283,7 @@ FSP Configuration
     Optional Functions: xTaskAbortDelay() Function: Disabled
     Optional Functions: xTaskGetHandle() Function: Disabled
     Optional Functions: xTaskResumeFromISR() Function: Enabled
-    RA: Hardware Stack Monitor: Disabled
+    RA: Hardware Stack Monitor: Enabled
     Logging: Print String Function: printf(x)
     Logging: Logging Max Message Length: 192
     Logging: Logging Include Time and Task Name: Disabled

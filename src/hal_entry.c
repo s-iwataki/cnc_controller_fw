@@ -7,6 +7,8 @@
 #include "spindle.h"
 #include "triaxis_table.h"
 #include "uart_tty.h"
+#include "bsp_api.h"
+#include "syscalls.h"
 
 FSP_CPP_HEADER
 void R_BSP_WarmStart(bsp_warm_start_event_t event);
@@ -69,6 +71,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         /* C runtime environment and system clocks are setup. */
 
         /* Configure pins. */
+        R_BSP_GroupIrqWrite(BSP_GRP_IRQ_MPU_STACK  ,stack_protector_error_handler );
         R_IOPORT_Open(&g_ioport_ctrl, &IOPORT_CFG_NAME);
         uart_tty_attach(&g_uart9_ctrl, &g_uart9_cfg);
         // R_SCI_UART_Open(&g_uart9_ctrl,&g_uart9_cfg);

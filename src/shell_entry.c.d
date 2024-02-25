@@ -1,6 +1,7 @@
 CMakeFiles/cnc_controller.elf.dir/src/shell_entry.c.obj: \
  D:/workspace/cnc_controller/src/shell_entry.c \
  D:/workspace/cnc_controller/src/command_list.h \
+ D:/workspace/cnc_controller/src/resetcause.h \
  D:/workspace/cnc_controller/ra_gen/shell.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/fsp_common_api.h \
@@ -78,9 +79,12 @@ CMakeFiles/cnc_controller.elf.dir/src/shell_entry.c.obj: \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_timer_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
+ D:/workspace/cnc_controller/src/syscalls.h
 
 D:/workspace/cnc_controller/src/command_list.h:
+
+D:/workspace/cnc_controller/src/resetcause.h:
 
 D:/workspace/cnc_controller/ra_gen/shell.h:
 
@@ -237,3 +241,5 @@ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h:
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
+
+D:/workspace/cnc_controller/src/syscalls.h:

@@ -2,6 +2,7 @@
 #include <FreeRTOS.h>
 #include <errno.h>
 #include <signal.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
@@ -10,9 +11,27 @@
 #include <sys/times.h>
 #include <time.h>
 
+#include "bsp_api.h"
 #include "task.h"
 #include "tty.h"
 
+/**
+ * @brief debug info(fault stack trace)
+ *
+ */
+volatile uint32_t r0 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t r1 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t r2 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t r3 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t r12 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t lr BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);    /* Link register. */
+volatile uint32_t pc BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);    /* Program counter. */
+volatile uint32_t psr BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);   /* Program status register. */
+volatile uint32_t cfsr BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);  /* Configurable fault status register. */
+volatile uint32_t hfsr BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);  /* Hard fault status register. */
+volatile uint32_t mmfar BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT); /* MemManage fault address register. */
+volatile uint32_t bfar BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);  /* Busfault address register*/
+volatile bsp_grp_irq_t error_irq BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 
 /* Variables */
 #ifdef errno
@@ -24,6 +43,14 @@ char* __env[1] = {0};
 char** environ = __env;
 
 /* Functions */
+
+void syscall_print_debug_dump(void) {
+    printf("r0: %x r1:%x r2:%x r3:%x \r\n", r0, r1, r2, r3);
+    printf("r12: %x lr:%x pc:%x psr:%x \r\n", r12, lr, pc, psr);
+    printf("cfsr: %x hfsr:%x mmfar:%x bfar:%x \r\n", cfsr, hfsr, mmfar, bfar);
+    printf("nmi_irq:%d\r\n",error_irq);
+}
+
 __attribute__((used)) void initialise_monitor_handles() {
 }
 
@@ -122,4 +149,81 @@ __attribute__((used)) void __malloc_lock(struct _reent* REENT) {
 }
 __attribute__((used)) void __malloc_unlock(struct _reent* REENT) {
     xTaskResumeAll();
+}
+
+void prvGetRegistersFromStack(uint32_t* pulFaultStackAddress) {
+    cfsr = SCB->CFSR;
+    hfsr = SCB->HFSR;
+    mmfar = SCB->MMFAR;
+    bfar = SCB->BFAR;
+    r0 = pulFaultStackAddress[0];
+    r1 = pulFaultStackAddress[1];
+    r2 = pulFaultStackAddress[2];
+    r3 = pulFaultStackAddress[3];
+
+    r12 = pulFaultStackAddress[4];
+    lr = pulFaultStackAddress[5];
+    pc = pulFaultStackAddress[6];
+    psr = pulFaultStackAddress[7];
+    NVIC_SystemReset();
+}
+
+void HardFault_Handler(void) {
+    __asm volatile(
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, hf_handler2_address_const                            \n"
+        " bx r2                                                     \n"
+        " hf_handler2_address_const: .word prvGetRegistersFromStack    \n");
+}
+void MemManage_Handler(void) {
+    __asm volatile(
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, mm_handler2_address_const                            \n"
+        " bx r2                                                     \n"
+        " mm_handler2_address_const: .word prvGetRegistersFromStack    \n");
+}
+void BusFault_Handler(void) {
+    __asm volatile(
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, bf_handler2_address_const                            \n"
+        " bx r2                                                     \n"
+        " bf_handler2_address_const: .word prvGetRegistersFromStack    \n");
+}
+void UsageFault_Handler(void) {
+    __asm volatile(
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, uf_handler2_address_const                            \n"
+        " bx r2                                                     \n"
+        " uf_handler2_address_const: .word prvGetRegistersFromStack    \n");
+}
+void SecureFault_Handler(void) {
+    __asm volatile(
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, sf_handler2_address_const                            \n"
+        " bx r2                                                     \n"
+        " sf_handler2_address_const: .word prvGetRegistersFromStack    \n");
+}
+void stack_protector_error_handler(bsp_grp_irq_t irq) {
+    error_irq =irq;
+    NVIC_SystemReset();
 }

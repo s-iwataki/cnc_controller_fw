@@ -212,7 +212,7 @@
             #define INCLUDE_xTaskResumeFromISR (1)
             #endif
             #ifndef RM_FREERTOS_PORT_CFG_HW_STACK_MONITOR_ENABLE
-            #define RM_FREERTOS_PORT_CFG_HW_STACK_MONITOR_ENABLE  (0)
+            #define RM_FREERTOS_PORT_CFG_HW_STACK_MONITOR_ENABLE  (1)
             #endif
             #ifndef configPRINT_STRING
             #define configPRINT_STRING(x)                      (printf(x))

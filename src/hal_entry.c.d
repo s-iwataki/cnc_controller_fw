@@ -81,7 +81,8 @@ CMakeFiles/cnc_controller.elf.dir/src/hal_entry.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
- D:/workspace/cnc_controller/src/uart_tty.h
+ D:/workspace/cnc_controller/src/uart_tty.h \
+ D:/workspace/cnc_controller/src/syscalls.h
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -246,3 +247,5 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
 
 D:/workspace/cnc_controller/src/uart_tty.h:
+
+D:/workspace/cnc_controller/src/syscalls.h:

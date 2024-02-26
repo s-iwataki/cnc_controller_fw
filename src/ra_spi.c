@@ -23,7 +23,7 @@ typedef struct {
 void spi_callback(spi_callback_args_t* p_arg) {
     ra_spi_busdriver_t* d = container_of(p_arg->p_context, ra_spi_busdriver_t, api);
     if (d->task_handle != NULL) {
-        BaseType_t higher_prio_task_wake;
+        BaseType_t higher_prio_task_wake = 0;
         xTaskNotifyFromISR(d->task_handle, p_arg->event, eSetBits, &higher_prio_task_wake);
         portYIELD_FROM_ISR(higher_prio_task_wake);
     }

@@ -21,13 +21,13 @@
 
 static void adc0_cb(adc_callback_args_t* arg) {
     TaskHandle_t h = *(TaskHandle_t*)arg->p_context;
-    BaseType_t wakeup;
+    BaseType_t wakeup = 0;
     xTaskNotifyFromISR(h, 0x01, eSetBits, &wakeup);
     portYIELD_FROM_ISR(wakeup);
 }
 static void adc1_cb(adc_callback_args_t* arg) {
     TaskHandle_t h = *(TaskHandle_t*)arg->p_context;
-    BaseType_t wakeup;
+    BaseType_t wakeup = 0;
     xTaskNotifyFromISR(h, 0x02, eSetBits, &wakeup);
     portYIELD_FROM_ISR(wakeup);
 }
@@ -37,9 +37,9 @@ int test_adc_cmd(int argc, char** argv) {
     uint16_t adc0_val, adc1_val;
     TaskHandle_t h = xTaskGetCurrentTaskHandle();
     g_adc0.p_api->callbackSet(g_adc0.p_ctrl, adc0_cb, &h, NULL);
-    g_adc0.p_api->scanCfg(g_adc0.p_ctrl,g_adc0.p_channel_cfg);
+    g_adc0.p_api->scanCfg(g_adc0.p_ctrl, g_adc0.p_channel_cfg);
     g_adc1.p_api->callbackSet(g_adc1.p_ctrl, adc1_cb, &h, NULL);
-    g_adc1.p_api->scanCfg(g_adc1.p_ctrl,g_adc1.p_channel_cfg);
+    g_adc1.p_api->scanCfg(g_adc1.p_ctrl, g_adc1.p_channel_cfg);
     TickType_t tick = xTaskGetTickCount();
     for (int i = 0; i < 100; i++) {
         printf("wait\r\n");

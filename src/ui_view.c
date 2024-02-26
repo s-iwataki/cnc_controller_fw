@@ -72,7 +72,7 @@ typedef struct {
 
 static void adc_cb(adc_callback_args_t* arg) {
     adc_cb_ctx_t* ctx = (adc_cb_ctx_t*)arg->p_context;
-    BaseType_t wakeup;
+    BaseType_t wakeup = 0;
     xTaskNotifyFromISR(ctx->h, ctx->evt_code, eSetBits, &wakeup);
     portYIELD_FROM_ISR(wakeup);
 }
@@ -84,7 +84,7 @@ static uint16_t adc_get(const adc_instance_t* adc) {
     adc->p_api->callbackSet(adc->p_ctrl, adc_cb, &ctx, NULL);
     adc->p_api->scanCfg(adc->p_ctrl, adc->p_channel_cfg);
     adc->p_api->scanStart(adc->p_ctrl);
-    uint32_t notification_val;
+    uint32_t notification_val = 0;
     while (notification_val != ctx.evt_code) {
         xTaskNotifyWait(ctx.evt_code, ctx.evt_code, &notification_val, portMAX_DELAY);
     }
@@ -155,7 +155,7 @@ static void process_table_motion(userinput_state_t* s, userinput_state_t* s_prev
         }
     }
     if (s->autofeed_enabled == pdFALSE) {
-        if(s->setzero_button_pressed==pdTRUE){
+        if (s->setzero_button_pressed == pdTRUE) {
             table_setzero(table);
         }
         if (s->uienc_diff != 0) {
@@ -190,12 +190,11 @@ static void process_user_input(userinput_state_t* s) {
 }
 
 static void print_mm_disp(TEXTBOX_t* t, float val) {
-    int mm = (int)(val * 1000.0f);
-    int sign = (mm > 0) ? 1 : -1;
-    mm *= sign;
-    int mm_part = mm / 1000 * sign;
+    int sign = (val >= 0.0f) ? 1 : -1;
+    int mm = (int)((float)sign * val * 1000.0f);
+    int mm_part = mm / 1000;
     int micron_part = mm % 1000;
-    textbox_printf(t, "%+ 4d.%03d", mm_part, micron_part);
+    textbox_printf(t, "%c% 3d.%03d",(sign>0)?' ':'-', mm_part, micron_part);
 }
 
 static void update_position_disp(TEXTBOX_t* t, float prev, float current) {
@@ -265,7 +264,7 @@ void ui_view_init(void) {
     print_mm_disp(&g_view_items.z_pos, 0);
     textbox_printf(&g_view_items.autofeed_speed, "% 4d mm/s", 0);
     textbox_printf(&g_view_items.spindle_rpm, "% 4d rpm", 0);
-    table_3d_driver_t*tbl=table_get_driver();
+    table_3d_driver_t* tbl = table_get_driver();
     table_enable(tbl, pdTRUE);
 }
 void ui_view_process(void) {

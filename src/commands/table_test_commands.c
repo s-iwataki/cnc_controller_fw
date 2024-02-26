@@ -11,10 +11,11 @@
 #include "projdefs.h"
 #include "queue.h"
 #include "r_ioport.h"
+#include "subcmd_helper.h"
 #include "task.h"
 #include "triaxis_table.h"
 #include "utils.h"
-#include "subcmd_helper.h"
+
 
 static int test_table_enable_cmd(int argc, char** argv) {
     table_3d_driver_t* tbl_drv = table_get_driver();
@@ -37,7 +38,7 @@ static void table_callback(void* ctx, const table_3d_event_t* evt) {
     uint32_t x_complted = ((evt->id == X_AXIS_MOTION_COMPLETE) || (evt->inmotion.x == 0)) ? X_AXIS_MOTION_COMPLETE : 0;
     uint32_t y_complted = ((evt->id == Y_AXIS_MOTION_COMPLETE) || (evt->inmotion.y == 0)) ? Y_AXIS_MOTION_COMPLETE : 0;
     uint32_t z_complted = ((evt->id == Z_AXIS_MOTION_COMPLETE) || (evt->inmotion.z == 0)) ? Z_AXIS_MOTION_COMPLETE : 0;
-    BaseType_t other_task_woken;
+    BaseType_t other_task_woken = 0;
     xTaskNotifyFromISR(s->handle, x_complted | y_complted | z_complted, eSetBits, &other_task_woken);
     portYIELD_FROM_ISR(other_task_woken);
 }

@@ -23,6 +23,7 @@ volatile uint32_t r0 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 volatile uint32_t r1 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 volatile uint32_t r2 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 volatile uint32_t r3 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
+volatile uint32_t r7 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 volatile uint32_t r12 BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);
 volatile uint32_t lr BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);    /* Link register. */
 volatile uint32_t pc BSP_PLACE_IN_SECTION(BSP_SECTION_NOINIT);    /* Program counter. */
@@ -46,7 +47,7 @@ char** environ = __env;
 
 void syscall_print_debug_dump(void) {
     printf("r0: %x r1:%x r2:%x r3:%x \r\n", r0, r1, r2, r3);
-    printf("r12: %x lr:%x pc:%x psr:%x \r\n", r12, lr, pc, psr);
+    printf("r7:%x r12: %x lr:%x pc:%x psr:%x \r\n",r7, r12, lr, pc, psr);
     printf("cfsr: %x hfsr:%x mmfar:%x bfar:%x \r\n", cfsr, hfsr, mmfar, bfar);
     printf("nmi_irq:%d\r\n",error_irq);
 }
@@ -156,69 +157,83 @@ void prvGetRegistersFromStack(uint32_t* pulFaultStackAddress) {
     hfsr = SCB->HFSR;
     mmfar = SCB->MMFAR;
     bfar = SCB->BFAR;
-    r0 = pulFaultStackAddress[0];
-    r1 = pulFaultStackAddress[1];
-    r2 = pulFaultStackAddress[2];
-    r3 = pulFaultStackAddress[3];
+    r7=pulFaultStackAddress[0];
+    r0 = pulFaultStackAddress[1];
+    r1 = pulFaultStackAddress[2];
+    r2 = pulFaultStackAddress[3];
+    r3 = pulFaultStackAddress[4];
 
-    r12 = pulFaultStackAddress[4];
-    lr = pulFaultStackAddress[5];
-    pc = pulFaultStackAddress[6];
-    psr = pulFaultStackAddress[7];
+    r12 = pulFaultStackAddress[5];
+    lr = pulFaultStackAddress[6];
+    pc = pulFaultStackAddress[7];
+    psr = pulFaultStackAddress[8];
     NVIC_SystemReset();
 }
 
 void HardFault_Handler(void) {
+    //例外ハンドラ開始時点でR7がstackに積まれる
+    /*
+    |PSR|
+    |PC |
+    |LR |
+    |R12|
+    |R3 |
+    |R2 |
+    |R1 |
+    |R0 |<- ここまでは自動的に積まれる
+    |R7 |<- ハンドラのプロローグとしてコンパイラが生成
+
+    なので，下のインラインアセンブラ突入時は，SPは|R7 |を指している
+    */
     __asm volatile(
         " tst lr, #4                                                \n"
         " ite eq                                                    \n"
         " mrseq r0, msp                                             \n"
         " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
         " ldr r2, hf_handler2_address_const                            \n"
         " bx r2                                                     \n"
         " hf_handler2_address_const: .word prvGetRegistersFromStack    \n");
 }
 void MemManage_Handler(void) {
+    //例外ハンドラ開始時点でR7がstackに積まれる
     __asm volatile(
         " tst lr, #4                                                \n"
         " ite eq                                                    \n"
         " mrseq r0, msp                                             \n"
         " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
         " ldr r2, mm_handler2_address_const                            \n"
         " bx r2                                                     \n"
         " mm_handler2_address_const: .word prvGetRegistersFromStack    \n");
 }
 void BusFault_Handler(void) {
+    //例外ハンドラ開始時点でR7がstackに積まれる
     __asm volatile(
         " tst lr, #4                                                \n"
         " ite eq                                                    \n"
         " mrseq r0, msp                                             \n"
         " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
         " ldr r2, bf_handler2_address_const                            \n"
         " bx r2                                                     \n"
         " bf_handler2_address_const: .word prvGetRegistersFromStack    \n");
 }
 void UsageFault_Handler(void) {
+    //例外ハンドラ開始時点でR7がstackに積まれる
     __asm volatile(
         " tst lr, #4                                                \n"
         " ite eq                                                    \n"
         " mrseq r0, msp                                             \n"
         " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
         " ldr r2, uf_handler2_address_const                            \n"
         " bx r2                                                     \n"
         " uf_handler2_address_const: .word prvGetRegistersFromStack    \n");
 }
 void SecureFault_Handler(void) {
+    //例外ハンドラ開始時点でR7がstackに積まれる
     __asm volatile(
         " tst lr, #4                                                \n"
         " ite eq                                                    \n"
         " mrseq r0, msp                                             \n"
         " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
         " ldr r2, sf_handler2_address_const                            \n"
         " bx r2                                                     \n"
         " sf_handler2_address_const: .word prvGetRegistersFromStack    \n");

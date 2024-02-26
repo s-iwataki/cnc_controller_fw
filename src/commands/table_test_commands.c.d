@@ -77,10 +77,10 @@ CMakeFiles/cnc_controller.elf.dir/src/commands/table_test_commands.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
+ D:/workspace/cnc_controller/src/commands/subcmd_helper.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/src/triaxis_table.h \
- D:/workspace/cnc_controller/src/utils.h \
- D:/workspace/cnc_controller/src/commands/subcmd_helper.h
+ D:/workspace/cnc_controller/src/utils.h
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
 
@@ -236,10 +236,10 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
 
+D:/workspace/cnc_controller/src/commands/subcmd_helper.h:
+
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 
 D:/workspace/cnc_controller/src/triaxis_table.h:
 
 D:/workspace/cnc_controller/src/utils.h:
-
-D:/workspace/cnc_controller/src/commands/subcmd_helper.h:

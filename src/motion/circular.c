@@ -71,7 +71,7 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
     float d2 = m->current_p2 - m->p2;
     if ((fabsf(d1) <=  CIRCULAR_MOTION_DL_MIN) && (fabsf(d2) <=  CIRCULAR_MOTION_DL_MIN)) {  // 終了判定
         m->last = 1;
-        /*m->x_complete = 0;
+        m->x_complete = 0;
         m->y_complete = 0;
         m->z_complete = 0;
         float v1 = 0, v2 = 0;
@@ -92,7 +92,7 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
                 table_moveto(m->table, m->p2, 0, m->p1, v2, 0, v1, table_motion_isr, ctx);
                 break;
         }
-        return;*/
+        return;
     }
     iterate_motion(m);
     return;

@@ -51,8 +51,8 @@ CMakeFiles/cnc_controller.elf.dir/src/motion/circular.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
- D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/dsp/fast_math_functions.h \
  D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_types.h \
+ D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/dsp/fast_math_functions.h \
  D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_memory.h \
  D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_types.h \
  D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/dsp/none.h \
@@ -163,9 +163,9 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
 
-D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/dsp/fast_math_functions.h:
-
 D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_types.h:
+
+D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/dsp/fast_math_functions.h:
 
 D:/workspace/cnc_controller/ra/arm/CMSIS_5/CMSIS/DSP/Include/arm_math_memory.h:
 

@@ -87,7 +87,12 @@ void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, fl
     uint32_t gtccr = sig * (int32_t)(dist / mm_per_count);
     uint32_t current_gtccr = t->p_reg->GTCCR[0];
     if (current_gtccr == gtccr) {  // 指示された動作幅が最小分解能より小さい場合は最小分解能で動く
-        gtccr += min;
+        if (min > 0) {
+            gtccr++;
+        }
+        if (min < 0) {
+            gtccr--;
+        }
     }
     t->p_reg->GTCCR[0] = gtccr;  // set gtccra
     t->p_reg->GTCCR[2] = gtccr;  // バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．

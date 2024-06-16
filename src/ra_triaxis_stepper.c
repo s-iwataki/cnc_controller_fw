@@ -68,13 +68,16 @@ void timer_clock_set(gpt_instance_ctrl_t* t, float v, float mm_per_count) {
 
 void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, float mm_per_count) {
     const gpt_extended_cfg_t* cfg_ext = t->p_cfg->p_extend;
+    int min = 0;
     if (dist > currnt) {
         // 軸を動かす方向によってカウント要因を入れ替え
         t->p_reg->GTUPSR = cfg_ext->count_up_source;
         t->p_reg->GTDNSR = GPT_SOURCE_NONE;
+        min = 1;
     } else {
         t->p_reg->GTDNSR = cfg_ext->count_up_source;
         t->p_reg->GTUPSR = GPT_SOURCE_NONE;
+        min = -1;
     }
     int sig = 1;
     if (dist < 0) {
@@ -82,9 +85,9 @@ void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, fl
         dist = -dist;
     }
     uint32_t gtccr = sig * (int32_t)(dist / mm_per_count);
-    uint32_t current_gtccr=t->p_reg->GTCCR[0];
-    if(current_gtccr==gtccr){//指示された動作幅が最小分解能より小さい場合は最小分解能で動く
-        gtccr++;
+    uint32_t current_gtccr = t->p_reg->GTCCR[0];
+    if (current_gtccr == gtccr) {  // 指示された動作幅が最小分解能より小さい場合は最小分解能で動く
+        gtccr += min;
     }
     t->p_reg->GTCCR[0] = gtccr;  // set gtccra
     t->p_reg->GTCCR[2] = gtccr;  // バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．

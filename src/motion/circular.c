@@ -41,9 +41,9 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt);
 
 static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
     circular_motion_ctx_t* m = ctx;
-    m->x_complete = ((evt->id == X_AXIS_MOTION_COMPLETE) || (evt->inmotion.x == 0));
-    m->y_complete = ((evt->id == Y_AXIS_MOTION_COMPLETE) || (evt->inmotion.y == 0));
-    m->z_complete = ((evt->id == Z_AXIS_MOTION_COMPLETE) || (evt->inmotion.z == 0));
+    m->x_complete = ((evt->id == X_AXIS_MOTION_COMPLETE) || (evt->inmotion.x == 0))||(m->x_complete);
+    m->y_complete = ((evt->id == Y_AXIS_MOTION_COMPLETE) || (evt->inmotion.y == 0))||(m->y_complete);
+    m->z_complete = ((evt->id == Z_AXIS_MOTION_COMPLETE) || (evt->inmotion.z == 0))||(m->z_complete);
     if (!(m->x_complete && m->y_complete && m->z_complete)) {  // 他の軸が稼働中
         return;
     }
@@ -86,6 +86,17 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
     }
     iterate_motion(m);
     return;
+}
+
+static int compare_dist_vs_radius(float p1,float p2,float c1,float c2,float r){
+    float d= (p1-c1)*(p1-c1)+(p2-c2)*(p2-c2)-r*r;
+    if(d>0){
+        return 1;
+    }
+    if(d<0){
+        return -1;
+    }
+    return 0;
 }
 
 static int iterate_motion(circular_motion_ctx_t* ctx) {

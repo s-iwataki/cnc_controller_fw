@@ -7,6 +7,7 @@
 #include "command_list.h"
 #include "common_data.h"
 #include "hal_data.h"
+#include "motion/circular.h"
 #include "portmacro.h"
 #include "projdefs.h"
 #include "queue.h"
@@ -15,7 +16,6 @@
 #include "task.h"
 #include "triaxis_table.h"
 #include "utils.h"
-
 
 static int test_table_enable_cmd(int argc, char** argv) {
     table_3d_driver_t* tbl_drv = table_get_driver();
@@ -75,7 +75,7 @@ static int test_table_move_cmd(int argc, char** argv) {
     table_movedelta(tbl_drv, dx, dy, dz, dx / t, dy / t, dz / t, table_callback, &status);
     int wait_ms = 100;
     int nwait = (int)(t * 1000 / wait_ms) + 1;
-    uint32_t notification;
+    uint32_t notification = 0;
     uint32_t evt_mask = X_AXIS_MOTION_COMPLETE | Y_AXIS_MOTION_COMPLETE | Z_AXIS_MOTION_COMPLETE;
     int retval = xTaskNotifyWait(evt_mask, 0, &notification, pdMS_TO_TICKS(wait_ms));
     if ((retval == pdTRUE) &&
@@ -112,6 +112,69 @@ static int test_table_move_cmd(int argc, char** argv) {
     }
     return 0;
 }
+
+static int test_table_circle_move_cmd(int argc, char** argv) {
+    table_3d_driver_t* tbl_drv = table_get_driver();
+    if (argc != 8) {
+        printf("usage: circle [xy|yz|zx] [cw|ccw] p1 p2 i j speed\r\n");
+        return -1;
+    }
+    float p1, p2, i, j, k, speed;
+    CIRCLE_MOTION_PLANE_t pl;
+    CIRCLE_MOTION_DIR_t dir;
+    if (strcmp(argv[1], "xy") == 0) {
+        pl = XY_PLANE;
+    } else if (strcmp(argv[1], "yz") == 0) {
+        pl = YZ_PLANE;
+    } else if (strcmp(argv[1], "zx") == 0) {
+        pl = ZX_PLANE;
+    } else {
+        printf("please specify plane [xy|yz|zx].\r\n");
+        return -1;
+    }
+
+    if (strcmp(argv[2], "cw") == 0) {
+        dir = CW;
+        ;
+    } else if (strcmp(argv[1], "ccw") == 0) {
+        dir = CCW;
+    } else {
+        printf("please specify direction [cw|ccw].\r\n");
+        return -1;
+    }
+
+    if (my_atof(argv[3], &p1) < 0) {
+        printf("parse error\r\n");
+        return -1;
+    }
+    if (my_atof(argv[4], &p2) < 0) {
+        printf("parse error\r\n");
+        return -1;
+    }
+
+    if (my_atof(argv[5], &i) < 0) {
+        printf("parse error\r\n");
+        return -1;
+    }
+    if (my_atof(argv[6], &j) < 0) {
+        printf("parse error\r\n");
+        return -1;
+    }
+    if (my_atof(argv[7], &speed) < 0) {
+        printf("parse error\r\n");
+        return -1;
+    }
+    if (speed < 0) {
+        printf("speed must be positive value\r\n");
+        return -1;
+    }
+    int retv = move_circular(tbl_drv, pl, dir, p1, p2, i, j, speed);
+    if (retv != 0) {
+        printf("error:%d\r\n", retv);
+    }
+    return 0;
+}
+
 static int test_table_getpos_cmd(int argc, char** argv) {
     table_3d_driver_t* tbl_drv = table_get_driver();
     float x, y, z;
@@ -127,7 +190,8 @@ static int test_table_setzero_cmd(int argc, char** argv) {
 static command_entry_t table_subcmd[] = {
     {"enable", test_table_enable_cmd, "table motor drive enable"},
     {"disable", test_table_disable_cmd, "table motor drive disable"},
-    {"move", test_table_move_cmd, "tabel move table move dx dy dz second"},
+    {"move", test_table_move_cmd, "table move dx dy dz second"},
+    {"circle", test_table_circle_move_cmd, "table circle [xy|yz|zx] [cw|ccw] p1 p2 i j speed"},
     {"getpos", test_table_getpos_cmd, "get table position"},
     {"setzero", test_table_setzero_cmd, "set current position as origin"},
     {NULL, NULL, NULL}};

@@ -81,6 +81,7 @@ void spindle_init(spindle_motor_t* m) {
     m->motor_enabled = pdFALSE;
     m->target_rpm = 0;
     m->init = pdTRUE;
+    R_IOPORT_PinWrite(&g_ioport_ctrl, m->motor_dir, BSP_IO_LEVEL_HIGH);
 }
 void spindle_set_speed(spindle_motor_t* m, int rpm) {
     m->target_rpm = rpm;

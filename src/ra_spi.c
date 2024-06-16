@@ -36,7 +36,7 @@ static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_
     size_t common_txrx_size = (tx_size > rx_size) ? (rx_size) : (tx_size);
     if (common_txrx_size > 0) {
         inst->p_api->writeRead(inst->p_ctrl, tx_buf, rx_buf, common_txrx_size, SPI_BIT_WIDTH_8_BITS);
-        uint32_t notify_value;
+        uint32_t notify_value=0;
         uint32_t spi_event_mask = SPI_EVENT_TRANSFER_COMPLETE;
         while (1) {
             xTaskNotifyWait(spi_event_mask, spi_event_mask, &notify_value, portMAX_DELAY);
@@ -49,7 +49,7 @@ static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_
     size_t rx_remain = rx_size - common_txrx_size;
     if (tx_remain > 0) {
         inst->p_api->write(inst->p_ctrl, tx_buf + common_txrx_size, tx_remain, SPI_BIT_WIDTH_8_BITS);
-        uint32_t notify_value;
+        uint32_t notify_value=0;
         uint32_t spi_event_mask = SPI_EVENT_TRANSFER_COMPLETE;
         while (1) {
             xTaskNotifyWait(spi_event_mask, spi_event_mask, &notify_value, portMAX_DELAY);
@@ -60,7 +60,7 @@ static int spi_do_transaction(struct spi_bus_driver_s* instance, struct spi_bus_
     }
     if (rx_remain > 0) {
         inst->p_api->read(inst->p_ctrl, rx_buf + common_txrx_size, rx_remain, SPI_BIT_WIDTH_8_BITS);
-        uint32_t notify_value;
+        uint32_t notify_value=0;
         uint32_t spi_event_mask = SPI_EVENT_TRANSFER_COMPLETE;
         while (1) {
             xTaskNotifyWait(spi_event_mask, spi_event_mask, &notify_value, portMAX_DELAY);

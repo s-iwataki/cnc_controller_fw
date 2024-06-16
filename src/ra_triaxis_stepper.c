@@ -63,7 +63,6 @@ void timer_clock_set(gpt_instance_ctrl_t* t, float v, float mm_per_count) {
     timer_info_t s;
     R_GPT_InfoGet(t, &s);
     uint32_t period = get_period_counts(v, mm_per_count, s.clock_frequency);
-    printf("tmr set period %d\r\n", period);
     R_GPT_PeriodSet(t, get_period_counts(v, mm_per_count, s.clock_frequency));
 }
 
@@ -83,6 +82,10 @@ void set_count_comparematch(gpt_instance_ctrl_t* t, float dist, float currnt, fl
         dist = -dist;
     }
     uint32_t gtccr = sig * (int32_t)(dist / mm_per_count);
+    uint32_t current_gtccr=t->p_reg->GTCCR[0];
+    if(current_gtccr==gtccr){//指示された動作幅が最小分解能より小さい場合は最小分解能で動く
+        gtccr++;
+    }
     t->p_reg->GTCCR[0] = gtccr;  // set gtccra
     t->p_reg->GTCCR[2] = gtccr;  // バッファが有効になっているので，0をまたぐときにGTCCRCの値がGTCCRAに書き込まれる．
 }
@@ -132,9 +135,15 @@ void moveto(void* instance, float x, float y, float z, float vx, float vy, float
         R_IOPORT_PinWrite(&g_ioport_ctrl, Z_MOTOR_TQ, BSP_IO_LEVEL_LOW);
         d->z_in_motion = 0;
     }
-    set_count_comparematch(&g_timer_xpos_ctrl, x, current_x, d->mm_per_count.x);
-    set_count_comparematch(&g_timer_ypos_ctrl, y, current_y, d->mm_per_count.y);
-    set_count_comparematch(&g_timer_zpos_ctrl, z, current_z, d->mm_per_count.z);
+    if (d->x_in_motion) {
+        set_count_comparematch(&g_timer_xpos_ctrl, x, current_x, d->mm_per_count.x);
+    }
+    if (d->y_in_motion) {
+        set_count_comparematch(&g_timer_ypos_ctrl, y, current_y, d->mm_per_count.y);
+    }
+    if (d->z_in_motion) {
+        set_count_comparematch(&g_timer_zpos_ctrl, z, current_z, d->mm_per_count.z);
+    }
     set_direction_pin(&g_ioport_ctrl, X_MOTOR_DIR, x, current_x, d->axis_dirction.x);
     set_direction_pin(&g_ioport_ctrl, Y_MOTOR_DIR, y, current_y, d->axis_dirction.y);
     set_direction_pin(&g_ioport_ctrl, Z_MOTOR_DIR, z, current_z, d->axis_dirction.z);

@@ -9,6 +9,10 @@ void table_movedelta(table_3d_driver_t* d, float dx, float dy, float dz, float v
 void table_getpos(table_3d_driver_t* d, float* x, float* y, float* z) {
     d->getpos(d->hw_driver_instance, x, y, z);
 }
+
+void table_setpos(table_3d_driver_t* d, float x, float y, float z) {
+    d->setpos(d->hw_driver_instance, x, y, z);
+}
 void table_move_cancel(table_3d_driver_t* d) {
     d->cancel(d->hw_driver_instance);
 }
@@ -21,9 +25,9 @@ void table_enable(table_3d_driver_t* d, int enable) {
 }
 
 static table_3d_driver_t driver;
-void table_init(void(*table_hw_driver_provider)(table_3d_driver_t*d,const table_mm_per_count_t*mmpc,const table_axis_sign_t*sign),const table_mm_per_count_t*mmpc,const table_axis_sign_t*sign){
-    table_hw_driver_provider(&driver,mmpc,sign);
+void table_init(void (*table_hw_driver_provider)(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign), const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign) {
+    table_hw_driver_provider(&driver, mmpc, sign);
 }
-table_3d_driver_t* table_get_driver(){
+table_3d_driver_t* table_get_driver() {
     return &driver;
 }

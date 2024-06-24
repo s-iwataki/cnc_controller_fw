@@ -52,6 +52,16 @@ static void setzero(void* instance) {
     R_GPT_Reset(&g_timer_ypos_ctrl);
     R_GPT_Reset(&g_timer_xpos_ctrl);
 }
+
+static void setpos(void*instance,float x,float y,float z){
+    ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)instance;
+    int32_t xcnt=(int32_t)(x/d->mm_per_count.x);
+    int32_t ycnt=(int32_t)(y/d->mm_per_count.y);
+    int32_t zcnt=(int32_t)(z/d->mm_per_count.z);
+    R_GPT_CounterSet(&g_timer_xpos_ctrl, (uint32_t)xcnt);
+    R_GPT_CounterSet(&g_timer_ypos_ctrl, (uint32_t)ycnt);
+    R_GPT_CounterSet(&g_timer_zpos_ctrl, (uint32_t)zcnt);
+}
 uint32_t get_period_counts(float mm_ps, float mm_per_count, uint32_t counter_hz) {
     uint32_t pps_hz = (uint32_t)(mm_ps / mm_per_count);
     if (pps_hz == 0) {
@@ -233,6 +243,7 @@ void ra_triaxis_stepper_init(table_3d_driver_t* d, const table_mm_per_count_t* m
     d->moveto = moveto;
     d->setzero = setzero;
     d->enable = motor_enable;
+    d->setpos=setpos;
     d->hw_driver_instance = &g_ra_triaxis_driver;
     g_ra_triaxis_driver.axis_dirction = *sign;
     g_ra_triaxis_driver.mm_per_count = *mmpc;

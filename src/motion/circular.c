@@ -5,12 +5,14 @@
 
 #include "FreeRTOS.h"
 #include "arm_math_types.h"
+#include "commands/gcode/gcode_errortype.h"
 #include "dsp/fast_math_functions.h"
 #include "fsp_common_api.h"
 #include "motion/circular.h"
 #include "projdefs.h"
 #include "task.h"
 #include "triaxis_table.h"
+
 
 #define CIRCULAR_MOTION_COMPLETE (1 << 10)
 // interrupt rate per sec
@@ -69,7 +71,7 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
     }
     float d1 = m->current_p1 - m->p1;
     float d2 = m->current_p2 - m->p2;
-    if ((fabsf(d1) <=  CIRCULAR_MOTION_DL_MIN) && (fabsf(d2) <=  CIRCULAR_MOTION_DL_MIN)) {  // 終了判定
+    if ((fabsf(d1) <= CIRCULAR_MOTION_DL_MIN) && (fabsf(d2) <= CIRCULAR_MOTION_DL_MIN)) {  // 終了判定
         m->last = 1;
         m->x_complete = 0;
         m->y_complete = 0;
@@ -266,7 +268,7 @@ static int check_args(float p01, float p02, float p1, float p2, float c1, float 
     float d_se;
     arm_sqrt_f32((p1 - c1) * (p1 - c1) + (p2 - c2) * (p2 - c2), &d_se);
     if (fabsf(d_sc - d_se) > 2 * CIRCULAR_MOTION_DL_MIN) {  // 半径rが一致（誤差程度で一致)
-        return -1;
+        return -GCODE_ERROR_INVALID_CIRCLE_PARAMS;
     }
     *r = d_sc;
     return 0;
@@ -294,8 +296,9 @@ int move_circular(table_3d_driver_t* table, CIRCLE_MOTION_PLANE_t plane, CIRCLE_
     ctx.c1 += ctx.current_p1;
     ctx.c2 += ctx.current_p2;  // 絶対位置に変換
     // エラーチェック 現在位置と中心位置と終点位置
-    if (check_args(ctx.current_p1, ctx.current_p2, p1, p2, ctx.c1, ctx.c2, &ctx.r) != 0) {
-        return -FSP_ERR_INVALID_DATA;
+    int retcode;
+    if ((retcode = check_args(ctx.current_p1, ctx.current_p2, p1, p2, ctx.c1, ctx.c2, &ctx.r)) != 0) {
+        return retcode;
     }
     float estimated_time = get_estimate_dulation(dir, ctx.current_p1, ctx.current_p2, p1, p2, ctx.c1, ctx.c2, speed);
     uint32_t notif_val = 0;
@@ -305,5 +308,6 @@ int move_circular(table_3d_driver_t* table, CIRCLE_MOTION_PLANE_t plane, CIRCLE_
     if (notif_val & CIRCULAR_MOTION_COMPLETE) {
         return 0;
     }
-    return -FSP_ERR_TIMEOUT;
+    table_move_cancel(table);
+    return -GCODE_ERROR_TABLE_TIMEOUT;
 }

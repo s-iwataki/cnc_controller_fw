@@ -24,6 +24,8 @@ void tmr_callback(timer_callback_args_t* arg) {
         const uint32_t counter_hz = i.clock_frequency;
         const int rpm = (capture != 0) ? (60 * counter_hz / capture) : 0;
         m->current_rpm = rpm;
+    } else if (arg->event == TIMER_EVENT_CYCLE_END) {
+        m->current_rpm = 0;
     }
 }
 
@@ -36,7 +38,7 @@ void spindle_control_task_entry(void* pvParameters) {
     /* TODO: add your own code here */
     while (1) {
         vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(10));
-        if(g_spindle_motor.init!=pdTRUE){
+        if (g_spindle_motor.init != pdTRUE) {
             continue;
         }
         int rpm = g_spindle_motor.current_rpm;
@@ -46,7 +48,7 @@ void spindle_control_task_entry(void* pvParameters) {
             continue;
         }
         R_IOPORT_PinWrite(&g_ioport_ctrl, g_spindle_motor.motor_on, BSP_IO_LEVEL_HIGH);
-        if(g_spindle_motor.control_mode!=SPINDLE_SPEED_CONTROL){
+        if (g_spindle_motor.control_mode != SPINDLE_SPEED_CONTROL) {
             continue;
         }
         int err = rpm - g_spindle_motor.target_rpm;
@@ -58,8 +60,8 @@ void spindle_control_task_entry(void* pvParameters) {
             ctrl = 0;  // duty is positive.
         }
         timer_info_t ti;
-        g_spindle_motor.pwm_timer->p_api->infoGet(g_spindle_motor.pwm_timer->p_ctrl,&ti);
-        uint32_t duty_count=(uint32_t)((float)ti.period_counts*(ctrl/100.0f));
+        g_spindle_motor.pwm_timer->p_api->infoGet(g_spindle_motor.pwm_timer->p_ctrl, &ti);
+        uint32_t duty_count = (uint32_t)((float)ti.period_counts * (ctrl / 100.0f));
         g_spindle_motor.pwm_timer->p_api->dutyCycleSet(g_spindle_motor.pwm_timer->p_ctrl, duty_count, GPT_IO_PIN_GTIOCA);
     }
 }
@@ -92,14 +94,14 @@ int spindle_get_speed(spindle_motor_t* m) {
 }
 void spindle_set_duty(spindle_motor_t* m, uint32_t duty) {
     timer_info_t ti;
-    m->pwm_timer->p_api->infoGet(m->pwm_timer->p_ctrl,&ti);
-    if(duty<0){
-        duty=0;
+    m->pwm_timer->p_api->infoGet(m->pwm_timer->p_ctrl, &ti);
+    if (duty < 0) {
+        duty = 0;
     }
-    if(duty>100){
-        duty=100;
+    if (duty > 100) {
+        duty = 100;
     }
-    uint32_t duty_count=(ti.period_counts*duty/100);
+    uint32_t duty_count = (ti.period_counts * duty / 100);
     m->pwm_timer->p_api->dutyCycleSet(m->pwm_timer->p_ctrl, duty_count, GPT_IO_PIN_GTIOCA);
 }
 spindle_status_t spindle_get_status(spindle_motor_t* m) {
@@ -120,6 +122,6 @@ void spindle_set_control_param(spindle_motor_t* m, float kp, float ki, float kd)
     m->kd = kd;
 }
 
-void spindle_control_mode_set(spindle_motor_t*m,spindle_control_mode_t mode){
-    m->control_mode=mode;
+void spindle_control_mode_set(spindle_motor_t* m, spindle_control_mode_t mode) {
+    m->control_mode = mode;
 }

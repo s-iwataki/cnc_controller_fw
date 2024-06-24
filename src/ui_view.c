@@ -172,11 +172,14 @@ static void process_table_motion(userinput_state_t* s, userinput_state_t* s_prev
     }
 }
 
-static void process_spindle(userinput_state_t* s) {
-    if (s->spindle_enabled) {
-        spindle_enable(&g_spindle_motor, pdTRUE);
-    } else {
-        spindle_enable(&g_spindle_motor, pdFALSE);
+static void process_spindle(userinput_state_t* s, userinput_state_t* s_prev) {
+    if (s->spindle_enabled != s_prev->spindle_enabled) {
+        if (s->spindle_enabled) {
+            spindle_control_mode_set(&g_spindle_motor, SPINDLE_DIRECT_DUTY_CONTROL);
+            spindle_enable(&g_spindle_motor, pdTRUE);
+        } else {
+            spindle_enable(&g_spindle_motor, pdFALSE);
+        }
     }
     uint32_t duty = s->spindle_speed * 100 / MAX_SPINDLE_RPM;
     spindle_set_duty(&g_spindle_motor, duty);
@@ -185,7 +188,7 @@ static void process_spindle(userinput_state_t* s) {
 static void process_user_input(userinput_state_t* s) {
     static userinput_state_t s_prev;
     process_table_motion(s, &s_prev);
-    process_spindle(s);
+    process_spindle(s, &s_prev);
     s_prev = *s;
 }
 
@@ -194,7 +197,7 @@ static void print_mm_disp(TEXTBOX_t* t, float val) {
     int mm = (int)((float)sign * val * 1000.0f);
     int mm_part = mm / 1000;
     int micron_part = mm % 1000;
-    textbox_printf(t, "%c% 3d.%03d",(sign>0)?' ':'-', mm_part, micron_part);
+    textbox_printf(t, "%c% 3d.%03d", (sign > 0) ? ' ' : '-', mm_part, micron_part);
 }
 
 static void update_position_disp(TEXTBOX_t* t, float prev, float current) {

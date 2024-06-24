@@ -47,6 +47,7 @@ typedef struct table_3d_driver {
     void (*moveto)(void*, float x, float y, float z, float vx, float vy, float vz, void (*callback)(void*, const table_3d_event_t*), void* ctx);
     void (*movedelta)(void*, float x, float y, float z, float vx, float vy, float vz, void (*callback)(void*, const table_3d_event_t*), void* ctx);
     void (*getpos)(void*, float* x, float* y, float* z);
+    void (*setpos)(void*, float x, float y, float z);
     void (*cancel)(void*);
     void (*setzero)(void*);
     void (*enable)(void*, int);
@@ -68,6 +69,7 @@ typedef struct table_3d_driver {
 void table_moveto(table_3d_driver_t* d, float x, float y, float z, float vx, float vy, float vz, void (*callback)(void*, const table_3d_event_t*), void* ctx);
 void table_movedelta(table_3d_driver_t* d, float dx, float dy, float dz, float vx, float vy, float vz, void (*callback)(void*, const table_3d_event_t*), void* ctx);
 void table_getpos(table_3d_driver_t* d, float* x, float* y, float* z);
+void table_setpos(table_3d_driver_t* d, float x, float y, float z);
 void table_move_cancel(table_3d_driver_t* d);
 void table_setzero(table_3d_driver_t* d);
 void table_enable(table_3d_driver_t* d, int enable);

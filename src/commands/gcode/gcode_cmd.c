@@ -14,7 +14,6 @@
 #include "triaxis_table.h"
 #include "utils.h"
 
-
 typedef struct {
     float val;
     int valid;
@@ -151,7 +150,7 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
                     if ((block->g92_set_coord != 0) || (block->interpolation_mode != G01_03_UNSET)) {
                         return -GCODE_ERROR_G92_AND_TABLE_MOTION;
                     }
-                }else{
+                } else {
                     return -GCODE_ERROR_UNSUPPORTED_COMMAND;
                 }
             } break;
@@ -247,6 +246,48 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
     return 0;
 }
 
+#define G01_COMPLETED (1 << 11)
+typedef struct {
+    TaskHandle_t caller_task;
+    int x_complete;
+    int y_complete;
+    int z_complete;
+} g01_motion_ctx_t;
+
+static void g01_event_handler(void* ctx, const table_3d_event_t* evt) {
+    g01_motion_ctx_t* m = ctx;
+    if (evt->id == MOTION_CANCELLED) {
+        if (xPortIsInsideInterrupt()) {
+            BaseType_t other_task_woken = 0;
+            xTaskNotifyFromISR(m->caller_task, MOTION_CANCELLED, eSetBits, &other_task_woken);
+            portYIELD_FROM_ISR(other_task_woken);
+        } else {
+            TaskHandle_t taskid = xTaskGetCurrentTaskHandle();
+            if (m->caller_task != taskid) {
+                xTaskNotify(m->caller_task, MOTION_CANCELLED, eSetBits);
+            }
+        }
+        return;
+    }
+
+    m->x_complete = ((evt->id == X_AXIS_MOTION_COMPLETE) || (evt->inmotion.x == 0)) || (m->x_complete);
+    m->y_complete = ((evt->id == Y_AXIS_MOTION_COMPLETE) || (evt->inmotion.y == 0)) || (m->y_complete);
+    m->z_complete = ((evt->id == Z_AXIS_MOTION_COMPLETE) || (evt->inmotion.z == 0)) || (m->z_complete);
+    if (!(m->x_complete && m->y_complete && m->z_complete)) {  // 他の軸が稼働中
+        return;
+    }
+    if (xPortIsInsideInterrupt()) {
+        BaseType_t other_task_woken = 0;
+        xTaskNotifyFromISR(m->caller_task, G01_COMPLETED, eSetBits, &other_task_woken);
+        portYIELD_FROM_ISR(other_task_woken);
+    } else {
+        TaskHandle_t taskid = xTaskGetCurrentTaskHandle();
+        if (m->caller_task != taskid) {
+            xTaskNotify(m->caller_task, G01_COMPLETED, eSetBits);
+        }
+    }
+}
+
 static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
     table_3d_driver_t* tbl = table_get_driver();
     float x = 0, y = 0, z = 0;
@@ -256,6 +297,10 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
     if (block->f.valid) {
         gcode_state->feed = block->f.val;
     }
+    float f = gcode_state->feed / 60.0f;  // 内部の制御では速度はmm/secだが，Gコードの指令値ではmm/minで与える
+    g01_motion_ctx_t ctx = {0};
+    float esimated_time = 0;
+    ctx.caller_task = xTaskGetCurrentTaskHandle();
     if (block->abs_incr == G91_INCR) {
         if (block->x.valid) {
             x = block->x.val;
@@ -268,16 +313,16 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
         }
 
         float d = 0;
-        float f = gcode_state->feed;
+
         arm_sqrt_f32(x * x + y * y + z * z, &d);
         if (d == 0.0f) {
             return 0;
         };
-
+        esimated_time = d / f;
         float32_t vx = x / d * f;
         float32_t vy = y / d * f;
         float32_t vz = z / d * f;
-        table_movedelta(tbl, x, y, z, vx, vy, vz, NULL, NULL);
+        table_movedelta(tbl, x, y, z, vx, vy, vz, g01_event_handler, &ctx);
     } else {
         table_getpos(tbl, &x, &y, &z);
         float dx = 0, dy = 0, dz = 0;
@@ -295,17 +340,26 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
         }
 
         float d = 0;
-        float f = gcode_state->feed;
         arm_sqrt_f32(dx * dx + dy * dy + dz * dz, &d);
         if (d == 0.0f) {
             return 0;
         };
-
+        esimated_time = d / f;
         float32_t vx = dx / d * f;
         float32_t vy = dy / d * f;
         float32_t vz = dz / d * f;
-        table_moveto(tbl, x, y, z, vx, vy, vz, NULL, NULL);
+        table_moveto(tbl, x, y, z, vx, vy, vz, g01_event_handler, &ctx);
     }
+    uint32_t notif_val = 0;
+    xTaskNotifyWait(G01_COMPLETED | MOTION_CANCELLED, G01_COMPLETED | MOTION_CANCELLED, &notif_val, pdMS_TO_TICKS(esimated_time * 1000));
+    if (notif_val & G01_COMPLETED) {
+        return 0;
+    }
+    if ((notif_val & MOTION_CANCELLED) == 0) {
+        table_move_cancel(tbl);
+        return -GCODE_ERROR_TABLE_TIMEOUT;
+    }
+    return -GCODE_ERROR_MOTION_INTERRUPTED;
 }
 static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, float x, float y, float z, float* p1, float* p2, float* c1, float* c2) {
     float p1_work = 0, p2_work = 0;
@@ -436,7 +490,7 @@ static int execute_g0203(g_code_state_t* gcode_state, g_code_block_t* block, CIR
     if (ret < 0) {
         return ret;
     }
-    return move_circular(tbl, (CIRCLE_MOTION_PLANE_t)block->working_plane, ccwcw, p1, p2, c1, c2, gcode_state->feed);
+    return move_circular(tbl, (CIRCLE_MOTION_PLANE_t)block->working_plane, ccwcw, p1, p2, c1, c2, gcode_state->feed / 60.0f);
 }
 // CW
 static int execute_g02(g_code_state_t* gcode_state, g_code_block_t* block) {

@@ -4,7 +4,8 @@
 typedef enum {
     X_AXIS_MOTION_COMPLETE = 1<<7,
     Y_AXIS_MOTION_COMPLETE = 1<<8,
-    Z_AXIS_MOTION_COMPLETE = 1<<9
+    Z_AXIS_MOTION_COMPLETE = 1<<9,
+    MOTION_CANCELLED=1<<10
 } table_3d_event_type_t;
 
 typedef struct {

@@ -13,8 +13,7 @@
 #include "task.h"
 #include "triaxis_table.h"
 
-
-#define CIRCULAR_MOTION_COMPLETE (1 << 10)
+#define CIRCULAR_MOTION_COMPLETE (1 << 11)
 // interrupt rate per sec
 #define CIRCULAR_MOTION_INTERRUPT_RATE 100
 #define CIRCULAR_MOTION_DL_MIN 0.0125f
@@ -43,6 +42,20 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt);
 
 static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
     circular_motion_ctx_t* m = ctx;
+    if (evt->id == MOTION_CANCELLED) {
+        if (xPortIsInsideInterrupt()) {
+            BaseType_t other_task_woken = 0;
+            xTaskNotifyFromISR(m->caller_task, MOTION_CANCELLED, eSetBits, &other_task_woken);
+            portYIELD_FROM_ISR(other_task_woken);
+        } else {
+            TaskHandle_t taskid = xTaskGetCurrentTaskHandle();
+            if (m->caller_task != taskid) {
+                xTaskNotify(m->caller_task, MOTION_CANCELLED, eSetBits);
+            }
+        }
+        return;
+    }
+
     m->x_complete = ((evt->id == X_AXIS_MOTION_COMPLETE) || (evt->inmotion.x == 0)) || (m->x_complete);
     m->y_complete = ((evt->id == Y_AXIS_MOTION_COMPLETE) || (evt->inmotion.y == 0)) || (m->y_complete);
     m->z_complete = ((evt->id == Z_AXIS_MOTION_COMPLETE) || (evt->inmotion.z == 0)) || (m->z_complete);
@@ -64,9 +77,16 @@ static void table_motion_isr(void* ctx, const table_3d_event_t* evt) {
             break;
     }
     if (m->last) {  // 動作完了
-        BaseType_t other_task_woken = 0;
-        xTaskNotifyFromISR(m->caller_task, CIRCULAR_MOTION_COMPLETE, eSetBits, &other_task_woken);
-        portYIELD_FROM_ISR(other_task_woken);
+        if (xPortIsInsideInterrupt()) {
+            BaseType_t other_task_woken = 0;
+            xTaskNotifyFromISR(m->caller_task, CIRCULAR_MOTION_COMPLETE, eSetBits, &other_task_woken);
+            portYIELD_FROM_ISR(other_task_woken);
+        } else {
+            TaskHandle_t taskid = xTaskGetCurrentTaskHandle();
+            if (m->caller_task != taskid) {
+                xTaskNotify(m->caller_task, CIRCULAR_MOTION_COMPLETE, eSetBits);
+            }
+        }
         return;
     }
     float d1 = m->current_p1 - m->p1;
@@ -304,10 +324,13 @@ int move_circular(table_3d_driver_t* table, CIRCLE_MOTION_PLANE_t plane, CIRCLE_
     uint32_t notif_val = 0;
     int wait_ms = (int)(estimated_time * 2000.0f);
     iterate_motion(&ctx);
-    xTaskNotifyWait(CIRCULAR_MOTION_COMPLETE, CIRCULAR_MOTION_COMPLETE, &notif_val, pdMS_TO_TICKS(wait_ms));
+    xTaskNotifyWait(CIRCULAR_MOTION_COMPLETE | MOTION_CANCELLED, CIRCULAR_MOTION_COMPLETE | MOTION_CANCELLED, &notif_val, pdMS_TO_TICKS(wait_ms));
     if (notif_val & CIRCULAR_MOTION_COMPLETE) {
         return 0;
     }
-    table_move_cancel(table);
-    return -GCODE_ERROR_TABLE_TIMEOUT;
+    if ((notif_val & MOTION_CANCELLED) == 0) {
+        table_move_cancel(table);
+        return -GCODE_ERROR_TABLE_TIMEOUT;
+    }
+    return -GCODE_ERROR_MOTION_INTERRUPTED;
 }

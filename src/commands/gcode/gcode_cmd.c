@@ -3,11 +3,14 @@
 #include <stdio.h>
 
 #include "arm_math_types.h"
+#include "bsp_pin_cfg.h"
 #include "cnc_systemstate.h"
 #include "commands/gcode/gcode_errortype.h"
+#include "common_data.h"
 #include "dsp/fast_math_functions.h"
 #include "fsp_common_api.h"
 #include "gcode_errortype.h"
+#include "hal_data.h"
 #include "motion/circular.h"
 #include "projdefs.h"
 #include "spindle.h"
@@ -24,6 +27,7 @@ typedef struct {
     g_code_working_plane_t working_plane;
     g_code_motor_cmd_t motor;
     int g92_set_coord;
+    int program_end;
     g_code_block_args_t x;
     g_code_block_args_t y;
     g_code_block_args_t z;
@@ -34,6 +38,90 @@ typedef struct {
     g_code_block_args_t f;
     g_code_block_args_t r;
 } g_code_block_t;
+
+static void print_block(const g_code_block_t* b) {
+    printf("ABS/INCR:");
+    switch (b->abs_incr) {
+        case G91_INCR:
+            printf("G91 INCR\r\n");
+            break;
+        case G90_ABS:
+            printf("G90 ABS\r\n");
+            break;
+        case G90_91_UNSET:
+            printf("UNSET\r\n");
+    }
+    printf("INTERPOLATION:");
+    switch (b->interpolation_mode) {
+        case G00_FAST_FEED:
+            printf("G00 FAST FEED\r\n");
+            break;
+        case G01_LINEAR:
+            printf("G01 LINE\r\n");
+            break;
+        case G02_CIRCULAR_CW:
+            printf("G02 CIRCLE CW\r\n");
+            break;
+        case G03_CIRCULAR_CCW:
+            printf("G03 CIRCLE CCW\r\n");
+            break;
+        case G01_03_UNSET:
+            printf("UNSET\r\n");
+    }
+    printf("MOTOR:");
+    switch (b->motor) {
+        case M03_MOTOR_ON:
+            printf("M03 ON\r\n");
+            break;
+        case M05_MOTOR_OFF:
+            printf("M05 OFF\r\n");
+            break;
+        case M03_05_UNSET:
+            printf("UNSET\r\n");
+    }
+    printf("WORKPLANE:");
+    switch (b->working_plane) {
+        case G17_XY_PLANE:
+            printf("G17 X-Y\r\n");
+            break;
+        case G18_ZX_PLANE:
+            printf("G18 Z-X\r\n");
+            break;
+        case G19_YZ_PLANE:
+            printf("G19 Y-Z\r\n");
+            break;
+        case G17_19_UNSET:
+            printf("UNSET\r\n");
+            break;
+    }
+    if (b->x.valid) {
+        printf("x=%d ", (int)b->x.val);
+    }
+    if (b->y.valid) {
+        printf("y=%d ", (int)b->y.val);
+    }
+    if (b->z.valid) {
+        printf("z=%d ", (int)b->z.val);
+    }
+    if (b->f.valid) {
+        printf("f=%d ", (int)b->f.val);
+    }
+    if (b->s.valid) {
+        printf("s=%d ", (int)b->s.val);
+    }
+    if (b->r.valid) {
+        printf("r=%d ", (int)b->r.val);
+    }
+    if (b->i.valid) {
+        printf("i=%d ", (int)b->i.val);
+    }
+    if (b->j.valid) {
+        printf("x=%d ", (int)b->j.val);
+    }
+    if (b->k.valid) {
+        printf("k=%d ", (int)b->k.val);
+    }
+}
 
 /**
  * @brief 文字列を浮動小数点にする
@@ -50,7 +138,6 @@ static int parse_num(const char* s, float* result) {
     int i = 0;
     int int_part = 0;
     for (i = 0; s[i] != 0; i++) {
-        int_part = int_part * 10;
         if (s[i] == '-' && i == 0) {
             sign = -1;
             consumed++;
@@ -58,22 +145,23 @@ static int parse_num(const char* s, float* result) {
             sign = 1;
             consumed++;
         } else if ((s[i] >= '0') && (s[i] <= '9')) {
+            int_part = int_part * 10;
             int_part += (s[i] - '0');
             consumed++;
         } else if (s[i] == '.') {
             consumed++;
             break;
         } else {
-            *result = sign * int_part;
+            *result = (float)(sign * int_part);
             return consumed;
         }
     }
     float float_part = 0;
     float digit = 1.0f;
     for (i++; s[i] != 0; i++) {
-        digit = digit * 0.1f;
         if ((s[i] >= '0') && (s[i] <= '9')) {
-            float_part += digit * (s[i] - '0');
+            digit = digit * 0.1f;
+            float_part += digit * (float)(s[i] - '0');
             consumed++;
         } else {
             break;
@@ -86,6 +174,9 @@ static int parse_num(const char* s, float* result) {
 static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_code_block_t* block) {
     for (int pos = 0; line[pos] != 0;) {
         char ltr = line[pos++];
+        if ((ltr == '\r') || (ltr == '\n')) {
+            break;
+        }
         if ((ltr < 'A') || (ltr > 'Z')) {
             return -GCODE_ERROR_BLOCK_START_INVALID_CHAR;
         }
@@ -97,6 +188,7 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
         }
         pos += consumed;
         int int_num = (int)val;
+        printf("num=%d\r\n", int_num);
         // ltr Gxx Mxx それ以外判定
         switch (ltr) {
             case 'G': {
@@ -162,6 +254,8 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
                     block->motor = M03_MOTOR_ON;
                 } else if (int_num == 5) {
                     block->motor = M05_MOTOR_OFF;
+                } else if (int_num == 2 || int_num == 30) {
+                    block->program_end = 1;
                 } else {
                     return -GCODE_ERROR_UNSUPPORTED_COMMAND;
                 }
@@ -243,7 +337,7 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
     if (block->working_plane == G17_19_UNSET) {
         block->working_plane = gcode_state->working_plane;
     }
-    return 0;
+    return block->program_end;
 }
 
 #define G01_COMPLETED (1 << 11)
@@ -532,6 +626,7 @@ static gcode_table_operation_t gcode_table_ops[] = {
 };
 
 static int execute_block(g_code_state_t* s, g_code_block_t* block) {
+    int r = 0;
     if (block->s.valid) {
         s->spindle_rpm_ref = block->s.val;
         spindle_set_speed(&g_spindle_motor, (int)s->spindle_rpm_ref);
@@ -551,13 +646,15 @@ static int execute_block(g_code_state_t* s, g_code_block_t* block) {
         }
     }
     if (block->g92_set_coord) {
-        execute_g92(s, block);
+        r = execute_g92(s, block);
     }
+    return r;
 }
 
 int gcode_cmd(int argc, char** argv) {
     char buf[256];
-    cnc_system_state_set_gcode_exec();
+    g_code_state_t* s = cnc_system_state_set_gcode_exec();
+    int retval = 0;
     while (1) {
         printf("OK\r\n");
         g_code_block_t block = {0};
@@ -568,13 +665,20 @@ int gcode_cmd(int argc, char** argv) {
         block.g92_set_coord = 0;
 
         fgets(buf, sizeof(buf), stdin);
-        int retval = parse_gcode_block(buf);
+        retval = parse_gcode_block(s, buf, &block);
         if (retval < 0) {
             printf("ERR:%d\r\n", retval);
-        } else if (retval == 0) {
+        } else if (retval == 1) {
             printf("END\r\n");
+            break;
+        }
+        print_block(&block);
+        retval = execute_block(s, &block);
+        if (retval < 0) {
+            printf("ERR:%d\r\n", retval);
             break;
         }
     }
     cnc_system_state_unset_gcode_exec();
+    return retval;
 }

@@ -36,8 +36,8 @@ typedef struct{
     g_code_abs_inc_state_t abs_incr;
     g_code_interpolation_state_t interpolation_mode;
     g_code_working_plane_t working_plane;
-    float feed;
-    float spindle_rpm_ref;
+    float feed;//mm/min
+    float spindle_rpm_ref;//rpm
 }g_code_state_t;
 
 typedef struct{
@@ -46,6 +46,7 @@ typedef struct{
 
 }cnc_system_state_t;
 
+void cnc_system_state_init();
 int cnc_system_state_is_gcode_exec();
-void cnc_system_state_set_gcode_exec();
+g_code_state_t* cnc_system_state_set_gcode_exec();
 void cnc_system_state_unset_gcode_exec();

@@ -1,5 +1,6 @@
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
+#include "cnc_systemstate.h"
 #include "encoder.h"
 #include "hal_data.h"
 #include "ra_gpt_encoder.h"
@@ -82,6 +83,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         g_adc0.p_api->open(g_adc0.p_ctrl,g_adc0.p_cfg);
         g_adc1.p_api->open(g_adc1.p_ctrl,g_adc1.p_cfg);
         spindle_init(&g_spindle_motor);
+        cnc_system_state_init();
     }
 }
 

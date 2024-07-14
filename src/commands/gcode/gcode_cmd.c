@@ -116,7 +116,7 @@ static void print_block(const g_code_block_t* b) {
         printf("i=%d ", (int)b->i.val);
     }
     if (b->j.valid) {
-        printf("x=%d ", (int)b->j.val);
+        printf("j=%d ", (int)b->j.val);
     }
     if (b->k.valid) {
         printf("k=%d ", (int)b->k.val);
@@ -392,6 +392,9 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
         gcode_state->feed = block->f.val;
     }
     float f = gcode_state->feed / 60.0f;  // 内部の制御では速度はmm/secだが，Gコードの指令値ではmm/minで与える
+    if (f == 0) {
+        return -GCODE_ERROR_FEED_SPEED_INVALID;
+    }
     g01_motion_ctx_t ctx = {0};
     float esimated_time = 0;
     ctx.caller_task = xTaskGetCurrentTaskHandle();
@@ -445,7 +448,7 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
         table_moveto(tbl, x, y, z, vx, vy, vz, g01_event_handler, &ctx);
     }
     uint32_t notif_val = 0;
-    xTaskNotifyWait(G01_COMPLETED | MOTION_CANCELLED, G01_COMPLETED | MOTION_CANCELLED, &notif_val, pdMS_TO_TICKS(esimated_time * 1000));
+    xTaskNotifyWait(G01_COMPLETED | MOTION_CANCELLED, G01_COMPLETED | MOTION_CANCELLED, &notif_val, pdMS_TO_TICKS(esimated_time * 2000));
     if (notif_val & G01_COMPLETED) {
         return 0;
     }
@@ -455,10 +458,10 @@ static int execute_g01(g_code_state_t* gcode_state, g_code_block_t* block) {
     }
     return -GCODE_ERROR_MOTION_INTERRUPTED;
 }
-static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, float x, float y, float z, float* p1, float* p2, float* c1, float* c2) {
-    float p1_work = 0, p2_work = 0;
-    float c1_work = 0, c2_work = 0;
-    float b1 = 0, b2 = 0;
+static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, float x_current, float y_current, float z_current, float* p1, float* p2, float* c1, float* c2) {
+    float p1_work = 0, p2_work = 0;  // ゴール位置
+    float c1_work = 0, c2_work = 0;  // 中心位置(相対)
+    float b1 = 0, b2 = 0;            // 始点位置 絶対
     switch (block->working_plane) {
         case G17_XY_PLANE:
             if (((block->i.valid != 0) || (block->j.valid != 0)) && (block->r.valid != 0)) {  // i,jとrは同時指定不可
@@ -473,12 +476,12 @@ static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, flo
             if (block->y.valid) {
                 p2_work = block->y.val;
             }
-            if (block->abs_incr == G91_INCR) {
-                p1_work += x;
-                p2_work += y;
+            if (block->abs_incr == G91_INCR) {  // blockの座標値が相対の場合絶対位置に変換
+                p1_work += x_current;
+                p2_work += y_current;
             }
-            b1 = x;
-            b2 = y;
+            b1 = x_current;
+            b2 = y_current;
             if (block->i.valid) {
                 c1_work = block->i.val;
             }
@@ -495,16 +498,16 @@ static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, flo
             }
             if (block->z.valid) {
                 p1_work = block->z.val;
+            } else if (block->abs_incr == G91_INCR) {
+                p1_work += z_current;
             }
             if (block->x.valid) {
                 p2_work = block->x.val;
+            } else if (block->abs_incr == G91_INCR) {
+                p2_work += x_current;
             }
-            if (block->abs_incr == G91_INCR) {
-                p1_work += z;
-                p2_work += x;
-            }
-            b1 = z;
-            b2 = x;
+            b1 = z_current;
+            b2 = x_current;
             if (block->k.valid) {
                 c1_work = block->k.val;
             }
@@ -521,16 +524,16 @@ static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, flo
             }
             if (block->y.valid) {
                 p1_work = block->y.val;
+            } else if (block->abs_incr == G91_INCR) {
+                p1_work += y_current;
             }
             if (block->z.valid) {
                 p2_work = block->z.val;
+            } else if (block->abs_incr == G91_INCR) {
+                p2_work += z_current;
             }
-            if (block->abs_incr == G91_INCR) {
-                p1_work += y;
-                p2_work += z;
-            }
-            b1 = y;
-            b2 = z;
+            b1 = y_current;
+            b2 = z_current;
             if (block->j.valid) {
                 c1_work = block->j.val;
             }
@@ -548,7 +551,7 @@ static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, flo
     }
     float d_2 = (p1_work - b1) * (p1_work - b1) + (p2_work - b2) * (p2_work - b2);
     float r = block->r.val;
-    if (d_2 >= 4.0f * r * r) {
+    if (d_2 > 4.0f * r * r) {
         return -GCODE_ERROR_INVALID_CIRCLE_PARAMS;
     }
     float k;
@@ -563,26 +566,18 @@ static int g0203_chk_param(g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw, flo
 static int execute_g0203(g_code_state_t* gcode_state, g_code_block_t* block, CIRCLE_MOTION_DIR_t ccwcw) {
     float x = 0, y = 0, z = 0;
     table_3d_driver_t* tbl = table_get_driver();
-    table_getpos(tbl, &x, &y, &z);
+    table_getpos(tbl, &x, &y, &z);  // カレント位置(絶対)
 
     if (block->f.valid) {
         gcode_state->feed = block->f.val;
-    }
-    if (block->abs_incr == G91_INCR) {
-        if (block->x.valid) {
-            x += block->x.val;
-        }
-        if (block->y.valid) {
-            y += block->y.val;
-        }
-        if (block->z.valid) {
-            z += block->z.val;
-        }
     }
     float p1, p2, c1, c2;
     int ret = g0203_chk_param(block, ccwcw, x, y, z, &p1, &p2, &c1, &c2);
     if (ret < 0) {
         return ret;
+    }
+    if (gcode_state->feed == 0) {
+        return -GCODE_ERROR_FEED_SPEED_INVALID;
     }
     return move_circular(tbl, (CIRCLE_MOTION_PLANE_t)block->working_plane, ccwcw, p1, p2, c1, c2, gcode_state->feed / 60.0f);
 }
@@ -641,6 +636,7 @@ static int execute_block(g_code_state_t* s, g_code_block_t* block) {
     if (block->interpolation_mode != G01_03_UNSET) {
         for (int i = 0; i < sizeof(gcode_table_ops) / sizeof(gcode_table_operation_t); i++) {
             if (gcode_table_ops[i].gcode == block->interpolation_mode) {
+                s->interpolation_mode = block->interpolation_mode;
                 return gcode_table_ops[i].func(s, block);
             }
         }

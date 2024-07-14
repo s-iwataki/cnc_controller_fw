@@ -203,6 +203,14 @@
       <description>FreeRTOS - Memory Management - Heap 3</description>
       <originalPack>Amazon.FreeRTOS-Kernel.10.4.6+fsp.4.6.0.pack</originalPack>
     </component>
+    <component apiversion="" class="HAL Drivers" condition="" group="all" subgroup="r_flash_hp" variant="" vendor="Renesas" version="4.6.0">
+      <description>Flash Memory High Performance</description>
+      <originalPack>Renesas.RA.4.6.0.pack</originalPack>
+    </component>
+    <component apiversion="" class="Middleware" condition="" group="all" subgroup="rm_vee_flash" variant="" vendor="Renesas" version="4.6.0">
+      <description>Virtual EEPROM</description>
+      <originalPack>Renesas.RA.4.6.0.pack</originalPack>
+    </component>
   </raComponentSelection>
   <raElcConfiguration/>
   <raIcuConfiguration/>
@@ -817,6 +825,22 @@
       <property id="module.driver.adc.window_b_ipl" value="_disabled"/>
       <property id="module.driver.adc.adbuf" value="module.driver.adc.adbuf.disabled"/>
     </module>
+    <module id="module.middleware.rm_vee_flash.1195576066">
+      <property id="module.middleware.rm_vee_flash.name" value="g_vee0"/>
+      <property id="module.middleware.rm_vee_flash.record_max_id" value="16"/>
+      <property id="module.middleware.rm_vee_flash.num_segments" value="2"/>
+      <property id="module.middleware.rm_vee_flash.start_addr" value="BSP_FEATURE_FLASH_DATA_FLASH_START"/>
+      <property id="module.middleware.rm_vee_flash.total_size" value="BSP_DATA_FLASH_SIZE_BYTES"/>
+      <property id="module.middleware.rm_vee_flash.ref_data_size" value="0"/>
+      <property id="module.middleware.rm_vee_flash.p_callback" value="vee_callback"/>
+    </module>
+    <module id="module.driver.flash_on_flash_hp.2011480408">
+      <property id="module.driver.flash.name" value="g_flash0"/>
+      <property id="module.driver.flash.data_flash_bgo" value="module.driver.flash.data_flash_bgo.enabled"/>
+      <property id="module.driver.flash.p_callback" value="NULL"/>
+      <property id="module.driver.flash.ipl" value="board.icu.common.irq.priority15"/>
+      <property id="module.driver.flash.err_ipl" value="board.icu.common.irq.priority15"/>
+    </module>
     <context id="_hal.0">
       <stack module="module.driver.ioport_on_ioport.0"/>
       <stack module="module.middleware.rm_freertos_port.0"/>
@@ -838,6 +862,9 @@
       </stack>
       <stack module="module.driver.adc_on_adc.832361948"/>
       <stack module="module.driver.adc_on_adc.1133950238"/>
+      <stack module="module.middleware.rm_vee_flash.1195576066">
+        <stack module="module.driver.flash_on_flash_hp.2011480408" requires="module.middleware.rm_vee_flash.requires.flash"/>
+      </stack>
     </context>
     <context id="rtos.awsfreertos.thread.1922777237">
       <property id="_symbol" value="led_blink"/>
@@ -875,6 +902,11 @@
       <property id="rtos.awsfreertos.thread.allocation" value="rtos.awsfreertos.thread.allocation.static"/>
       <property id="rtos.awsfreertos.thread.secure_context" value="rtos.awsfreertos.thread.secure_context.enable"/>
     </context>
+    <config id="config.driver.flash_hp">
+      <property id="config.driver.flash_hp.param_checking_enable" value="config.flash_hp.param_checking_enable.bsp"/>
+      <property id="config.driver.flash_hp.param_code_flash_programming_enable" value="config.driver.flash_hp.param_code_flash_programming_enable.disabled"/>
+      <property id="config.driver.flash_hp.param_data_flash_programming_enable" value="config.driver.flash_hp.param_data_flash_programming_enable.enabled"/>
+    </config>
     <config id="config.driver.ioport">
       <property id="config.driver.ioport.checking" value="config.driver.ioport.checking.system"/>
     </config>
@@ -954,6 +986,11 @@
     </config>
     <config id="config.driver.dmac">
       <property id="config.driver.dmac.param_checking_enable" value="config.driver.dmac.param_checking_enable.bsp"/>
+    </config>
+    <config id="config.middleware.rm_vee_flash">
+      <property id="config.middleware.rm_vee_flash.checking" value="config.middleware.rm_vee_flash.checking.system"/>
+      <property id="config.middleware.rm_vee_flash.ref_data_support" value="config.middleware.rm_vee_flash.ref_data_support.disabled"/>
+      <property id="config.middleware.rm_vee_flash.refresh_buf_size" value="32"/>
     </config>
     <config id="config.driver.sci_uart">
       <property id="config.driver.sci_uart.param_checking_enable" value="config.driver.sci_uart.param_checking_enable.bsp"/>

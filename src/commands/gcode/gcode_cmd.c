@@ -121,6 +121,7 @@ static void print_block(const g_code_block_t* b) {
     if (b->k.valid) {
         printf("k=%d ", (int)b->k.val);
     }
+    printf("\r\n");
 }
 
 /**
@@ -668,7 +669,7 @@ int gcode_cmd(int argc, char** argv) {
             printf("END\r\n");
             break;
         }
-        print_block(&block);
+        //print_block(&block);
         retval = execute_block(s, &block);
         if (retval < 0) {
             printf("ERR:%d\r\n", retval);

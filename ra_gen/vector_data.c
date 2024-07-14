@@ -18,6 +18,8 @@
             [11] = dmac_int_isr, /* DMAC1 INT (DMAC transfer end 1) */
             [12] = adc_scan_end_isr, /* ADC0 SCAN END (A/D scan end interrupt) */
             [13] = adc_scan_end_isr, /* ADC1 SCAN END (A/D scan end interrupt) */
+            [14] = fcu_frdyi_isr, /* FCU FRDYI (Flash ready interrupt) */
+            [15] = fcu_fiferr_isr, /* FCU FIFERR (Flash access error interrupt) */
         };
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_MAX_ENTRIES] =
         {
@@ -35,5 +37,7 @@
             [11] = BSP_PRV_IELS_ENUM(EVENT_DMAC1_INT), /* DMAC1 INT (DMAC transfer end 1) */
             [12] = BSP_PRV_IELS_ENUM(EVENT_ADC0_SCAN_END), /* ADC0 SCAN END (A/D scan end interrupt) */
             [13] = BSP_PRV_IELS_ENUM(EVENT_ADC1_SCAN_END), /* ADC1 SCAN END (A/D scan end interrupt) */
+            [14] = BSP_PRV_IELS_ENUM(EVENT_FCU_FRDYI), /* FCU FRDYI (Flash ready interrupt) */
+            [15] = BSP_PRV_IELS_ENUM(EVENT_FCU_FIFERR), /* FCU FIFERR (Flash access error interrupt) */
         };
         #endif

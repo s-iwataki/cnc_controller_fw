@@ -6,6 +6,60 @@
 #define ADC_TRIGGER_ADC1        ADC_TRIGGER_SYNC_ELC
 #define ADC_TRIGGER_ADC1_B      ADC_TRIGGER_SYNC_ELC
 
+flash_hp_instance_ctrl_t g_flash0_ctrl;
+const flash_cfg_t g_flash0_cfg =
+{
+    .data_flash_bgo      = true,
+    .p_callback          = rm_vee_flash_callback,
+    .p_context           = &g_vee0_ctrl,
+#if defined(VECTOR_NUMBER_FCU_FRDYI)
+    .irq                 = VECTOR_NUMBER_FCU_FRDYI,
+#else
+    .irq                 = FSP_INVALID_VECTOR,
+#endif
+#if defined(VECTOR_NUMBER_FCU_FIFERR)
+    .err_irq             = VECTOR_NUMBER_FCU_FIFERR,
+#else
+    .err_irq             = FSP_INVALID_VECTOR,
+#endif
+    .err_ipl             = (15),
+    .ipl                 = (15),
+};
+/* Instance structure to use this module. */
+const flash_instance_t g_flash0 =
+{
+    .p_ctrl        = &g_flash0_ctrl,
+    .p_cfg         = &g_flash0_cfg,
+    .p_api         = &g_flash_on_flash_hp
+};
+rm_vee_flash_instance_ctrl_t g_vee0_ctrl;
+
+const rm_vee_flash_cfg_t g_vee0_cfg_ext = {
+    .p_flash = &g_flash0
+};
+
+static uint16_t g_vee0_record_offset[16 + 1] = {0};
+
+const rm_vee_cfg_t g_vee0_cfg =
+{
+    .start_addr    = BSP_FEATURE_FLASH_DATA_FLASH_START,
+    .num_segments  = 2,
+    .total_size    = BSP_DATA_FLASH_SIZE_BYTES,
+    .ref_data_size = 0,
+    .record_max_id = 16,
+    .rec_offset = &g_vee0_record_offset[0],
+    .p_callback    = vee_callback,
+    .p_context     = NULL,
+    .p_extend = &g_vee0_cfg_ext
+};
+
+/* Instance structure to use this module. */
+const rm_vee_instance_t g_vee0 =
+{
+    .p_ctrl        = &g_vee0_ctrl,
+    .p_cfg         = &g_vee0_cfg,
+    .p_api         = &g_rm_vee_on_flash
+};
 adc_instance_ctrl_t g_adc1_ctrl;
 const adc_extended_cfg_t g_adc1_cfg_extend =
 {

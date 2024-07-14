@@ -96,6 +96,8 @@
             <slot name="IRQ11" secure="false"/>
             <slot name="IRQ12" secure="false"/>
             <slot name="IRQ13" secure="false"/>
+            <slot name="IRQ14" secure="false"/>
+            <slot name="IRQ15" secure="false"/>
         </peripheral>
         <peripheral name="ELC">
             <slot name="GPT_A" secure="false"/>

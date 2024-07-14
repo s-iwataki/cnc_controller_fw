@@ -2,6 +2,7 @@
 #include "FreeRTOSConfig.h"
 #include "cnc_systemstate.h"
 #include "encoder.h"
+#include "fsp_common_api.h"
 #include "hal_data.h"
 #include "ra_gpt_encoder.h"
 #include "ra_triaxis_stepper.h"
@@ -76,14 +77,25 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         R_IOPORT_Open(&g_ioport_ctrl, &IOPORT_CFG_NAME);
         uart_tty_attach(&g_uart9_ctrl, &g_uart9_cfg);
         // R_SCI_UART_Open(&g_uart9_ctrl,&g_uart9_cfg);
+        cnc_nonvolatile_config_t*cfg=0;
+        if(cnc_system_state_config_load(&cfg)!=FSP_SUCCESS){
+            printf("[WARN]:Config is not set.\r\n");
+        }
         table_mm_per_count_t mm_per_count = {.x = 0.00125f, .y = 0.00125f, .z = 0.00125f};
-        table_axis_sign_t sing = {.x = 1, .y = 1, .z = 1};
-        table_init(ra_triaxis_stepper_init, &mm_per_count, &sing);
+        table_axis_sign_t sign = {.x = 1, .y = 1, .z = 1};
+        if(cfg){
+            mm_per_count=cfg->table_cfg.table_mm_per_step;
+            sign=cfg->table_cfg.table_axis_direction;
+        }
+        table_init(ra_triaxis_stepper_init, &mm_per_count, &sign);
         ra_gpt_encoder_init(&g_ui_encoder);
         g_adc0.p_api->open(g_adc0.p_ctrl,g_adc0.p_cfg);
         g_adc1.p_api->open(g_adc1.p_ctrl,g_adc1.p_cfg);
         spindle_init(&g_spindle_motor);
-        cnc_system_state_init();
+        if(cfg){
+            spindle_set_control_param(&g_spindle_motor, cfg->spindle_cfg.kp, cfg->spindle_cfg.ki, cfg->spindle_cfg.kd);
+        }
+        cnc_system_state_init(cfg);
     }
 }
 

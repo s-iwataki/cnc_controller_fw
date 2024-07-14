@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include "cnc_systemstate.h"
+#include "triaxis_table.h"
 
 #define MAX_FEEDSPEED_MM_PER_SEC 40
 #define MAX_SPINDLE_RPM 5000
@@ -46,7 +47,26 @@ typedef struct{
 
 }cnc_system_state_t;
 
-void cnc_system_state_init();
+typedef struct{
+    table_axis_sign_t table_axis_direction;
+    table_mm_per_count_t table_mm_per_step;
+}cnc_nonvolatile_table_config_t ;
+
+typedef struct{
+    float kp;
+    float ki;
+    float kd;
+}cnc_nonvolatile_spindle_config_t ;
+
+typedef struct{
+    cnc_nonvolatile_spindle_config_t spindle_cfg;
+    cnc_nonvolatile_table_config_t table_cfg;
+    g_code_state_t gcode_cfg;
+}cnc_nonvolatile_config_t;
+
+void cnc_system_state_init(cnc_nonvolatile_config_t*cfg);
+int cnc_system_state_config_load(cnc_nonvolatile_config_t**cfg);
+int cnc_system_state_config_save(cnc_nonvolatile_config_t*);
 int cnc_system_state_is_gcode_exec();
 g_code_state_t* cnc_system_state_set_gcode_exec();
 void cnc_system_state_unset_gcode_exec();

@@ -961,3 +961,12 @@ FSP Configuration
     Memory Allocation: Static
     Allocate Secure Context: Enable
     
+  Thread "safety_obsavation"
+    Symbol: safety_obsavation_task
+    Name: safety_obsavation
+    Stack size (bytes): 1024
+    Priority: 1
+    Thread Context: NULL
+    Memory Allocation: Static
+    Allocate Secure Context: Enable
+    

@@ -1,5 +1,6 @@
 #include "gcode_cmd.h"
 
+#include <stdint.h>
 #include <stdio.h>
 
 #include "arm_math_types.h"
@@ -26,6 +27,7 @@ typedef struct {
     g_code_interpolation_state_t interpolation_mode;
     g_code_working_plane_t working_plane;
     g_code_motor_cmd_t motor;
+    int g04_dwell;
     int g92_set_coord;
     int program_end;
     g_code_block_args_t x;
@@ -124,8 +126,6 @@ static void print_block(const g_code_block_t* b) {
     printf("\r\n");
 }
 
-
-
 static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_code_block_t* block) {
     for (int pos = 0; line[pos] != 0;) {
         char ltr = line[pos++];
@@ -168,6 +168,8 @@ static int parse_gcode_block(g_code_state_t* gcode_state, const char* line, g_co
                             block->interpolation_mode = G03_CIRCULAR_CCW;
                             break;
                     }
+                } else if (int_num == 4) {  // G04 dewell
+                    block->g04_dwell = 1;
                 } else if ((int_num >= 17) && (int_num < 20)) {
                     if (block->working_plane != G17_19_UNSET) {
                         return -GCODE_ERROR_DUPLICATED_WORKPLANE;
@@ -579,12 +581,17 @@ static int execute_block(g_code_state_t* s, g_code_block_t* block) {
     int r = 0;
     if (block->s.valid) {
         s->spindle_rpm_ref = block->s.val;
-        spindle_set_speed(&g_spindle_motor, (int)s->spindle_rpm_ref);
+        // spindle_set_speed(&g_spindle_motor, (int)s->spindle_rpm_ref);
+        uint32_t duty = (uint32_t)(100.0f * (s->spindle_rpm_ref / (float)MAX_SPINDLE_RPM));
+        spindle_set_duty(&g_spindle_motor, duty);
     }
     if (block->motor == M03_MOTOR_ON) {
         spindle_enable(&g_spindle_motor, pdTRUE);
-        spindle_control_mode_set(&g_spindle_motor, SPINDLE_SPEED_CONTROL);
-        spindle_set_speed(&g_spindle_motor, (int)s->spindle_rpm_ref);
+        // spindle_control_mode_set(&g_spindle_motor, SPINDLE_SPEED_CONTROL);
+        spindle_control_mode_set(&g_spindle_motor, SPINDLE_DIRECT_DUTY_CONTROL);
+        // spindle_set_speed(&g_spindle_motor, (int)s->spindle_rpm_ref);
+        uint32_t duty = (uint32_t)(100.0f * (s->spindle_rpm_ref / (float)MAX_SPINDLE_RPM));
+        spindle_set_duty(&g_spindle_motor, duty);
     } else if (block->motor == M05_MOTOR_OFF) {
         spindle_enable(&g_spindle_motor, pdFALSE);
     }
@@ -598,6 +605,15 @@ static int execute_block(g_code_state_t* s, g_code_block_t* block) {
     }
     if (block->g92_set_coord) {
         r = execute_g92(s, block);
+    }
+    if (block->g04_dwell) {
+        if (block->x.valid) {
+            uint32_t wait_ms = (uint32_t)(block->x.val * 1000);
+            vTaskDelay(pdMS_TO_TICKS(wait_ms));
+            r = GCODE_ERROR_OK;
+        } else {
+            r = GCODE_ERROR_UNEXPECTED_ARGS;
+        }
     }
     return r;
 }
@@ -623,7 +639,7 @@ int gcode_cmd(int argc, char** argv) {
             printf("END\r\n");
             break;
         }
-        //print_block(&block);
+        // print_block(&block);
         retval = execute_block(s, &block);
         if (retval < 0) {
             printf("ERR:%d\r\n", retval);

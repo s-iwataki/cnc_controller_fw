@@ -11,6 +11,8 @@ extern void spindle_control_task_create(void);
                 extern TaskHandle_t spindle_control_task;
 extern void ui_thread_create(void);
                 extern TaskHandle_t ui_thread;
+extern void safety_obsavation_task_create(void);
+                extern TaskHandle_t safety_obsavation_task;
                 uint32_t g_fsp_common_thread_count;
                 bool g_fsp_common_initialized;
                 SemaphoreHandle_t g_fsp_common_initialized_semaphore;
@@ -110,6 +112,7 @@ extern void ui_thread_create(void);
 shell_create();
 spindle_control_task_create();
 ui_thread_create();
+safety_obsavation_task_create();
 
                     /* Start the scheduler. */
                     vTaskStartScheduler();

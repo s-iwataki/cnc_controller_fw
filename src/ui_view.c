@@ -156,7 +156,23 @@ static void process_table_motion(userinput_state_t* s, userinput_state_t* s_prev
     }
     if (s->autofeed_enabled == pdFALSE) {
         if (s->setzero_button_pressed == pdTRUE) {
-            table_setzero(table);
+            float xpos, ypos, zpos;
+            table_getpos(table, &xpos, &ypos, &zpos);
+            switch (s->xyz_sel) {
+                case UI_X_AXIS_SEL:
+                    xpos = 0;
+                    break;
+                case UI_Y_AXIS_SEL:
+                    ypos = 0;
+                    break;
+                case UI_Z_AXIS_SEL:
+                    zpos = 0;
+                    break;
+                default:
+                    break;
+            }
+            table_setpos(table, xpos, ypos, zpos);
+            // table_setzero(table);
         }
         if (s->uienc_diff != 0) {
             float dpos = (float)s->uienc_diff * UI_POS_INCR_PER_ENC;

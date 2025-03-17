@@ -8,6 +8,8 @@
 #include "r_ioport.h"
 #include "semphr.h"
 
+
+#define SPINDLE_DUTY_SPINUP_RATE 10
 typedef enum{
     SPINDLE_DIRECT_DUTY_CONTROL,
     SPINDLE_SPEED_CONTROL
@@ -30,6 +32,8 @@ typedef struct{
     int prev_err;
     int err_integral;
     spindle_control_mode_t control_mode;
+    uint32_t current_duty;
+    uint32_t target_duty;
 }spindle_motor_t ;
 typedef enum{
     SPINDLE_OK,

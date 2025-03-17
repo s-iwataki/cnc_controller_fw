@@ -25,6 +25,9 @@ typedef struct {
     int x_in_motion;
     int y_in_motion;
     int z_in_motion;
+    float x_speed;
+    float y_speed;
+    float z_speed;
 } ra_triaxis_table_driver_t;
 
 ra_triaxis_table_driver_t g_ra_triaxis_driver;
@@ -132,6 +135,9 @@ void moveto(void* instance, float x, float y, float z, float vx, float vy, float
     ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)instance;
     float current_x, current_y, current_z;
     getpos(instance, &current_x, &current_y, &current_z);
+    d->x_speed=vx;
+    d->y_speed=vy;
+    d->z_speed=vz;
     vx = (vx < 0) ? -vx : vx;
     vy = (vy < 0) ? -vy : vy;
     vz = (vz < 0) ? -vz : vz;
@@ -230,6 +236,13 @@ void zpos_counter_isr(timer_callback_args_t* p_args) {
         }
     }
 }
+static void get_status(void* instance, table_state_t* s) {
+    ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)instance;
+    getpos(instance, &s->x_pos,&s->y_pos, &s->y_pos);
+    s->x_speed=d->x_speed;
+    s->y_speed=d->y_speed;
+    s->z_speed=d->z_speed;
+}
 
 void ra_triaxis_stepper_init(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign) {
     R_ELC_Open(&g_elc_ctrl, &g_elc_cfg);
@@ -256,6 +269,7 @@ void ra_triaxis_stepper_init(table_3d_driver_t* d, const table_mm_per_count_t* m
     d->setzero = setzero;
     d->enable = motor_enable;
     d->setpos = setpos;
+    d->get_status = get_status;
     d->hw_driver_instance = &g_ra_triaxis_driver;
     g_ra_triaxis_driver.axis_dirction = *sign;
     g_ra_triaxis_driver.mm_per_count = *mmpc;

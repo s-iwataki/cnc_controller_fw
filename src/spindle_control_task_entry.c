@@ -45,10 +45,22 @@ void spindle_control_task_entry(void* pvParameters) {
         if (g_spindle_motor.motor_enabled == pdFALSE) {
             R_IOPORT_PinWrite(&g_ioport_ctrl, g_spindle_motor.motor_on, BSP_IO_LEVEL_LOW);
             g_spindle_motor.pwm_timer->p_api->dutyCycleSet(g_spindle_motor.pwm_timer->p_ctrl, 0, GPT_IO_PIN_GTIOCA);
+            g_spindle_motor.current_duty = 0;
             continue;
         }
         R_IOPORT_PinWrite(&g_ioport_ctrl, g_spindle_motor.motor_on, BSP_IO_LEVEL_HIGH);
         if (g_spindle_motor.control_mode != SPINDLE_SPEED_CONTROL) {
+            if (g_spindle_motor.target_duty != g_spindle_motor.current_duty) {
+                if(g_spindle_motor.target_duty-g_spindle_motor.current_duty>SPINDLE_DUTY_SPINUP_RATE){
+                    g_spindle_motor.current_duty+=SPINDLE_DUTY_SPINUP_RATE;
+                }else{
+                    g_spindle_motor.current_duty=g_spindle_motor.target_duty;
+                }
+                timer_info_t ti;
+                g_spindle_motor.pwm_timer->p_api->infoGet(g_spindle_motor.pwm_timer->p_ctrl, &ti);
+                uint32_t duty_count = (ti.period_counts * g_spindle_motor.current_duty / 100);
+                g_spindle_motor.pwm_timer->p_api->dutyCycleSet(g_spindle_motor.pwm_timer->p_ctrl, duty_count, GPT_IO_PIN_GTIOCA);
+            }
             continue;
         }
         int err = rpm - g_spindle_motor.target_rpm;
@@ -83,6 +95,7 @@ void spindle_init(spindle_motor_t* m) {
     m->motor_enabled = pdFALSE;
     m->target_rpm = 0;
     m->init = pdTRUE;
+    m->current_duty = 0;
     R_IOPORT_PinWrite(&g_ioport_ctrl, m->motor_dir, BSP_IO_LEVEL_HIGH);
 }
 void spindle_set_speed(spindle_motor_t* m, int rpm) {
@@ -93,16 +106,13 @@ int spindle_get_speed(spindle_motor_t* m) {
     return rpm;
 }
 void spindle_set_duty(spindle_motor_t* m, uint32_t duty) {
-    timer_info_t ti;
-    m->pwm_timer->p_api->infoGet(m->pwm_timer->p_ctrl, &ti);
     if (duty < 0) {
         duty = 0;
     }
     if (duty > 100) {
         duty = 100;
     }
-    uint32_t duty_count = (ti.period_counts * duty / 100);
-    m->pwm_timer->p_api->dutyCycleSet(m->pwm_timer->p_ctrl, duty_count, GPT_IO_PIN_GTIOCA);
+    m->target_duty = duty;
 }
 spindle_status_t spindle_get_status(spindle_motor_t* m) {
     bsp_io_level_t level;

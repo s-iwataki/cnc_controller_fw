@@ -17,6 +17,7 @@
 #include "spindle.h"
 #include "triaxis_table.h"
 #include "utils.h"
+#include "led_indicator.h"
 
 typedef struct {
     float val;

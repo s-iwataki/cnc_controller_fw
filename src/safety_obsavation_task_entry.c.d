@@ -1,7 +1,7 @@
-CMakeFiles/cnc_controller.elf.dir/src/led_blink_entry.c.obj: \
- D:/workspace/cnc_controller/src/led_blink_entry.c \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h \
- D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h \
+CMakeFiles/cnc_controller.elf.dir/src/safety_obsavation_task_entry.c.obj: \
+ D:/workspace/cnc_controller/src/safety_obsavation_task_entry.c \
+ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h \
+ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/fsp_common_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/fsp_version.h \
@@ -41,23 +41,31 @@ CMakeFiles/cnc_controller.elf.dir/src/led_blink_entry.c.obj: \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_compiler_support.h \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_delay.h \
  d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_mcu_api.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/deprecated_definitions.h \
- D:/workspace/cnc_controller/ra/fsp/src/rm_freertos_port/portmacro.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
- D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h \
- D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h \
- D:/workspace/cnc_controller/ra_gen/hal_data.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h \
+ D:/workspace/cnc_controller/src/led_indicator.h \
+ D:/workspace/cnc_controller/ra/fsp/src/rm_freertos_port/portmacro.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
+ D:/workspace/cnc_controller/ra_gen/safety_obsavation_task.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h \
+ D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/deprecated_definitions.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
+ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
+ D:/workspace/cnc_controller/ra_gen/hal_data.h \
+ D:/workspace/cnc_controller/ra_gen/common_data.h \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_flash_hp.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_flash_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_flash_hp_cfg.h \
@@ -78,19 +86,13 @@ CMakeFiles/cnc_controller.elf.dir/src/led_blink_entry.c.obj: \
  D:/workspace/cnc_controller/ra/fsp/inc/instances/r_sci_uart.h \
  D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
- D:/workspace/cnc_controller/ra_gen/led_blink.h \
+ D:/workspace/cnc_controller/src/spindle.h \
  D:/workspace/cnc_controller/ra_gen/hal_data.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
- D:/workspace/cnc_controller/src/led_indicator.h \
- D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h
+ D:/workspace/cnc_controller/src/triaxis_table.h
 
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
+D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
 
-D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h:
+D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
 
@@ -170,31 +172,11 @@ d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_delay.h:
 
 d:\workspace\cnc_controller\ra\fsp\src\bsp\mcu\all\bsp_mcu_api.h:
 
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/deprecated_definitions.h:
-
-D:/workspace/cnc_controller/ra/fsp/src/rm_freertos_port/portmacro.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
-
-D:/workspace/cnc_controller/ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h:
-
-D:/workspace/cnc_controller/ra/fsp/inc/instances/r_ioport.h:
-
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_ioport_api.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/bsp_api.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_ioport_cfg.h:
-
-D:/workspace/cnc_controller/ra_gen/hal_data.h:
 
 D:/workspace/cnc_controller/ra_gen/common_data.h:
 
@@ -203,6 +185,42 @@ D:/workspace/cnc_controller/ra/fsp/inc/instances/r_elc.h:
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_elc_cfg.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/api/r_elc_api.h:
+
+D:/workspace/cnc_controller/src/led_indicator.h:
+
+D:/workspace/cnc_controller/ra/fsp/src/rm_freertos_port/portmacro.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
+
+D:/workspace/cnc_controller/ra_gen/safety_obsavation_task.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/FreeRTOS.h:
+
+D:/workspace/cnc_controller/ra_cfg/aws/FreeRTOSConfig.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/portable.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/deprecated_definitions.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h:
+
+D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
+
+D:/workspace/cnc_controller/ra_gen/hal_data.h:
+
+D:/workspace/cnc_controller/ra_gen/common_data.h:
 
 D:/workspace/cnc_controller/ra/fsp/inc/instances/r_flash_hp.h:
 
@@ -244,20 +262,8 @@ D:/workspace/cnc_controller/ra/fsp/inc/api/r_uart_api.h:
 
 D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
 
-D:/workspace/cnc_controller/ra_gen/led_blink.h:
+D:/workspace/cnc_controller/src/spindle.h:
 
 D:/workspace/cnc_controller/ra_gen/hal_data.h:
 
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
-
-D:/workspace/cnc_controller/src/led_indicator.h:
-
-D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h:
+D:/workspace/cnc_controller/src/triaxis_table.h:

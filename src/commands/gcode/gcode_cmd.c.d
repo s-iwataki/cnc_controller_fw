@@ -96,7 +96,8 @@ CMakeFiles/cnc_controller.elf.dir/src/commands/gcode/gcode_cmd.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h \
- D:/workspace/cnc_controller/src/utils.h
+ D:/workspace/cnc_controller/src/utils.h \
+ D:/workspace/cnc_controller/src/led_indicator.h
 
 D:/workspace/cnc_controller/src/commands/gcode/gcode_cmd.h:
 
@@ -291,3 +292,5 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/task.h:
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/list.h:
 
 D:/workspace/cnc_controller/src/utils.h:
+
+D:/workspace/cnc_controller/src/led_indicator.h:

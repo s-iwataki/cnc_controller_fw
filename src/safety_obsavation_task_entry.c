@@ -1,11 +1,13 @@
 #include "bsp_pin_cfg.h"
 #include "common_data.h"
+#include "led_indicator.h"
 #include "portmacro.h"
 #include "projdefs.h"
 #include "r_ioport.h"
 #include "safety_obsavation_task.h"
 #include "spindle.h"
 #include "triaxis_table.h"
+
 /* safety_obsavation entry function */
 /* pvParameters contains TaskHandle_t */
 void safety_obsavation_task_entry(void* pvParameters) {
@@ -13,6 +15,7 @@ void safety_obsavation_task_entry(void* pvParameters) {
 
     /* TODO: add your own code here */
     TickType_t last_wake_time = xTaskGetTickCount();
+    while(1){vTaskDelay(pdMS_TO_TICKS(100));}
     while (1) {
         vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(10));
         table_3d_driver_t* table = table_get_driver();
@@ -20,11 +23,13 @@ void safety_obsavation_task_entry(void* pvParameters) {
             spindle_enable(&g_spindle_motor, pdFALSE);
 
             table_move_cancel(table);
+            led_indicator_set(LED_INDICATE_ERROR);
         }
         bsp_io_level_t stepper_alert_status;
         R_IOPORT_PinRead(&g_ioport_ctrl, STEPPER_ALERT, &stepper_alert_status);
         if (stepper_alert_status == pdFALSE) {  // alert状態
-            table_move_cancel(table);//table停止
+            table_move_cancel(table);           // table停止
+            led_indicator_set(LED_INDICATE_ERROR);
         }
         table_state_t table_state;
         table_get_status(table, &table_state);

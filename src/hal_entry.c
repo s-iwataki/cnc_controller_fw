@@ -79,7 +79,7 @@ void R_BSP_WarmStart(bsp_warm_start_event_t event) {
         // R_SCI_UART_Open(&g_uart9_ctrl,&g_uart9_cfg);
         cnc_nonvolatile_config_t*cfg=0;
         if(cnc_system_state_config_load(&cfg)!=FSP_SUCCESS){
-            printf("[WARN]:Config is not set.\r\n");
+            //printf("[WARN]:Config is not set.\r\n");//ここでprintfを呼ぶとまずい(freertosのtask内ではない)
         }
         table_mm_per_count_t mm_per_count = {.x = 0.00125f, .y = 0.00125f, .z = 0.00125f};
         table_axis_sign_t sign = {.x = 1, .y = 1, .z = 1};

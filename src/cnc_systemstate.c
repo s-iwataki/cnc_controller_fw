@@ -38,10 +38,10 @@ void cnc_system_state_unset_gcode_exec() {
 typedef struct {
     TaskHandle_t h;
 } vee_command_ctx_t;
-
+vee_command_ctx_t vee_command_ctx;
 void vee_callback(rm_vee_callback_args_t* p_args) {
-    vee_command_ctx_t* ctx = p_args->p_context;
-    TaskHandle_t h = ctx->h;
+    //vee_command_ctx_t* ctx = p_args->p_context;
+    TaskHandle_t h = vee_command_ctx.h;
     uint32_t w = 0;
     xTaskNotifyFromISR(h, 1, eSetBits, &w);
     if (w) {
@@ -54,13 +54,14 @@ static void vee_command_wait(void) {
     xTaskNotifyWait(1, 1, &v, portMAX_DELAY);
 }
 int cnc_system_state_config_load(cnc_nonvolatile_config_t** cfg) {
+    return -1;
     if (cfg == NULL) {
         return FSP_ERR_INVALID_POINTER;
     }
     fsp_err_t r = g_vee0.p_api->open(g_vee0.p_ctrl, g_vee0.p_cfg);
-    vee_command_ctx_t ctx;
-    ctx.h = xTaskGetCurrentTaskHandle();
-    g_vee0.p_api->callbackSet(g_vee0.p_ctrl, vee_callback, &ctx, NULL);
+    
+    vee_command_ctx.h = xTaskGetCurrentTaskHandle();
+    //g_vee0.p_api->callbackSet(g_vee0.p_ctrl, vee_callback, &ctx, NULL);<- NULL ptr
     switch (r) {
         case FSP_ERR_NOT_INITIALIZED:
             r = g_vee0.p_api->refresh(g_vee0.p_ctrl);
@@ -90,9 +91,8 @@ int cnc_system_state_config_save(cnc_nonvolatile_config_t* cfg) {
         return FSP_ERR_INVALID_POINTER;
     }
     fsp_err_t r = g_vee0.p_api->open(g_vee0.p_ctrl, g_vee0.p_cfg);
-    vee_command_ctx_t ctx;
-    ctx.h = xTaskGetCurrentTaskHandle();
-    g_vee0.p_api->callbackSet(g_vee0.p_ctrl, vee_callback, &ctx, NULL);
+    vee_command_ctx.h = xTaskGetCurrentTaskHandle();
+    //g_vee0.p_api->callbackSet(g_vee0.p_ctrl, vee_callback, &ctx, NULL);
     if (r != FSP_SUCCESS) {
         return r;
     }

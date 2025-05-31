@@ -24,8 +24,12 @@ void table_enable(table_3d_driver_t* d, int enable) {
     d->enable(d->hw_driver_instance, enable);
 }
 
-void table_get_status(table_3d_driver_t*d,table_state_t*s){
-    d->get_status(d->hw_driver_instance,s);
+void table_get_status(table_3d_driver_t* d, table_state_t* s) {
+    d->get_status(d->hw_driver_instance, s);
+}
+
+void table_set_parameter(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign) {
+    d->set_parameter(d->hw_driver_instance, mmpc, sign);
 }
 
 static table_3d_driver_t driver;

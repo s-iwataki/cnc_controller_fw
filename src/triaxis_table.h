@@ -53,6 +53,7 @@ typedef struct table_3d_driver {
     void (*setzero)(void*);
     void (*enable)(void*, int);
     void (*get_status)(void*,table_state_t*);
+    void (*set_parameter)(void*,const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign);
 } table_3d_driver_t;
 
 /**
@@ -76,5 +77,6 @@ void table_move_cancel(table_3d_driver_t* d);
 void table_setzero(table_3d_driver_t* d);
 void table_enable(table_3d_driver_t* d, int enable);
 void table_get_status(table_3d_driver_t*d,table_state_t*s);
+void table_set_parameter(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign);
 void table_init(void (*table_hw_driver_provider)(table_3d_driver_t* d, const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign), const table_mm_per_count_t* mmpc, const table_axis_sign_t* sign);
 table_3d_driver_t* table_get_driver();

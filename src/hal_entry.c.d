@@ -48,8 +48,6 @@ CMakeFiles/cnc_controller.elf.dir/src/hal_entry.c.obj: \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h \
- D:/workspace/cnc_controller/src/cnc_systemstate.h \
- D:/workspace/cnc_controller/src/triaxis_table.h \
  D:/workspace/cnc_controller/src/encoder.h \
  D:/workspace/cnc_controller/ra_gen/hal_data.h \
  D:/workspace/cnc_controller/ra_gen/common_data.h \
@@ -83,6 +81,7 @@ CMakeFiles/cnc_controller.elf.dir/src/hal_entry.c.obj: \
  D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h \
  D:/workspace/cnc_controller/src/ra_gpt_encoder.h \
  D:/workspace/cnc_controller/src/ra_triaxis_stepper.h \
+ D:/workspace/cnc_controller/src/triaxis_table.h \
  D:/workspace/cnc_controller/src/spindle.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/semphr.h \
  D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/queue.h \
@@ -187,10 +186,6 @@ D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/projdefs.h:
 
 D:/workspace/cnc_controller/ra/aws/FreeRTOS/FreeRTOS/Source/include/mpu_wrappers.h:
 
-D:/workspace/cnc_controller/src/cnc_systemstate.h:
-
-D:/workspace/cnc_controller/src/triaxis_table.h:
-
 D:/workspace/cnc_controller/src/encoder.h:
 
 D:/workspace/cnc_controller/ra_gen/hal_data.h:
@@ -256,6 +251,8 @@ D:/workspace/cnc_controller/ra_cfg/fsp_cfg/r_sci_uart_cfg.h:
 D:/workspace/cnc_controller/src/ra_gpt_encoder.h:
 
 D:/workspace/cnc_controller/src/ra_triaxis_stepper.h:
+
+D:/workspace/cnc_controller/src/triaxis_table.h:
 
 D:/workspace/cnc_controller/src/spindle.h:
 

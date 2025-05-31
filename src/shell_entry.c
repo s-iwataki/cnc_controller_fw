@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "cnc_systemstate.h"
 #include "command_list.h"
 #include "resetcause.h"
 #include "shell.h"
+#include "spindle.h"
 #include "syscalls.h"
+#include "triaxis_table.h"
 
 /* shell task entry function */
 /* pvParameters contains TaskHandle_t */
@@ -26,6 +29,21 @@ void shell_entry(void* pvParameters) {
         syscall_print_debug_dump();
     }
     reset_cause_checked();
+
+    cnc_nonvolatile_config_t* cfg = 0;
+    if (cnc_system_state_config_load(&cfg) != FSP_SUCCESS) {
+        printf("[WARN]:Config is not set.\r\n");
+    }
+    if (cfg) {
+        table_mm_per_count_t mm_per_count = cfg->table_cfg.table_mm_per_step;
+        table_axis_sign_t sign = cfg->table_cfg.table_axis_direction;
+        // table parameter set
+        spindle_set_control_param(&g_spindle_motor, cfg->spindle_cfg.kp, cfg->spindle_cfg.ki, cfg->spindle_cfg.kd);
+        table_3d_driver_t* table = table_get_driver();
+        table_set_parameter(table, &mm_per_count, &sign);
+    }
+    cnc_system_state_init(cfg);
+
     /* TODO: add your own code here */
     while (1) {
         printf(">");

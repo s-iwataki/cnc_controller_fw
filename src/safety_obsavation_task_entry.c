@@ -7,6 +7,7 @@
 #include "safety_obsavation_task.h"
 #include "spindle.h"
 #include "triaxis_table.h"
+#include <stdio.h>
 
 /* safety_obsavation entry function */
 /* pvParameters contains TaskHandle_t */
@@ -15,21 +16,28 @@ void safety_obsavation_task_entry(void* pvParameters) {
 
     /* TODO: add your own code here */
     TickType_t last_wake_time = xTaskGetTickCount();
-    while(1){vTaskDelay(pdMS_TO_TICKS(100));}
     while (1) {
         vTaskDelayUntil(&last_wake_time, pdMS_TO_TICKS(10));
         table_3d_driver_t* table = table_get_driver();
+        bool spindle_ok=false;
         if (spindle_get_status(&g_spindle_motor) == SPINDLE_ERROR) {
             spindle_enable(&g_spindle_motor, pdFALSE);
 
             table_move_cancel(table);
+            printf("spindle error\r\n");
             led_indicator_set(LED_INDICATE_ERROR);
+        }else{
+            spindle_ok=true;
         }
         bsp_io_level_t stepper_alert_status;
+        bool table_ok=false;
         R_IOPORT_PinRead(&g_ioport_ctrl, STEPPER_ALERT, &stepper_alert_status);
         if (stepper_alert_status == pdFALSE) {  // alert状態
             table_move_cancel(table);           // table停止
             led_indicator_set(LED_INDICATE_ERROR);
+            printf("table error\r\n");
+        }else{
+            table_ok=true;
         }
         table_state_t table_state;
         table_get_status(table, &table_state);
@@ -47,6 +55,9 @@ void safety_obsavation_task_entry(void* pvParameters) {
             ((table_state.z_speed < 0) && (zmin_hit == pdTRUE)) ||
             ((table_state.z_speed > 0) && (zmax_hit == pdTRUE))) {
             table_move_cancel(table);
+            printf("table hit limit\r\n");
+        }else if(table_ok&&spindle_ok){
+            led_indicator_set(LED_INDICATE_STANDBY);
         }
     }
 }

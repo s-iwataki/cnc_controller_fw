@@ -50,6 +50,9 @@ static void cancel(void* instance) {
     R_GPT_Stop(&g_timer_yclock_ctrl);
     R_GPT_Stop(&g_timer_zclock_ctrl);
     ra_triaxis_table_driver_t* d = (ra_triaxis_table_driver_t*)instance;
+    d->x_speed=0;
+    d->y_speed=0;
+    d->z_speed=0;
     if (d->callback) {
         table_3d_event_t evt = {0};
         evt.id = MOTION_CANCELLED;
